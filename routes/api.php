@@ -1,0 +1,31 @@
+<?php
+
+use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\admin\ProductController;
+use App\Models\Coupon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::post('get-coupon-data', [CouponController::class, 'get_coupon']);
+
+Route::post('search-products', [ProductController::class, 'search_products']);
+
+Route::post('find-product-by-id', [ProductController::class, 'find_product_by_id']);
+
+Route::post('store-cash-register', [OrderController::class, 'cash_register_store']);
