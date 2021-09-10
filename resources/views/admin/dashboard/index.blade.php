@@ -45,9 +45,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>S/. {{$rate_profit}}<sup style="font-size: 20px"></sup></h3>
+                            <h3>S/. {{$income}}<sup style="font-size: 20px"></sup></h3>
 
-                            <p>Utilidad</p>
+                            <p>Ingresos</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>

@@ -15,20 +15,20 @@ class DashboardController extends Controller
     public function index()
     {
         $current_month = date('m');
-        $rate_profit = $this->get_utility();
+        $income = $this->get_income();
         $total_products = $this->get_total_products();
         $users = User::whereMonth('created_at', $current_month)->get();
         $orders = Order::whereMonth('created_at', $current_month)->get();
         $order_bar_chart = $this->order_bar_chart();
         $product_pie_chart = $this->product_pie_chart();
-        return view('admin.dashboard.index', compact('orders', 'rate_profit', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart'));
+        return view('admin.dashboard.index', compact('orders', 'income', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart'));
     }
 
-    private function get_utility()
+    private function get_income()
     {
         $current_month = date('m');
-        $sum_utility = Order::whereMonth('created_at', $current_month)->sum('total');
-        return number_format($sum_utility, 2);
+        $sum_income = Order::whereMonth('created_at', $current_month)->sum('total');
+        return number_format($sum_income, 2);
     }
 
     private function get_total_products()
