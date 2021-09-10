@@ -45,7 +45,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{$rate_profit}}<sup style="font-size: 20px">%</sup></h3>
+                            <h3>S/. {{$rate_profit}}<sup style="font-size: 20px"></sup></h3>
 
                             <p>Utilidad</p>
                         </div>
@@ -191,6 +191,7 @@
 <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
 <script>
     const count_orders_by_date = @json($order_bar_chart);
+    console.log(count_orders_by_date);
     const order_bar_chart = document
         .getElementById("order-week-chart-canvas")
         .getContext("2d");
@@ -293,5 +294,23 @@
 
         },
     });
+
+    Chart.plugins.register({
+        afterDraw: function(chart) {
+            if (chart.data.datasets[0].data.every(item => item === 0)) {
+                let ctx = chart.chart.ctx;
+                let width = chart.chart.width;
+                let height = chart.chart.height;
+
+                chart.clear();
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('No hay datos para mostrar', width / 2, height / 2);
+                ctx.restore();
+            }
+        }
+    });
+
 </script>
 @endsection

@@ -123,8 +123,6 @@ class OrderController extends Controller
             $data['shipment_price'] = 0;
             $data['shipment_status'] = 1;
             $data['status'] = 1;
-            throw new Error;
-            dd("HIOLA");
             $order = Order::create($data);
             $order->code = str_pad($order->id, 5, "0", STR_PAD_LEFT);
             $order->save();
@@ -148,7 +146,7 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'error' => 'Ocurrio un error',
-            ], 200);
+            ], 400);
         }
     }
 }

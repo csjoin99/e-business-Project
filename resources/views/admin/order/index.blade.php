@@ -62,7 +62,7 @@
                                         <td>{{ Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('d-m-Y') }}
                                         </td>
                                         <td>{{ $order->district ? $order->district : '-' }}</td>
-                                        <td>{{ $order->shipment_date }}</td>
+                                        <td>{{ Carbon::createFromFormat('Y-m-d', $order->shipment_date)->format('d-m-Y') }}</td>
                                         <td>
                                             @switch($order->shipment_status)
                                             @case(1)

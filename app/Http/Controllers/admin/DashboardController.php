@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index()
     {
         $current_month = date('m');
-        $rate_profit = $this->get_profit_rate();
+        $rate_profit = $this->get_utility();
         $total_products = $this->get_total_products();
         $users = User::whereMonth('created_at', $current_month)->get();
         $orders = Order::whereMonth('created_at', $current_month)->get();
@@ -24,19 +24,11 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', compact('orders', 'rate_profit', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart'));
     }
 
-    private function get_profit_rate()
+    private function get_utility()
     {
         $current_month = date('m');
-        $last_month = Carbon::now()->subMonth()->month;
-        $avg_current_month = Order::whereMonth('created_at', $current_month)->avg('total');
-        $avg_last_month = Order::whereMonth('created_at', $last_month)->avg('total');
-        $diff = $avg_last_month - $avg_current_month;
-        if ($avg_last_month > 0) {
-            $avg_order_rate = ($diff / $avg_last_month) * 100;
-        } else {
-            $avg_order_rate = 100;
-        }
-        return floatval(number_format($avg_order_rate, 2));
+        $sum_utility = Order::whereMonth('created_at', $current_month)->sum('total');
+        return number_format($sum_utility, 2);
     }
 
     private function get_total_products()

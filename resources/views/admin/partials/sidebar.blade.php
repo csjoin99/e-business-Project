@@ -4,7 +4,7 @@
     <a href="index3.html" class="brand-link">
         {{-- <img src="{{ asset('img/logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
         style="opacity: .8; width: 50px; height: 50px"> --}}
-        <span class="brand-text font-weight-light ml-2">Cotiapp</span>
+        <span class="brand-text font-weight-light ml-2">PORTAL COMMERCE</span>
     </a>
 
     <!-- Sidebar -->
