@@ -8,8 +8,8 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
+use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
-use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,4 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
+
+    Route::get('settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::post('settings/{settings}', [SettingsController::class, 'settings_update'])->name('settings.update');
 });

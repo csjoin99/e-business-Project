@@ -104,19 +104,18 @@
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
-                <td colspan="2">
+                <td colspan="3">
                     <table>
                         <tr>
-                            <td class="title">
-                                <h1>Portal commerce</h1>
+                            <td class="title" style="max-width: 150px">
+                                <h2 style="margin: 20px 0px">Portal commerce</h2>
                                 {{-- <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" /> --}}
                             </td>
-
                             <td>
-                                Factura #: {{$order->code}}<br />
-                                Fecha:
-                                {{Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('d/m/Y')}}{{-- {{Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('d \d\e\ F, Y')}}
-                                --}}<br />
+                                <span style="white-space: nowrap">Factura #: {{$order->code}}</span>
+                                <br />
+                                <span style="white-space: nowrap">Fecha:
+                                    {{Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('d/m/Y')}}</span><br />
                             </td>
                         </tr>
                     </table>
@@ -124,7 +123,7 @@
             </tr>
 
             <tr class="information">
-                <td colspan="2">
+                <td colspan="3">
                     <table>
                         <tr>
                             {{-- <td>
