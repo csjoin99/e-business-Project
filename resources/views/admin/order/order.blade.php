@@ -140,7 +140,7 @@
 								</td> --}}
                             <td>
                                 {{$order->user ? $order->user->name .' '.$order->user->lastname : $order->client}}<br />
-                                {{$order->user ? $oder->user->email : ''}}
+                                {{$order->user ? $order->user->email : ''}}
                             </td>
 
                             <td>

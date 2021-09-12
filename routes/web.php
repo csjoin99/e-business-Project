@@ -56,10 +56,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('order', OrderController::class)->middleware('permission:admin.order');
     Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
-    Route::get('test', function () {
-        $order = Order::get()->first();
-        return view('admin.order.order', compact('order'));
-    });
-
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
 });
