@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
 use App\Http\Controllers\admin\UserController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('coupon', CouponController::class)->middleware('permission:admin.coupon');
 
     Route::resource('order', OrderController::class)->middleware('permission:admin.order');
+    Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
+
+    Route::get('test', function () {
+        $order = Order::get()->first();
+        return view('admin.order.order', compact('order'));
+    });
 
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
 });

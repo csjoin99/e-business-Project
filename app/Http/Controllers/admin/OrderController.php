@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class OrderController extends Controller
 {
@@ -19,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at','desc')->paginate(10);
+        $orders = Order::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.order.index', compact('orders'));
     }
 
@@ -148,5 +149,13 @@ class OrderController extends Controller
                 'error' => 'Ocurrio un error',
             ], 400);
         }
+    }
+
+    public function generate_order_pdf(Order $order)
+    {
+        $view = view('admin.order.order', compact('order'));
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->download('test.pdf');
     }
 }

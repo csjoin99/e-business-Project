@@ -93,6 +93,8 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-nowrap">
+                                                <a href="{{route('generate.order.pdf',$order)}}"
+                                                    class="btn btn-primary mr-1"><i class="fas fa-file-pdf"></i></a>
                                                 <form action="{{route('order.destroy',$order)}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
