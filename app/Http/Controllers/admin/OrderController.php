@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Settings;
 use App\Models\User;
 use Error;
 use Illuminate\Http\Request;
@@ -153,9 +154,10 @@ class OrderController extends Controller
 
     public function generate_order_pdf(Order $order)
     {
-        $view = view('admin.order.order', compact('order'));
+        $settings = Settings::get()->first();
+        $view = view('admin.order.order', compact('order', 'settings'));
         $pdf = app('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->download('test.pdf');
+        return $pdf->download('factura.pdf');
     }
 }

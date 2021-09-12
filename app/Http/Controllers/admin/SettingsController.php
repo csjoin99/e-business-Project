@@ -23,7 +23,7 @@ class SettingsController extends Controller
                 $request->logo->move(public_path('img/settings/'), $image_name);
                 $url = url('') . '/img/settings/' . $image_name;
             }
-            $data['logo'] = isset($url) ? $url : null;
+            $data['logo'] = isset($url) ? $url : $settings->logo;
             $settings->update($data);
             return redirect()->route('settings')->with('success', 'Configuración actualizada exitosamente');
         } catch (\Throwable $th) {

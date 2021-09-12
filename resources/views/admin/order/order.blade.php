@@ -108,8 +108,13 @@
                     <table>
                         <tr>
                             <td class="title" style="max-width: 150px">
-                                <h2 style="margin: 20px 0px">Portal commerce</h2>
+                                @if ($settings->logo)
+                                <h2 style="margin: 20px 0px">{{$settings->name}}</h2>
+                                {{-- <img src="{{$settings->logo}}" style="width: 100%; max-width: 300px" /> --}}
                                 {{-- <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" /> --}}
+                                @else
+                                <h2 style="margin: 20px 0px">{{$settings->name}}</h2>
+                                @endif
                             </td>
                             <td>
                                 <span style="white-space: nowrap">Factura #: {{$order->code}}</span>
