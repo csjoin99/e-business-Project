@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\web\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ Route::get('/', function () {
     return redirect()->route('login');
     /* return view('welcome'); */
 });
+
+Route::get('store', [StoreController::class, 'store'])->name('store');
 
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'login_post'])->name('login.post');
