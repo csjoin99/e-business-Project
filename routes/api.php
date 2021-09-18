@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\web\CartController;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,5 @@ Route::post('search-products', [ProductController::class, 'search_products']);
 Route::post('find-product-by-id', [ProductController::class, 'find_product_by_id']);
 
 Route::post('store-cash-register', [OrderController::class, 'cash_register_store']);
+
+Route::post('cart-add-item', [CartController::class, 'add_item']);

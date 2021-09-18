@@ -30,6 +30,8 @@ Route::get('/', function () {
 });
 
 Route::get('store', [StoreController::class, 'store'])->name('store');
+Route::get('product-detail/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');
+Route::get('shopping-cart', [StoreController::class, 'shopping_cart'])->name('shopping.cart');
 
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'login_post'])->name('login.post');

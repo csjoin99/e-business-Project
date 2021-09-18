@@ -13,4 +13,15 @@ class StoreController extends Controller
         $products = Product::all();
         return view('web.store.index', compact('products'));
     }
+
+    public function product_detail($slug)
+    {
+        $product = Product::where('slug',$slug)->first();
+        return view('web.product-detail.index', compact('product'));
+    }
+
+    public function shopping_cart()
+    {
+        return view('web.shopping-cart.index');
+    }
 }

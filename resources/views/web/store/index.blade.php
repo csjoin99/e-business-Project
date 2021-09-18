@@ -27,9 +27,11 @@ Tienda
                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
                     </div>
                     <!-- Product image-->
-                    <img class="card-img-top" style="object-fit: cover; max-height: 150px"
-                        src="{{$product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png' }}"
-                        alt="{{$product->name}}" />
+                    <a href="{{route('product.detail',['slug' => $product->slug])}}">
+                        <img class="card-img-top" style="object-fit: cover; max-height: 150px"
+                            src="{{$product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png' }}"
+                            alt="{{$product->name}}" />
+                    </a>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -46,14 +48,15 @@ Tienda
                             <!-- Product price-->
                             @if ($product->discount)
                             <span class="text-muted text-decoration-line-through">S/.
-                                {{number_format($product->discount,2)}}</span>
+                                {{number_format($product->price,2)}}</span>
                             @endif
-                            S/. {{number_format($product->price,2)}}
+                            S/. {{number_format($product->real_price,2)}}
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Añadir a carrito</a>
+                        <div class="text-center"><button class="btn btn-outline-dark mt-auto" v-on:click="add_cart" data-id="{{$product->id}}">Añadir a
+                                carrito</button>
                         </div>
                     </div>
                 </div>
