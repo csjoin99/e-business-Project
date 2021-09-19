@@ -107,3 +107,7 @@ a {
   width: 100%;
   text-align: right;
 }
+
+.table-shopping-cart th {
+  border-bottom: 0px !important;
+}

@@ -37,6 +37,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td colspan="4" class="text-center font-weight-bold">No hay items</td>
+                                        </tr>
                                         <tr v-for="item in this.cart">
                                             <td>
                                                 <figure class="itemside align-items-center">
@@ -68,33 +71,6 @@
                                                     v-on:click="cart_delete_item(item)">Eliminar</a>
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td>
-                                                <figure class="itemside align-items-center">
-                                                    <div class="aside"><img src="https://i.imgur.com/1eq5kmC.png"
-                                                            class="img-sm"></div>
-                                                    <figcaption class="info"> <a href="#" class="title text-dark"
-                                                            data-abc="true">Tshirt with round nect</a>
-                                                        <p class="text-muted small">SIZE: L <br> Brand: MAXTRA</p>
-                                                    </figcaption>
-                                                </figure>
-                                            </td>
-                                            <td>
-                                                <select class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="price-wrap"> <var class="price">$10.00</var> <small
-                                                        class="text-muted"> $9.20 each </small> </div>
-                                            </td>
-                                            <td class="text-right d-none d-md-block">
-                                                <a href="" class="btn btn-light" data-abc="true">Eliminar</a>
-                                            </td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -134,7 +110,7 @@
                                 <a href="#" class="btn btn-primary btn-square btn-main" data-abc="true">
                                     Realizar compra
                                 </a>
-                                <a href="#" class="btn btn-success btn-square btn-main mt-2" data-abc="true">
+                                <a href="{{route('store')}}" class="btn btn-success btn-square btn-main mt-2" data-abc="true">
                                     Seguir comprando
                                 </a>
                             </div>
