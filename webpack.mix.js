@@ -34,3 +34,4 @@ mix.js("resources/js/confirm-deletion.js", "public/js");
 mix.js("resources/js/admin/cash-register/index.js", "public/js/admin/cash-register");
 
 mix.js("resources/js/web/product-detail/index.js", "public/js/web/product-detail");
+mix.js("resources/js/web/shopping-cart/index.js", "public/js/web/shopping-cart");

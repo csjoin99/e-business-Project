@@ -23,11 +23,11 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+                <a class="btn btn-outline-dark" href="{{route('shopping.cart')}}">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
                     <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">{{Cart::count()}}</span>
-                </button>
+                </a>
             </form>
         </div>
     </div>

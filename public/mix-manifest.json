@@ -4,7 +4,8 @@
     "/js/confirm-deletion.js": "/js/confirm-deletion.js",
     "/js/admin/cash-register/index.js": "/js/admin/cash-register/index.js",
     "/js/web/product-detail/index.js": "/js/web/product-detail/index.js",
+    "/js/web/shopping-cart/index.js": "/js/web/shopping-cart/index.js",
+    "/css/shopping-cart/index.css": "/css/shopping-cart/index.css",
     "/css/product-detail/index.css": "/css/product-detail/index.css",
-    "/css/app.css": "/css/app.css",
-    "/css/shopping-cart/index.css": "/css/shopping-cart/index.css"
+    "/css/app.css": "/css/app.css"
 }

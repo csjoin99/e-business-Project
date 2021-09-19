@@ -64,6 +64,7 @@
 </section>
 @endsection
 @section('js')
+<script src="{{asset('js/web/product-detail/index.js')}}"></script>
 <script>
     const img_list = document.querySelector(".preview-thumbnail").querySelectorAll('li');
     const img = document.querySelector("img[class='pop']");

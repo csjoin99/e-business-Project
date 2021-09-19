@@ -31,4 +31,13 @@ Route::post('find-product-by-id', [ProductController::class, 'find_product_by_id
 
 Route::post('store-cash-register', [OrderController::class, 'cash_register_store']);
 
+/* Shopping cart */
 Route::post('cart-add-item', [CartController::class, 'add_item']);
+
+Route::post('get-cart-content',[CartController::class, 'get_cart_content']);
+
+Route::post('cart-update-item',[CartController::class, 'update_item']);
+
+Route::post('cart-delete-item',[CartController::class, 'delete_item']);
+
+Route::post('cart-get-coupon',[CartController::class, 'get_coupon']);
