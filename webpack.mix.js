@@ -25,6 +25,10 @@ mix.sass(
     "public/css/shopping-cart"
 );
 
+mix.sass(
+    "resources/sass/checkout/index.scss",
+    "public/css/checkout"
+);
 
 mix.js("resources/js/app.js", "public/js");
 
@@ -35,3 +39,4 @@ mix.js("resources/js/admin/cash-register/index.js", "public/js/admin/cash-regist
 
 mix.js("resources/js/web/product-detail/index.js", "public/js/web/product-detail");
 mix.js("resources/js/web/shopping-cart/index.js", "public/js/web/shopping-cart");
+mix.js("resources/js/web/checkout/index.js", "public/js/web/checkout");

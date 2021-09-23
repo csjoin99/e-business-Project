@@ -37,10 +37,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr v-if="!this.cart.length">
                                             <td colspan="4" class="text-center font-weight-bold">No hay items</td>
                                         </tr>
-                                        <tr v-for="item in this.cart">
+                                        <tr v-else v-for="item in this.cart">
                                             <td>
                                                 <figure class="itemside align-items-center">
                                                     <div class="aside">
@@ -57,7 +57,7 @@
                                             <td>
                                                 <input type="number" class="form-control" min="0"
                                                     :max="item.options.stock" v-model="item.qty"
-                                                    v-on:change="cart_update_qty(item)">
+                                                    v-on:change="cart_update_qty($event, item)">
                                             </td>
                                             <td>
                                                 <div class="price-wrap">
@@ -79,10 +79,10 @@
                     <aside class="col-lg-3">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <form @submit.prevent="get_coupon()">
+                                <form @submit.prevent="get_coupon($event)">
                                     <div class="form-group"> <label>Cupón</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control coupon" name=""
+                                            <input type="text" class="form-control coupon" name="coupon"
                                                 placeholder="Código de cupón" v-model="coupon.code">
                                             <span class="input-group-append">
                                                 <button type="submit" class="btn btn-primary btn-apply coupon h-100">Buscar</button>
@@ -107,9 +107,11 @@
                                     <dd class="text-right text-dark b ml-3 order-price" v-text="`S/. ${this.order.total}`"><strong></strong></dd>
                                 </dl>
                                 <hr>
-                                <a href="#" class="btn btn-primary btn-square btn-main" data-abc="true">
-                                    Realizar compra
-                                </a>
+                                <form @submit.prevent="submit_order($event)">
+                                    <button type="submit" class="btn btn-primary btn-square btn-main" data-abc="true">
+                                        Realizar compra
+                                    </button>
+                                </form>
                                 <a href="{{route('store')}}" class="btn btn-success btn-square btn-main mt-2" data-abc="true">
                                     Seguir comprando
                                 </a>
@@ -123,5 +125,6 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
 @endsection

@@ -27,7 +27,6 @@ const vm = new Vue({
             } else {
                 const {data, total_items} = await response.json();
                 document.querySelector('#cart-count').textContent = total_items;
-                console.log(data, total_items);
             }
             return;
         },

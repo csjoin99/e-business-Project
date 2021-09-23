@@ -1,4 +1,5 @@
 window.Vue = require("vue/dist/vue.js");
+import toastr from "toastr";
 
 const vm = new Vue({
     el: "#shopping-cart-section",
@@ -32,7 +33,8 @@ const vm = new Vue({
                 return { cart, coupon, order };
             }
         },
-        async cart_update_qty(item) {
+        async cart_update_qty(event, item) {
+            const input = event.target;
             const url = `${window.location.origin}/api/cart-update-item`;
             const data = {
                 id: item.id,
@@ -47,12 +49,15 @@ const vm = new Vue({
                 body: JSON.stringify(data),
             });
             if (response.status !== 200) {
-                console.log("error");
+                let { message } = await response.json();
+                input.classList.add('border-danger');
+                toastr.error(message,'Error')
             } else {
                 let { data, total_items, order } = await response.json();
                 Object.assign(item, data);
                 this.update_cart_qty(total_items);
                 this.order = order;
+                input.classList.remove('border-danger');
             }
         },
         async cart_delete_item(item) {
@@ -68,7 +73,8 @@ const vm = new Vue({
                 body: JSON.stringify(data),
             });
             if (response.status !== 200) {
-                console.log("error");
+                let { message } = await response.json();
+                toastr.error(message,'Error')
             } else {
                 let { message, total_items, cart_content, order } =
                     await response.json();
@@ -79,7 +85,9 @@ const vm = new Vue({
                 this.order = order;
             }
         },
-        async get_coupon() {
+        async get_coupon(event) {
+            const button = event.target.querySelector('button[type="submit"]');
+            button.disabled = true;
             const url = `${window.location.origin}/api/cart-get-coupon`;
             const data = {
                 code: this.coupon.code,
@@ -96,20 +104,37 @@ const vm = new Vue({
                 if(resp.order){
                     this.order = resp.order;
                 }
-                console.log(resp.message);
+                toastr.error(resp.message,'Error')
             } else {
                 let { coupon, order } = await response.json();
                 this.coupon = coupon;
                 this.order = order;
-                console.log(this.coupon);
             }
+            button.disabled = false;
         },
+        async submit_order(event){
+            const form = event.target; 
+            const order_has_items = this.cart.length;
+            if (order_has_items) {
+                location.href = `${window.location.origin}/checkout`;
+            } else {
+                toastr.error('Debe tener items en su carrito de compras','Error')
+            }
+        }
     },
     async created() {
         const { cart, coupon, order } = await this.get_cart_content();
         this.cart = cart;
         Object.assign(this.coupon, coupon);
         Object.assign(this.order, order);
-        console.log(this.cart, this.coupon, this.order);
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        };
     },
 });

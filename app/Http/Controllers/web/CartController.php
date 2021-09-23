@@ -128,7 +128,7 @@ class CartController extends Controller
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Ocurrio un error' . $th->getMessage(),
+                'message' => 'Ocurrio un error',
             ], 400);
         }
     }

@@ -12939,7 +12939,7 @@ var vm = new Vue({
               case 8:
                 _yield$response$json = _context.sent;
                 error = _yield$response$json.error;
-                _context.next = 19;
+                _context.next = 18;
                 break;
 
               case 12:
@@ -12951,12 +12951,11 @@ var vm = new Vue({
                 data = _yield$response$json2.data;
                 total_items = _yield$response$json2.total_items;
                 document.querySelector('#cart-count').textContent = total_items;
-                console.log(data, total_items);
 
-              case 19:
+              case 18:
                 return _context.abrupt("return");
 
-              case 20:
+              case 19:
               case "end":
                 return _context.stop();
             }
