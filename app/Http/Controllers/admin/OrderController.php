@@ -8,12 +8,15 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Settings;
 use App\Models\User;
+use App\Traits\PdfTraits;
 use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
+
 class OrderController extends Controller
 {
+    use PdfTraits;
     /**
      * Display a listing of the resource.
      *
@@ -133,7 +136,7 @@ class OrderController extends Controller
                 $order->product()->attach($product->id, [
                     'quantity' => $item->qty,
                     'price' => $item->price,
-                    'price_discount' => $item->real_price,
+                    'price_discount' => $item->price,
                 ]);
                 $product->stock = $product->stock - $item->qty;
                 $product->save();
@@ -154,10 +157,6 @@ class OrderController extends Controller
 
     public function generate_order_pdf(Order $order)
     {
-        $settings = Settings::get()->first();
-        $view = view('admin.order.order', compact('order', 'settings'));
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadHTML($view);
-        return $pdf->download('factura.pdf');
+        return $this->generate_pdf($order);
     }
 }

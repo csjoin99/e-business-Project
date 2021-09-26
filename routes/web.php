@@ -34,12 +34,20 @@ Route::get('store', [StoreController::class, 'store'])->name('store');
 Route::get('product-detail/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');
 Route::get('shopping-cart', [StoreController::class, 'shopping_cart'])->name('shopping.cart');
 
+Route::get('shipment-data', [CheckoutController::class, 'shipment_data'])->name('shipment.data');
+Route::post('shipment-data', [CheckoutController::class, 'store_shipment_data'])->name('store.shipment.data');
+
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-Route::post('checkout', [CheckoutController::class, 'checkout_post'])->name('checkout.post');
+
+Route::post('upon-delivery-payment', [CheckoutController::class, 'upon_delivery'])->name('upon.delivery');
+Route::post('stripe-payment', [CheckoutController::class, 'stripe'])->name('stripe');
 
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'login_post'])->name('login.post');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+/* Generate order pdf */
+Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -63,7 +71,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('coupon', CouponController::class)->middleware('permission:admin.coupon');
 
     Route::resource('order', OrderController::class)->middleware('permission:admin.order');
-    Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
 

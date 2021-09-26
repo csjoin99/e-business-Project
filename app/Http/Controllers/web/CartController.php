@@ -35,6 +35,7 @@ class CartController extends Controller
                     'image' => $product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png'
                 ]);
             }
+            $this->calculate_order();
             return response()->json([
                 'data' => Cart::content(),
                 'total_items' => Cart::count(),
@@ -146,7 +147,12 @@ class CartController extends Controller
         } else {
             $discount = 0;
         }
-        $total = number_format($subtotal - $discount, 2, '.', '');
+        $total = number_format($subtotal - $discount + 10, 2, '.', '');
+        session()->put('order',[
+            'subtotal' => $subtotal,
+            'discount' => $discount,
+            'total' => $total,
+        ]);
         return [
             'subtotal' => $subtotal,
             'discount' => $discount,

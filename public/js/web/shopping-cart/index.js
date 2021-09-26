@@ -24557,21 +24557,20 @@ var vm = new Vue({
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var form, order_has_items;
+        var order_has_items;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                form = event.target;
                 order_has_items = _this4.cart.length;
 
                 if (order_has_items) {
-                  location.href = "".concat(window.location.origin, "/checkout");
+                  location.href = "".concat(window.location.origin, "/shipment-data");
                 } else {
                   toastr__WEBPACK_IMPORTED_MODULE_1___default().error('Debe tener items en su carrito de compras', 'Error');
                 }
 
-              case 3:
+              case 2:
               case "end":
                 return _context5.stop();
             }

@@ -103,6 +103,10 @@
                                     <dd class="text-right text-danger ml-3 order-price" v-text="`- S/. ${this.order.discount}`"></dd>
                                 </dl>
                                 <dl class="dlist-align">
+                                    <dt>Delivery:</dt>
+                                    <dd class="text-right ml-3 order-price">S/. 10.00</dd>
+                                </dl>
+                                <dl class="dlist-align">
                                     <dt>Total:</dt>
                                     <dd class="text-right text-dark b ml-3 order-price" v-text="`S/. ${this.order.total}`"><strong></strong></dd>
                                 </dl>

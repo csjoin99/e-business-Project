@@ -163,7 +163,7 @@
             <tr class="item">
                 <td>{{$product->name}}</td>
                 <td style="text-align: left">{{$product->pivot->quantity}}</td>
-                <td>S/. {{$product->price}}</td>
+                <td>S/. {{$product->pivot->price}}</td>
             </tr>
             @endforeach
             <tr class="total">

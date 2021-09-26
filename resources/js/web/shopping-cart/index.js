@@ -113,10 +113,9 @@ const vm = new Vue({
             button.disabled = false;
         },
         async submit_order(event){
-            const form = event.target; 
             const order_has_items = this.cart.length;
             if (order_has_items) {
-                location.href = `${window.location.origin}/checkout`;
+                location.href = `${window.location.origin}/shipment-data`;
             } else {
                 toastr.error('Debe tener items en su carrito de compras','Error')
             }
