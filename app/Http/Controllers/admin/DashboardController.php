@@ -63,6 +63,7 @@ class DashboardController extends Controller
             ->leftJoin('product', 'order_detail.product_id', '=', 'product.id')
             ->select('product.id', 'product.name', DB::raw('COALESCE(sum(order_detail.quantity),0) as total'))
             ->whereBetween('order.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->whereNotNull('product.id')
             ->groupBy('product.id', 'product.name')
             ->get();
         return [
