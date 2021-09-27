@@ -39,7 +39,7 @@ class DashboardController extends Controller
             ->whereMonth('order.created_at', $current_month)
             ->groupBy(DB::raw('MONTH([order].[created_at])'))
             ->get();
-        return $total_products->first()->total;
+        return $total_products->count() ?  $total_products->first()->total : 0;
     }
 
     private function order_bar_chart()
