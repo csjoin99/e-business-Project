@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                 if (auth()->user()->roles->first()->name === 'Admin') {
                     return redirect()->route('admin.dashboard');
                 }
-                return redirect(RouteServiceProvider::HOME);
+                return redirect()->route('store');
             }
         }
 

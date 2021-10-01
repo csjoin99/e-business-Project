@@ -50,7 +50,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('permission:admin.product');
 
     Route::resource('product', ProductController::class)->middleware('permission:admin.product');
 
@@ -74,6 +74,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
 
-    Route::get('settings', [SettingsController::class, 'settings'])->name('settings');
+    Route::get('settings', [SettingsController::class, 'settings'])->name('settings')->middleware('permission:admin.product');
     Route::post('settings/{settings}', [SettingsController::class, 'settings_update'])->name('settings.update');
 });

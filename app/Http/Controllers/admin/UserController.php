@@ -20,13 +20,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if (isset($request->search)) {
-            $users = User::withTrashed()->where('id', '!=', auth()->user()->id)
+            $users = User::where('id', '!=', auth()->user()->id)
                 ->orWhere('name', 'LIKE', "%{$request->search}%")
                 ->orWhere('lastname', 'LIKE', "%{$request->search}%")
                 ->orWhere('email', 'LIKE', "%{$request->search}%")
                 ->paginate(10);
+            /* $users = User::withTrashed()->where('id', '!=', auth()->user()->id)
+                ->orWhere('name', 'LIKE', "%{$request->search}%")
+                ->orWhere('lastname', 'LIKE', "%{$request->search}%")
+                ->orWhere('email', 'LIKE', "%{$request->search}%")
+                ->paginate(10); */
         } else {
-            $users = User::where('id', '!=', auth()->user()->id)->withTrashed()->paginate(10);
+            /* $users = User::where('id', '!=', auth()->user()->id)->withTrashed()->paginate(10); */
+            $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
         }
         return view('admin.user.index', compact('users'));
     }
