@@ -24565,7 +24565,7 @@ var vm = new Vue({
                 order_has_items = _this4.cart.length;
 
                 if (order_has_items) {
-                  location.href = "".concat(window.location.origin, "/shipment-data");
+                  location.href = "".concat(window.location.origin, "/datos-envio");
                 } else {
                   toastr__WEBPACK_IMPORTED_MODULE_1___default().error('Debe tener items en su carrito de compras', 'Error');
                 }

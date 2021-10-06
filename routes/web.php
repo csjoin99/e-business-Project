@@ -30,12 +30,12 @@ Route::get('/', function () {
     /* return view('welcome'); */
 });
 
-Route::get('store', [StoreController::class, 'store'])->name('store');
-Route::get('product-detail/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');
-Route::get('shopping-cart', [StoreController::class, 'shopping_cart'])->name('shopping.cart');
+Route::get('tienda', [StoreController::class, 'store'])->name('store');
+Route::get('detalle-de-producto/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');
+Route::get('carrito-de-compra', [StoreController::class, 'shopping_cart'])->name('shopping.cart');
 
-Route::get('shipment-data', [CheckoutController::class, 'shipment_data'])->name('shipment.data');
-Route::post('shipment-data', [CheckoutController::class, 'store_shipment_data'])->name('store.shipment.data');
+Route::get('datos-envio', [CheckoutController::class, 'shipment_data'])->name('shipment.data');
+Route::post('datos-envio', [CheckoutController::class, 'store_shipment_data'])->name('store.shipment.data');
 
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
