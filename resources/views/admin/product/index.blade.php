@@ -65,6 +65,13 @@
                                         <td>{{ $product->stock }}</td>
                                         <td>
                                             <div class="d-flex flex-nowrap">
+                                                @if ($product->deleted_at)
+                                                <form action="{{route('product.restore',$product)}}" method="POST">
+                                                    @csrf
+                                                    <a role="button" class="btn btn-info" name="undo-button"><i
+                                                            class="fas fa-undo"></i></a>
+                                                </form>
+                                                @else
                                                 <a href="{{route('product.edit',$product)}}"
                                                     class="btn btn-primary mr-1"><i class="fas fa-pen"></i></a>
                                                 <a href="{{route('product.photo.index',$product)}}"
@@ -75,6 +82,8 @@
                                                     <a role="button" class="btn btn-danger" name="delete-button"><i
                                                             class="fas fa-trash"></i></a>
                                                 </form>
+                                                @endif
+                                                
                                             </div>
                                         </td>
                                     </tr>

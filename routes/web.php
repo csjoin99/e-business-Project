@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('permission:admin.product');
 
     Route::resource('product', ProductController::class)->middleware('permission:admin.product');
+    Route::post('product/{product}/restore', [ProductController::class, 'restore'])->name('product.restore')->middleware('permission:admin.product');
 
     Route::resource('category', CategoryController::class)->middleware('permission:admin.category');
 

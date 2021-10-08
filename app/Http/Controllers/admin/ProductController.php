@@ -24,9 +24,10 @@ class ProductController extends Controller
                 ->orWhere('code', 'LIKE', "%{$request->search}%")
                 ->orWhere(function ($subquery)  use ($categories) {
                     $subquery->whereIn('category_id', $categories->pluck('id'));
-                })->paginate(10);
+                })
+                ->withTrashed()->paginate(10);
         } else {
-            $products = Product::paginate(10);
+            $products = Product::withTrashed()->paginate(10);
         }
         return view('admin.product.index', compact('products'));
     }
@@ -112,9 +113,9 @@ class ProductController extends Controller
     {
         try {
             $product->delete();
-            return redirect()->route('product.index')->with('success', 'Producto eliminado exitosamente');
+            return redirect()->route('product.index')->with('success', 'Producto deshabilitado exitosamente');
         } catch (\Throwable $th) {
-            return redirect()->route('product.index')->with('failure', 'Ocurrio un error, no se pudo eliminar el producto');
+            return redirect()->route('product.index')->with('failure', 'Ocurrio un error, no se pudo deshabilitar el producto');
         }
     }
 
@@ -161,6 +162,17 @@ class ProductController extends Controller
             return response()->json([
                 'error' => 'No hay producto con ese id'
             ], 200);
+        }
+    }
+
+    public function restore($product)
+    {
+        try {
+            $product = Product::withTrashed()->find($product);
+            $product->restore();
+            return redirect()->route('product.index')->with('success', 'Producto restaurado exitosamente');
+        } catch (\Throwable $th) {
+            return redirect()->route('product.index')->with('failure', 'Ocurrio un error, no se pudo restaurar el product');
         }
     }
 }
