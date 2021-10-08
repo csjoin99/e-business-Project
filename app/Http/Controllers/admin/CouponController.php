@@ -49,7 +49,6 @@ class CouponController extends Controller
             $data = $request->all();
             $data['date_start'] = $dates[0];
             $data['date_end'] = $dates[1];
-            dd($data);
             Coupon::create($data);
             return redirect()->route('coupon.index')->with('success', 'Cupón registrado exitosamente');
         } catch (\Throwable $th) {
