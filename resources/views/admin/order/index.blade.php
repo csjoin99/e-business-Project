@@ -107,7 +107,7 @@
                                     </tr>
                                     @empty
                                     <tr class="odd">
-                                        <td valign="top" colspan="11" class="dataTables_empty text-center">No hay
+                                        <td valign="top" colspan="12" class="dataTables_empty text-center">No hay
                                             registros
                                         </td>
                                     </tr>

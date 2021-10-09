@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
+use App\Http\Controllers\admin\ProviderController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\web\CheckoutController;
@@ -50,7 +51,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('permission:admin.product');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware('permission:admin.dashboard');
 
     Route::resource('product', ProductController::class)->middleware('permission:admin.product');
     Route::post('product/{product}/restore', [ProductController::class, 'restore'])->name('product.restore')->middleware('permission:admin.product');
@@ -74,6 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('order', OrderController::class)->middleware('permission:admin.order');
 
     Route::get('cash-register', [CashRegisterController::class, 'cash_register'])->name('cash.register')->middleware('permission:admin.cash.register');
+
+    Route::resource('provider', ProviderController::class)->middleware('permission:admin.provider');
 
     Route::get('settings', [SettingsController::class, 'settings'])->name('settings')->middleware('permission:admin.product');
     Route::post('settings/{settings}', [SettingsController::class, 'settings_update'])->name('settings.update');

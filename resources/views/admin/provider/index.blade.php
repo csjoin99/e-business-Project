@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Lista de cupones')
+@section('title', 'Lista de proveedores')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lista de cupones</h1>
+                    <h1>Lista de proveedores</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-6 d-flex flex-column justify-content-center">
-                                    <a href="{{ route('coupon.create') }}" class="btn btn-outline-success"
+                                    <a href="{{ route('provider.create') }}" class="btn btn-outline-success"
                                         style="width: fit-content">Registrar</a>
                                 </div>
                                 <div class="col-6 d-flex justify-content-end">
@@ -39,37 +39,21 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Código</th>
-                                        <th>Descuento</th>
-                                        <th>Tipo</th>
-                                        <th>Fecha inicio</th>
-                                        <th>Fecha fin</th>
-                                        <th>Stock</th>
-                                        <th>Status</th>
-                                        <th>Acciones</th>
+                                        <th>Razón Social</th>
+                                        <th>RUC</th>
+                                        <th style="width: 35%">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($coupons as $coupon)
+                                    @forelse ($providers as $provider)
                                     <tr>
-                                        <td>{{ $coupon->code }}</td>
-                                        <td>{{ $coupon->discount_value }}</td>
-                                        <td>{{ $coupon->type }}</td>
-                                        <td>{{ Carbon::createFromFormat('Y-m-d', $coupon->date_start)->format('m-d-Y') }}</td>
-                                        <td>{{ Carbon::createFromFormat('Y-m-d', $coupon->date_end)->format('m-d-Y') }}</td>
-                                        <td>{{ $coupon->stock }}</td>
-                                        <td>
-                                            @if ($coupon->status === 'Activo')
-                                            <span class="badge badge-success">{{$coupon->status}}</span>
-                                            @else
-                                            <span class="badge badge-danger">{{$coupon->status}}</span>
-                                            @endif
-                                        </td>
+                                        <td>{{ $provider->name }}</td>
+                                        <td>{{ $provider->ruc }}</td>
                                         <td>
                                             <div class="d-flex flex-nowrap">
-                                                <a href="{{route('coupon.edit',$coupon)}}"
+                                                <a href="{{route('provider.edit',$provider)}}"
                                                     class="btn btn-primary mr-1"><i class="fas fa-pen"></i></a>
-                                                <form action="{{route('coupon.destroy',$coupon)}}" method="POST">
+                                                <form action="{{route('provider.destroy',$provider)}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <a role="button" class="btn btn-danger" name="delete-button"><i
@@ -80,14 +64,14 @@
                                     </tr>
                                     @empty
                                     <tr class="odd">
-                                        <td valign="top" colspan="8" class="dataTables_empty text-center">No hay
+                                        <td valign="top" colspan="3" class="dataTables_empty text-center">No hay
                                             registros
                                         </td>
                                     </tr>
                                     @endforelse
                                 </tbody>
                             </table>
-                            {{ $coupons->onEachSide(1)->appends(request()->except(['page']))->links('admin.partials.pagination') }}
+                            {{ $providers->onEachSide(1)->appends(request()->except(['page']))->links('admin.partials.pagination') }}
                         </div>
                         <!-- /.card-body -->
                     </div>
