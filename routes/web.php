@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\BuyOrderController;
 use App\Http\Controllers\admin\CashRegisterController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CouponController;
@@ -78,6 +79,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::resource('provider', ProviderController::class)->middleware('permission:admin.provider');
 
+    Route::resource('buy-order', BuyOrderController::class)->middleware('permission:admin.buy_order');
+
     Route::get('settings', [SettingsController::class, 'settings'])->name('settings')->middleware('permission:admin.product');
     Route::post('settings/{settings}', [SettingsController::class, 'settings_update'])->name('settings.update');
 });
+

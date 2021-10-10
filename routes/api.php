@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\BuyOrderController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProviderController;
 use App\Http\Controllers\web\CartController;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
@@ -27,9 +29,15 @@ Route::post('get-coupon-data', [CouponController::class, 'get_coupon']);
 
 Route::post('search-products', [ProductController::class, 'search_products']);
 
+Route::post('search-products-buy-order', [ProductController::class, 'search_products_buy_order']);
+
+Route::post('search-providers', [ProviderController::class, 'search_providers']);
+
 Route::post('find-product-by-id', [ProductController::class, 'find_product_by_id']);
 
 Route::post('store-cash-register', [OrderController::class, 'cash_register_store']);
+
+Route::post('store-buy-order', [BuyOrderController::class, 'store_buy_order']);
 
 /* Shopping cart */
 Route::post('cart-add-item', [CartController::class, 'add_item']);

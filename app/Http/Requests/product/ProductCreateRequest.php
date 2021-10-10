@@ -30,7 +30,6 @@ class ProductCreateRequest extends FormRequest
             'category_id' => 'required|in:' . implode(', ', $categories->pluck('id')->toarray()),
             'price' => 'required|numeric|min:1',
             'discount' => 'nullable|numeric|min:1|max:100',
-            'stock' => 'required|integer|min:0',
             'description' => 'required',
         ];
     }
@@ -42,7 +41,6 @@ class ProductCreateRequest extends FormRequest
             'category_id' => 'categoría',
             'price' => 'precio',
             'discount' => 'descuento',
-            'stock' => 'stock',
             'description' => 'descripción',
         ];
     }

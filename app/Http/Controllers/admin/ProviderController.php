@@ -104,4 +104,24 @@ class ProviderController extends Controller
             return redirect()->route('provider.index')->with('failure', 'Ocurrio un error, no se pudo eliminar al proveedor');
         }
     }
+
+    public function search_providers(Request $request)
+    {
+        try {
+            if ($request->search !== null) {
+                $providers = Provider::where('name', 'LIKE', "%{$request->search}%")
+                    ->orWhere('ruc', 'LIKE', "%{$request->search}%")->get();
+            } else {
+                $providers = Provider::all();
+            }
+            return response()->json([
+                'providers' => $providers,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'providers' => [],
+                'message' => $th->getMessage()
+            ], 400);
+        }
+    }
 }

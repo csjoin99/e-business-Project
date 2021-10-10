@@ -147,7 +147,36 @@ class ProductController extends Controller
             return response()->json([
                 'products' => [],
                 'message' => $th->getMessage()
+            ], 400);
+        }
+    }
+
+    public function search_products_buy_order(Request $request)
+    {
+        try {
+            $product_list = $request->product_list ? array_column($request->product_list, 'id') : [];
+            $products = Product::where(function ($query) use ($product_list) {
+                foreach ($product_list as $item) {
+                    $query->where('id', '!=', $item);
+                }
+            });
+            if ($request->search !== null) {
+                $categories = Category::where('name', 'LIKE', "%{$request->search}%")->get();
+                $products = $products->where('name', 'LIKE', "%{$request->search}%")
+                    ->orWhere('code', 'LIKE', "%{$request->search}%")
+                    ->orWhere(function ($subquery)  use ($categories) {
+                        $subquery->whereIn('category_id', $categories->pluck('id'));
+                    });
+            }
+            $products = $products->with('category')->get();
+            return response()->json([
+                'products' => $products,
             ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'products' => [],
+                'message' => $th->getMessage()
+            ], 400);
         }
     }
 
@@ -161,7 +190,7 @@ class ProductController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'error' => 'No hay producto con ese id'
-            ], 200);
+            ], 400);
         }
     }
 

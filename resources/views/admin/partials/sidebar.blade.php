@@ -77,7 +77,17 @@
                     <a href="{{ route('order.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice"></i>
                         <p>
-                            Orden
+                            Ventas
+                        </p>
+                    </a>
+                </li>
+                @endcan
+                @can('admin.buy_order')
+                <li class="nav-item">
+                    <a href="{{ route('buy-order.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            Ordenes de compra
                         </p>
                     </a>
                 </li>

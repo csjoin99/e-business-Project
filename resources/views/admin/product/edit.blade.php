@@ -74,15 +74,6 @@
                                     @endif --}}
                                 </div>
                                 <div class="form-group">
-                                    <label for="stock">Stock</label>
-                                    <input type="number"
-                                        class="form-control {{ $errors->has('stock') ? 'is-invalid' : '' }}" id="stock"
-                                        name="stock" placeholder="Ingresar el stock" min="0" value="{{$product->stock}}" noDecimal="1" required>
-                                    @error('stock')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="description">Descripción</label>
                                     <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                         name="description" id="description" cols="30" rows="10" required>{{$product->description}}</textarea>
