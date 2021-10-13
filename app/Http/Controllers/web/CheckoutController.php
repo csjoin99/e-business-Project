@@ -5,7 +5,9 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Purchase_session;
 use App\Traits\PdfTraits;
+use App\Traits\CheckoutTraits;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -16,12 +18,16 @@ use Stripe\Charge;
 
 class CheckoutController extends Controller
 {
-    use PdfTraits;
+    use CheckoutTraits;
 
     public function shipment_data()
     {
         if (!count(Cart::content()) || !auth()->check() || !session()->has('order')) {
             return redirect()->route('shopping.cart');
+        }
+        $this->check_sessions();
+        if (!$this->generate_session()) {
+            return redirect()->route('shopping.cart')->with('error', 'La cantidad solicitada no se encuentra disponible');
         }
         $path = public_path() . "\data\distritos.json";
         if (!File::exists($path)) {
@@ -43,6 +49,10 @@ class CheckoutController extends Controller
     {
         if (!count(Cart::content()) || !auth()->check() || !session()->has('order')) {
             return redirect()->route('shopping.cart');
+        }
+        $this->check_sessions();
+        if (!$this->generate_session()) {
+            return redirect()->route('shopping.cart')->with('error', 'La cantidad solicitada no se encuentra disponible');
         }
         if (!session()->has('shipment_data')) {
             return redirect()->route('shipment.data');

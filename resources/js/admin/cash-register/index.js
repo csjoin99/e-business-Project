@@ -83,7 +83,7 @@ const vm = new Vue({
                 price: product.price,
                 real_price: product.real_price,
                 qty: 1,
-                stock: product.stock,
+                stock: product.temp_stock,
                 total: (1 * product.real_price).toFixed(2),
             };
             this.product_list.push(this.product);
@@ -95,21 +95,34 @@ const vm = new Vue({
         async update_product(e) {
             const input = e.target;
             const qty = parseFloat(input.value);
-            console.log(qty);
-            if (
-                qty <= 0 ||
-                qty > parseFloat(this.product.stock) ||
-                qty % 1 != 0
-            ) {
-                input.classList.add("border-danger");
-                return;
-            } else {
-                input.classList.remove("border-danger");
-                this.product_list = this.product_list.map((item) => {
-                    item.total = (item.real_price * item.qty).toFixed(2);
-                    return item;
-                });
-                this.calculate_price();
+            const url = `${window.location.origin}/api/find-product-by-id`;
+            const response = await fetch(url, {
+                method: "POST",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: this.product.id,
+                }),
+            });
+            if (response.status !== 400) {
+                const { product } = await response.json();
+                if (
+                    qty <= 0 ||
+                    qty > parseFloat(product.stock) ||
+                    qty % 1 != 0
+                ) {
+                    input.classList.add("border-danger");
+                    return;
+                } else {
+                    input.classList.remove("border-danger");
+                    this.product_list = this.product_list.map((item) => {
+                        item.total = (item.real_price * item.qty).toFixed(2);
+                        return item;
+                    });
+                    this.calculate_price();
+                }
             }
         },
         delete_product(product) {
@@ -216,37 +229,3 @@ const vm = new Vue({
         this.list_products();
     },
 });
-
-/* $(".select-product")
-    .select2({
-        placeholder: "Buscar producto",
-        theme: "bootstrap4",
-        width: "100%",
-        ajax: {
-            url: `${window.location.origin}/api/search-products`,
-            dataType: "json",
-            type: "POST",
-            data: function (params) {
-                return {
-                    search: params.term,
-                    product_list: this.product_list,
-                };
-            },
-            processResults: function (data) {
-                return {
-                    results: data.products.length
-                        ? data.products.map((item) => {
-                              return {
-                                  id: item.id,
-                                  text: item.name,
-                              };
-                          })
-                        : [],
-                };
-            },
-        },
-    })
-    .on("change", (e) => {
-        vm.set_product(e.target.value);
-    });
- */

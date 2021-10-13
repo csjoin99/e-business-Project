@@ -24567,7 +24567,7 @@ var vm = new Vue({
                 if (order_has_items) {
                   location.href = "".concat(window.location.origin, "/datos-envio");
                 } else {
-                  toastr__WEBPACK_IMPORTED_MODULE_1___default().error('Debe tener items en su carrito de compras', 'Error');
+                  toastr__WEBPACK_IMPORTED_MODULE_1___default().error('Su carrito de compras debe tener productos', 'Error');
                 }
 
               case 2:

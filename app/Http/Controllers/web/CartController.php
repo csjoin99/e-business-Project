@@ -7,12 +7,16 @@ use App\Models\Coupon;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use App\Traits\CheckoutTraits;
 
 class CartController extends Controller
 {
+    use CheckoutTraits;
+    
     public function add_item(Request $request)
     {
         try {
+            $this->check_sessions();
             $product = Product::find($request->id);
             $cart = Cart::search(function ($cartItem, $rowId) use ($product) {
                 return $cartItem->id === $product->id;
@@ -68,11 +72,12 @@ class CartController extends Controller
     public function update_item(Request $request)
     {
         try {
+            $this->check_sessions();
             $product = Product::find($request->id);
             $cart = Cart::search(function ($cartItem, $rowId) use ($product) {
                 return $cartItem->id === $product->id;
             })->first();
-            if ((int)$product->stock < (int)$request->qty)
+            if ((int)$product->temp_stock < (int)$request->qty)
                 return response()->json([
                     'message' => 'La cantidad solicitada sobrepasa al stock actual'
                 ], 400);
@@ -94,6 +99,7 @@ class CartController extends Controller
     public function delete_item(Request $request)
     {
         try {
+            $this->check_sessions();
             Cart::remove($request->rowId);
             $order = $this->calculate_order();
             return response()->json([

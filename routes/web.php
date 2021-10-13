@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('store');
     /* return view('welcome'); */
 });
 
@@ -36,10 +36,10 @@ Route::get('tienda', [StoreController::class, 'store'])->name('store');
 Route::get('detalle-de-producto/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');
 Route::get('carrito-de-compra', [StoreController::class, 'shopping_cart'])->name('shopping.cart');
 
-Route::get('datos-envio', [CheckoutController::class, 'shipment_data'])->name('shipment.data');
+Route::get('datos-envio', [CheckoutController::class, 'shipment_data'])->name('shipment.data')->middleware('check_checkout_session');
 Route::post('datos-envio', [CheckoutController::class, 'store_shipment_data'])->name('store.shipment.data');
 
-Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('check_checkout_session');
 
 Route::post('upon-delivery-payment', [CheckoutController::class, 'upon_delivery'])->name('upon.delivery');
 Route::post('stripe-payment', [CheckoutController::class, 'stripe'])->name('stripe');

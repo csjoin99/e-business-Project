@@ -131,13 +131,13 @@ class ProductController extends Controller
             if ($request->search !== null) {
                 $categories = Category::where('name', 'LIKE', "%{$request->search}%")->get();
                 $products = $products->where('name', 'LIKE', "%{$request->search}%")
-                    ->where('stock', '>', 0)
+                    ->where('temp_stock', '>', 0)
                     ->orWhere('code', 'LIKE', "%{$request->search}%")
                     ->orWhere(function ($subquery)  use ($categories) {
                         $subquery->whereIn('category_id', $categories->pluck('id'));
                     });
             } else {
-                $products = $products->where('stock', '>', 0);
+                $products = $products->where('temp_stock', '>', 0);
             }
             $products = $products->with('category')->get();
             return response()->json([

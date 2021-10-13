@@ -131,4 +131,10 @@
 @section('js')
     <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
+    <script>
+        const error_msg = "{{session('error')}}";
+        if(error_msg){
+            toastr.error(error_msg,'Error')
+        }
+    </script>
 @endsection

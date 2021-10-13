@@ -57,7 +57,6 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        
     }
 
     /**
@@ -94,6 +93,7 @@ class OrderController extends Controller
         try {
             foreach ($order->product as $product) {
                 $product->stock += $product->pivot->quantity;
+                $product->temp_stock += $product->pivot->quantity;
                 $product->save();
             }
             if ($order->coupon) {
@@ -131,14 +131,26 @@ class OrderController extends Controller
             $order = Order::create($data);
             $order->code = str_pad($order->id, 5, "0", STR_PAD_LEFT);
             $order->save();
+            $product_list = [];
             foreach (json_decode($request->product_list) as $item) {
                 $product = Product::find($item->id);
+                if ($item->qty > $product->temp_stock) {
+                    return response()->json([
+                        'error' => 'La cantidad de un producto no es correcto',
+                    ], 400);
+                }
+                array_push($product_list, ['product' => $product, 'item' => $item]);
+            }
+            foreach ($product_list as $product_item) {
+                $item = $product_item['item'];
+                $product = $product_item['product'];
                 $order->product()->attach($product->id, [
                     'quantity' => $item->qty,
                     'price' => $item->price,
                     'price_discount' => $item->price,
                 ]);
                 $product->stock = $product->stock - $item->qty;
+                $product->temp_stock = $product->temp_stock - $item->qty;
                 $product->save();
             }
             if ($coupon) {

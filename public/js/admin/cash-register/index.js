@@ -13039,7 +13039,7 @@ var vm = new Vue({
                   price: product.price,
                   real_price: product.real_price,
                   qty: 1,
-                  stock: product.stock,
+                  stock: product.temp_stock,
                   total: (1 * product.real_price).toFixed(2)
                 };
 
@@ -13063,24 +13063,51 @@ var vm = new Vue({
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var input, qty;
+        var input, qty, url, response, _yield$response$json3, product;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 input = e.target;
                 qty = parseFloat(input.value);
-                console.log(qty);
+                url = "".concat(window.location.origin, "/api/find-product-by-id");
+                _context3.next = 5;
+                return fetch(url, {
+                  method: "POST",
+                  cache: "no-cache",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    id: _this3.product.id
+                  })
+                });
 
-                if (!(qty <= 0 || qty > parseFloat(_this3.product.stock) || qty % 1 != 0)) {
-                  _context3.next = 8;
+              case 5:
+                response = _context3.sent;
+
+                if (!(response.status !== 400)) {
+                  _context3.next = 19;
+                  break;
+                }
+
+                _context3.next = 9;
+                return response.json();
+
+              case 9:
+                _yield$response$json3 = _context3.sent;
+                product = _yield$response$json3.product;
+
+                if (!(qty <= 0 || qty > parseFloat(product.stock) || qty % 1 != 0)) {
+                  _context3.next = 16;
                   break;
                 }
 
                 input.classList.add("border-danger");
                 return _context3.abrupt("return");
 
-              case 8:
+              case 16:
                 input.classList.remove("border-danger");
                 _this3.product_list = _this3.product_list.map(function (item) {
                   item.total = (item.real_price * item.qty).toFixed(2);
@@ -13089,7 +13116,7 @@ var vm = new Vue({
 
                 _this3.calculate_price();
 
-              case 11:
+              case 19:
               case "end":
                 return _context3.stop();
             }
@@ -13108,7 +13135,7 @@ var vm = new Vue({
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var url, search, response, _yield$response$json3, products;
+        var url, search, response, _yield$response$json4, products;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -13141,8 +13168,8 @@ var vm = new Vue({
                 return response.json();
 
               case 8:
-                _yield$response$json3 = _context4.sent;
-                products = _yield$response$json3.products;
+                _yield$response$json4 = _context4.sent;
+                products = _yield$response$json4.products;
                 _this4.search_list = products;
 
               case 11:
@@ -13175,7 +13202,7 @@ var vm = new Vue({
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var url, formData, response, _yield$response$json4, error;
+        var url, formData, response, _yield$response$json5, error;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
@@ -13241,8 +13268,8 @@ var vm = new Vue({
                 return response.json();
 
               case 24:
-                _yield$response$json4 = _context5.sent;
-                error = _yield$response$json4.error;
+                _yield$response$json5 = _context5.sent;
+                error = _yield$response$json5.error;
                 throw error;
 
               case 27:
@@ -13270,39 +13297,6 @@ var vm = new Vue({
     this.list_products();
   }
 });
-/* $(".select-product")
-    .select2({
-        placeholder: "Buscar producto",
-        theme: "bootstrap4",
-        width: "100%",
-        ajax: {
-            url: `${window.location.origin}/api/search-products`,
-            dataType: "json",
-            type: "POST",
-            data: function (params) {
-                return {
-                    search: params.term,
-                    product_list: this.product_list,
-                };
-            },
-            processResults: function (data) {
-                return {
-                    results: data.products.length
-                        ? data.products.map((item) => {
-                              return {
-                                  id: item.id,
-                                  text: item.name,
-                              };
-                          })
-                        : [],
-                };
-            },
-        },
-    })
-    .on("change", (e) => {
-        vm.set_product(e.target.value);
-    });
- */
 })();
 
 /******/ })()

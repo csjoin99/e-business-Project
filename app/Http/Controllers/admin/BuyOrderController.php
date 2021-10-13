@@ -119,6 +119,7 @@ class BuyOrderController extends Controller
                     'total' => $item->real_price,
                 ]);
                 $product->stock = $product->stock + $item->qty;
+                $product->temp_stock = $product->temp_stock + $item->qty;
                 $product->save();
             }
             return response()->json([

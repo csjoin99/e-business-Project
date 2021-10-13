@@ -62,7 +62,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->discount ? floatval($product->discount).'%' : '-' }}</td>
-                                        <td>{{ $product->stock }}</td>
+                                        <td>{{ $product->stock }}/{{ $product->temp_stock }}</td>
                                         <td>
                                             <div class="d-flex flex-nowrap">
                                                 @if ($product->deleted_at)
