@@ -143,6 +143,11 @@ class CheckoutController extends Controller
             $order->coupon->save();
         }
         Cart::destroy();
+        if (auth()->check()) {
+            $purchase_session = Purchase_session::where('user_id', auth()->user()->id)->first();
+            $purchase_session->product()->delete();
+            $purchase_session->delete();
+        }
         session()->forget('coupon');
         session()->forget('order');
         session()->forget('shipment_data');
