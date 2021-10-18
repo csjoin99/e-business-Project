@@ -19,5 +19,6 @@ class Settings extends Model
         'facebook',
         'instagram',
         'twitter',
+        'whatsapp',
     ];
 }

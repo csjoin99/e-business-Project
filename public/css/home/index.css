@@ -1,0 +1,159 @@
+.dropdown-menu {
+  width: 100%;
+  list-style-type: none;
+  text-align: center;
+  background-color: #282c34;
+}
+.dropdown-menu a {
+  display: inline-block;
+  margin: auto;
+  width: auto;
+  padding: 5px;
+  background-color: #282c34;
+}
+.dropdown-menu a:hover {
+  background-color: #282c34;
+}
+
+.dropdown {
+  display: inline-block;
+  position: absolute;
+}
+
+.dropdown-item p {
+  color: #ffffff;
+}
+
+.carousel-item {
+  background-image: linear-gradient(#fb8f22, #f45f22);
+  height: 50vh;
+  color: white;
+}
+
+.ex1 {
+  margin-top: 1vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-items: center;
+}
+
+.card {
+  max-width: 8rem;
+  color: gray;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card:hover {
+  color: gray;
+  text-decoration: underline;
+}
+.card img {
+  width: 100%;
+}
+.card p {
+  margin: 0.5rem 0;
+}
+
+.ex2 {
+  text-align: center;
+  color: orange;
+}
+
+.ex3 {
+  display: grid;
+  width: 80vw;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.ex3 button {
+  margin: 0 1.5rem;
+  background-color: #ffffff;
+  border-style: none;
+  border-radius: 21px;
+  background: #ffffff;
+  box-shadow: 5px 5px 100px #fcfcfc, -5px -5px 100px #ffffff;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+.ex3 button:hover {
+  border-radius: 21px;
+  background: #ffffff;
+  box-shadow: 5px 5px 100px #d1d1d1, -5px -5px 100px #ffffff;
+}
+.ex3 button .card-img {
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ex3 button .card-img img {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.ex3 button .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ex3 button .card-body p {
+  margin-bottom: 0px;
+  color: orange;
+}
+.ex3 button .card-body .descripcion {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+.ex3 button .card-body .descripcion:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+.ex4 {
+  background-color: #fafafa;
+}
+.ex4 h5 {
+  color: orange;
+}
+.ex4 a:hover {
+  text-decoration: underline;
+}
+.ex4 ul {
+  padding-left: 0;
+}
+
+.credit {
+  width: 2rem;
+}
+
+.nav-item {
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
+  margin-right: 1rem;
+}
+
+.col-sm-2 {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb {
+  margin: 2rem 0;
+}
+.breadcrumb ol li a {
+  color: #6c757d;
+  text-decoration: none;
+}
+.breadcrumb ol li a:hover {
+  text-decoration: underline;
+}

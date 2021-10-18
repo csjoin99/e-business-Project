@@ -10,6 +10,7 @@
     "/js/web/checkout/index.js": "/js/web/checkout/index.js",
     "/css/checkout/index.css": "/css/checkout/index.css",
     "/css/shopping-cart/index.css": "/css/shopping-cart/index.css",
+    "/css/home/index.css": "/css/home/index.css",
     "/css/product-detail/index.css": "/css/product-detail/index.css",
     "/css/app.css": "/css/app.css"
 }

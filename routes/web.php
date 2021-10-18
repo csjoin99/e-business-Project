@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\ProviderController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\web\CheckoutController;
+use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\StoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,10 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('store');
-    /* return view('welcome'); */
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('tienda', [StoreController::class, 'store'])->name('store');
 Route::get('detalle-de-producto/{slug}', [StoreController::class, 'product_detail'])->name('product.detail');

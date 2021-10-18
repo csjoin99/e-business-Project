@@ -26,6 +26,12 @@ mix.sass(
 );
 
 mix.sass(
+    "resources/sass/home/index.scss",
+    "public/css/home"
+);
+
+
+mix.sass(
     "resources/sass/checkout/index.scss",
     "public/css/checkout"
 );
