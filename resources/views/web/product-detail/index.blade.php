@@ -1,77 +1,109 @@
 @extends('web.layout.layout')
-
-@section('title')
-{{$product->name}}
-@endsection
-
 @section('css')
-<link href="{{asset('css/product-detail/index.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link href="{{ asset('css/product-detail/index.css') }}" rel="stylesheet" type="text/css" />
 @endsection
-
-@section('header')
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Producto</h1>
-            <p class="lead fw-normal text-white-50 mb-0"></p>
+@section('content')
+    @include('web.partials.nav')
+    <!--Carrito -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cesta" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Mi cesta</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            No hay articulos
         </div>
     </div>
-</header>
-@endsection
-
-@section('content')
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="">
-            <div class="container-fliud">
-                <div class="wrapper row">
-                    <div class="preview col-md-5">
-                        <div class="preview-pic tab-content">
-                            <div class="tab-pane active" id="pic-1"><img class="pop"
-                                    src="{{$product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png'}}" />
+    <br>
+    <div class="breadcrumb">
+        <div class="container">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('store') }}">Tienda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="ex2">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="carousel carousel-main">
+                        @forelse ($product->product_photo as $photo)
+                            <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
                             </div>
-                        </div>
-                        @if ($product->product_photo->count())
-                        <ul class="preview-thumbnail nav nav-tabs">
-                            @foreach ($product->product_photo as $product_photo)
-                            <li class="active">
-                                <a data-target="{{"#pic-{$product_photo->id}"}}" data-toggle="tab">
-                                    <img src="{{$product_photo->image}}" />
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-                        @endif
+                        @empty
+                            <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
+                            </div>
+                        @endforelse
                     </div>
-                    <div class="details col-md-7">
-                        <h3 class="product-title">{{$product->name}}</h3>
-                        <h4 class="product-category">{{$product->category->name}}</h4>
-                        <p class="product-description">
-                            {{$product->description}}
-                        </p>
-                        <h4 class="price">Precio:
-                            <del class="text-muted">{{$product->discount ? "S/. {$product->price}" : ""}}</del>
-                            <span> S/.{{$product->real_price}}</span>
-                        </h4>
-                        <div class="action mt-5">
-                            <button class="btn-cart btn btn-outline-dark mt-auto" v-on:click="add_cart" data-id="{{$product->id}}" type="button">Añadir a carrito</button>
+                    <div class="carousel carousel-nav">
+                        @forelse ($product->product_photo as $photo)
+                            <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
+                            </div>
+                        @empty
+                            <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
+                            </div>
+                        @endforelse
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="col-sm-4">
+                    <div class="informacion">
+                        <h4>{{ $product->name }}</h4>
+                        <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
+                        <h5>S/. {{ $product->real_price }}</h5>
+                        <p>Cantidad</p>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn-Cantidad" onclick="update_qty(-1)">-</button>
+                            <input id="btn-qty-item" type="number" class="input-Cantidad" value="1" min="1">
+                            <button type="button" class="btn-Cantidad" onclick="update_qty(1)">+</button>
+                        </div>
+                        <br>
+                        <button type="button" class="btn-Agregar">Agregar al Carrito</button>
+                        <div class="info">
+                            <p>
+                                {{ $product->description }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+    @include('web.partials.footer')
 @endsection
 @section('js')
-<script src="{{asset('js/web/product-detail/index.js')}}"></script>
-<script>
-    const img_list = document.querySelector(".preview-thumbnail").querySelectorAll('li');
-    const img = document.querySelector("img[class='pop']");
-    img_list.forEach((item)=>{
-        item.querySelector("img").addEventListener('click',()=>{
-            img.src = item.querySelector('img').src
-        })
-    })
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.carousel-main').flickity();
+            // 2nd carousel, navigation
+            $('.carousel-nav').flickity({
+                asNavFor: '.carousel-main',
+                contain: true,
+                pageDots: false
+            });
+        });
+
+        function update_qty(qty) {
+            const input = document.querySelector('input[id="btn-qty-item"]');
+            let new_value = parseInt(input.value) + parseInt(qty);
+            if (new_value <= 1) {
+                input.value = 1;
+            } else {
+                input.value = new_value;
+            }
+        }
+    </script>
 @endsection

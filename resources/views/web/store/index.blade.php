@@ -17,8 +17,8 @@
             <div class="container">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Productos</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tienda</li>
                     </ol>
                 </nav>
             </div>
@@ -32,7 +32,7 @@
                             alt="">
                     </div>
                     <div class="card-body">
-                        <a href="producto.html" class="descripcion">
+                        <a href="{{ route('product.detail', ['slug' => $product->slug]) }}" class="descripcion">
                             {{ $product->name }}
                         </a>
                         <br>
