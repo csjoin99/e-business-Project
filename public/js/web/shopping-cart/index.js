@@ -24299,7 +24299,7 @@ var vm = new Vue({
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var product_id, qty, url, response, _yield$response$json, error, _yield$response$json2, cart, total_items;
+        var product_id, qty, url, response, _yield$response$json, message, _yield$response$json2, cart, total_items, order;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
@@ -24325,7 +24325,7 @@ var vm = new Vue({
                 response = _context.sent;
 
                 if (!(response.status === 400)) {
-                  _context.next = 13;
+                  _context.next = 15;
                   break;
                 }
 
@@ -24334,28 +24334,32 @@ var vm = new Vue({
 
               case 9:
                 _yield$response$json = _context.sent;
-                error = _yield$response$json.error;
-                _context.next = 21;
+                message = _yield$response$json.message;
+                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(message, "Error");
+                input.classList.add("border-danger");
+                _context.next = 25;
                 break;
 
-              case 13:
-                _context.next = 15;
+              case 15:
+                _context.next = 17;
                 return response.json();
 
-              case 15:
+              case 17:
                 _yield$response$json2 = _context.sent;
                 cart = _yield$response$json2.cart;
                 total_items = _yield$response$json2.total_items;
+                order = _yield$response$json2.order;
                 document.querySelector('#cart-count').textContent = total_items;
                 cart = Object.entries(cart).map(function (item, index) {
                   return item[1];
                 });
                 _this.cart = cart;
+                _this.order = order;
 
-              case 21:
+              case 25:
                 return _context.abrupt("return");
 
-              case 22:
+              case 26:
               case "end":
                 return _context.stop();
             }

@@ -33,14 +33,17 @@ const vm = new Vue({
                 }),
             });
             if (response.status === 400) {
-                const { error } = await response.json();
+                let { message } = await response.json();
+                toastr.error(message, "Error");
+                input.classList.add("border-danger");
             } else {
-                let {cart, total_items} = await response.json();
+                let {cart, total_items, order} = await response.json();
                 document.querySelector('#cart-count').textContent = total_items;
                 cart = Object.entries(cart).map((item, index) => {
                     return item[1];
                 });
                 this.cart = cart;
+                this.order = order;
             }
             return;
         },

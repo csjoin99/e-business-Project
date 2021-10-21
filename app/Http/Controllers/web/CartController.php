@@ -27,7 +27,7 @@ class CartController extends Controller
             } else {
                 $qty = $item_qty;
             }
-            if ((int)$product->stock < (int)$qty)
+            if ((int)$product->temp_stock < (int)$qty)
                 return response()->json([
                     'message' => 'La cantidad solicitada sobrepasa al stock actual'
                 ], 400);
@@ -40,10 +40,11 @@ class CartController extends Controller
                     'image' => $product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png'
                 ]);
             }
-            $this->calculate_order();
+            $order = $this->calculate_order();
             return response()->json([
                 'cart' => Cart::content(),
                 'total_items' => Cart::count(),
+                'order' => $order,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([

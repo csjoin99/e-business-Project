@@ -140,6 +140,7 @@
             toastr.error(error_msg, 'Error')
         }
     </script>
+    <script src="{{asset('js/web/shopping-cart/index.js')}}"></script>
 @endsection
 
 

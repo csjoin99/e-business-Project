@@ -13,7 +13,7 @@
                 <div class="col-8">
                     <a role="button" v-text="item.name"></a>
                     <p style="color:orange" v-text="`S/. ${parseFloat(item.subtotal).toFixed(2)}`"></p>
-                    <input type="number" value="1" maxlength="5px" v-model="item.qty" v-on:change="cart_update_qty($event, item)">
+                    <input type="number" maxlength="5px" v-model="item.qty" v-on:change="cart_update_qty($event, item)">
                     <button v-on:click="cart_delete_item(item)" type="button" class="btn-close position-relative"
                         aria-label="Close"></button>
                 </div>

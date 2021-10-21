@@ -8,68 +8,69 @@
     @include('web.partials.nav')
     <!--Carrito -->
     @include('web.partials.cart')
-    <br>
-    <div class="breadcrumb">
-        <div class="container">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('store') }}">Tienda</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
-                </ol>
-            </nav>
+    <section>
+        <div class="breadcrumb">
+            <div class="container">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('store') }}">Tienda</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="ex2">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="carousel carousel-main">
-                        @forelse ($product->product_photo as $photo)
-                            <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
-                            </div>
-                        @empty
-                            <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
-                            </div>
-                        @endforelse
-                    </div>
-                    <div class="carousel carousel-nav">
-                        @forelse ($product->product_photo as $photo)
-                            <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
-                            </div>
-                        @empty
-                            <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
-                            </div>
-                        @endforelse
-                    </div>
-                    <br>
-                    <br>
-                </div>
-                <div class="col-sm-4">
-                    <div class="informacion">
-                        <h4>{{ $product->name }}</h4>
-                        <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
-                        <h5>S/. {{ $product->real_price }}</h5>
-                        <p>Cantidad</p>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn-Cantidad" onclick="update_qty(-1)">-</button>
-                            <input id="add_item_qty" type="number" class="input-Cantidad" value="1" min="1">
-                            <button type="button" class="btn-Cantidad" onclick="update_qty(1)">+</button>
+        <div class="container">
+            <div class="ex2">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="carousel carousel-main">
+                            @forelse ($product->product_photo as $photo)
+                                <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
+                                </div>
+                            @empty
+                                <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
+                                </div>
+                            @endforelse
+                        </div>
+                        <div class="carousel carousel-nav">
+                            @forelse ($product->product_photo as $photo)
+                                <div class="carousel-image"><img src="{{ $photo->image }}" alt="">
+                                </div>
+                            @empty
+                                <div class="carousel-image"><img src="{{ asset('img/web/no-img.png') }}" alt="">
+                                </div>
+                            @endforelse
                         </div>
                         <br>
-                        <button type="button" class="btn-Agregar" data-id="{{ $product->id }}"
-                            v-on:click="cart_add_item($event)">Agregar al
-                            Carrito</button>
-                        <div class="info">
-                            <p>
-                                {{ $product->description }}
-                            </p>
+                        <br>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="informacion">
+                            <h4>{{ $product->name }}</h4>
+                            <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
+                            <h5>S/. {{ $product->real_price }}</h5>
+                            <p>Cantidad</p>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn-Cantidad" onclick="update_qty(-1)">-</button>
+                                <input id="add_item_qty" type="number" class="input-Cantidad" value="1" min="1">
+                                <button type="button" class="btn-Cantidad" onclick="update_qty(1)">+</button>
+                            </div>
+                            <br>
+                            <button type="button" class="btn-Agregar" data-id="{{ $product->id }}"
+                                v-on:click="cart_add_item($event)">Agregar al
+                                Carrito</button>
+                            <div class="info">
+                                <p>
+                                    {{ $product->description }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     @include('web.partials.footer')
 @endsection
 @section('js')
@@ -90,6 +91,9 @@
                 pageDots: false
             });
         });
+    </script>
+    <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
+    <script>
         const input = document.querySelector('input[id="add_item_qty"]');
 
         function update_qty(qty) {
@@ -100,7 +104,7 @@
                 input.value = new_value;
             }
         }
-        input.addEventListener('change', ()=>{
+        input.addEventListener('change', () => {
             if (input.value <= 1) {
                 input.value = 1;
             }
