@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AuditController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\BuyOrderController;
 use App\Http\Controllers\admin\CashRegisterController;
@@ -81,5 +82,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('settings', [SettingsController::class, 'settings'])->name('settings')->middleware('permission:admin.product');
     Route::post('settings/{settings}', [SettingsController::class, 'settings_update'])->name('settings.update');
+
+    Route::get('audit', [AuditController::class, 'index'])->name('audit.index')->middleware('permission:admin.cash.register');
+    Route::get('audit/{audit}', [AuditController::class, 'show'])->name('audit.show')->middleware('permission:admin.cash.register');
 });
 

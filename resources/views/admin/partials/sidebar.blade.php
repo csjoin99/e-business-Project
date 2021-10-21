@@ -122,6 +122,16 @@
                     </a>
                 </li>
                 @endcan
+                @can('admin.settings')
+                <li class="nav-item">
+                    <a href="{{ route('audit.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-history"></i>
+                        <p>
+                            Auditoría
+                        </p>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
