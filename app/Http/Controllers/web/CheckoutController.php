@@ -22,7 +22,10 @@ class CheckoutController extends Controller
 
     public function shipment_data()
     {
-        if (!count(Cart::content()) || !auth()->check() || !session()->has('order')) {
+        if (!auth()->check()) {
+            return redirect()->route('shopping.cart')->with('error', 'Debes logearte para realizar la compra');
+        }
+        if (!Cart::count() || !session()->has('order')) {
             return redirect()->route('shopping.cart');
         }
         $this->check_sessions();
@@ -87,7 +90,7 @@ class CheckoutController extends Controller
         $data['status'] = 1;
         $data['total'] = $data['total'];
         $this->save_order($data);
-        return redirect()->route('store');
+        return redirect()->route('store')->with('purchase_message', 'Se registró su compra con exito');
     }
 
     public function upon_delivery(Request $request)
@@ -120,7 +123,7 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['total'] = $total;
         $this->save_order($data);
-        return redirect()->route('store');
+        return redirect()->route('store')->with('purchase_message', 'Se registró su compra con exito');
     }
 
     public function save_order($data)
