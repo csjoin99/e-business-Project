@@ -1,48 +1,82 @@
 @extends('web.layout.layout')
+
+@section('css')
+    <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/store/index.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
     <!--NAvBar -->
     @include('web.partials.nav')
     <!--Carrito -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cesta" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Mi cesta</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            No hay articulos
+    @include('web.partials.cart')
+    <br>
+    <div class="ex1">
+        <div class="container">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+                </ol>
+            </nav>
         </div>
     </div>
+    <br>
+    <br>
     <div class="container">
-        <div class="breadcrumb">
-            <div class="container">
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Tienda</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
         <div class="ex3">
-            @foreach ($products as $product)
-                <button type="button" name="button">
-                    <div class="card-img">
-                        <img class="descripcion"
-                            src="{{ $product->product_photo->count() ? $product->product_photo->first()->image : asset('img/web/no-img.png') }}"
-                            alt="">
-                    </div>
-                    <div class="card-body">
-                        <a href="{{ route('product.detail', ['slug' => $product->slug]) }}" class="descripcion">
-                            {{ $product->name }}
-                        </a>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="Filtros">
+                        <p>Filtros</p>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="mayor-precio">Mayor Precio</option>
+                            <option value="menor-precio">Menor Precio</option>
+                        </select>
                         <br>
-                        @if ($product->discount)
-                            <p class="text-muted text-decoration-line-through">S/{{ $product->price }}</p>
-                        @endif
-                        <p>S/{{ $product->real_price }}</p>
+                        <div class="Tipo">
+                            <h5>Tipo de Producto</h5>
+                            <hr>
+                            @foreach ($categories as $category)
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="{{ $category->slug }}">
+                                    {{ $category->name }}
+                                </label>
+                            @endforeach
+                            <h5>Precio</h5>
+                            <hr>
+                            <div class="d-flex align-items-center">
+                                <input type="number" class="form-control form-control-xs" placeholder="Mínimo" min="1">
+                                <div class="text-gray-350 mx-2">‒</div>
+                                <input type="number" class="form-control form-control-xs" placeholder="Máximo" max="10000">
+                            </div>
+                        </div>
                     </div>
-                </button>
-            @endforeach
+                </div>
+                <div class="col-sm-9">
+                    <div class="ListProductos">
+                        <p>{{ $total }}</p>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                            @forelse ($products as $product)
+                                <div class="col">
+                                    <a class="Producto-items"
+                                        href="{{ route('product.detail', ['slug' => $product->slug]) }}" type="button">
+                                        <img src="{{ $product->product_photo->count() ? $product->product_photo->first()->image : asset('img/web/no-img.png') }}"
+                                            alt="">
+                                        <p class="name">{{ $product->name }}</p>
+                                        @if ($product->discount)
+                                            <p class="text-muted text-decoration-line-through">S/{{ $product->price }}</p>
+                                        @endif
+                                        <p style="color:orange">S/{{ $product->real_price }}</p>
+                                    </a>
+                                </div>
+                            @empty
+                                <h1>No hay productos</h1>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br>

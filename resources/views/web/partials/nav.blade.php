@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light border">
-    <div class=" container-fluid">
+    <div class="container-fluid mt-0">
         <a class="navbar-brand" href="{{ route('home') }}">
             <!--Insertar un svg  -->
             {{ $settings->name }}
@@ -53,8 +53,8 @@
                 <div class="nav-item navbar-icon-link" data-bs-toggle="cart">
                     <a role="button" data-bs-toggle="offcanvas" data-bs-target="#cesta" aria-controls="offcanvasRight">
                         <img src="{{ asset('assets/icons/cart.svg') }}">
-                        <span class="position-absolute translate-middle badge rounded-pill bg-success">
-                            0
+                        <span id="cart-count" class="position-absolute translate-middle badge rounded-pill bg-success">
+                            {{Cart::count()}}
                             <span class="visually-hidden">productos</span>
                         </span>
                     </a>

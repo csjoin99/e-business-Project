@@ -1,0 +1,47 @@
+@import "../variables.scss";
+
+.dropdown-menu {
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    background-color: #282c34;
+    a {
+        display: inline-block;
+        margin: auto;
+        width: auto;
+        padding: 5px;
+        background-color: #282c34;
+        &:hover {
+            background-color: #282c34;
+        }
+    }
+}
+
+.nav-item {
+    align-items: center;
+    display: flex;
+    padding-top: 10px;
+    margin-right: 1rem;
+}
+
+.dropdown {
+    display: inline-block;
+    position: absolute;
+}
+
+.dropdown-item p {
+    color: #ffffff;
+}
+
+.ex4 {
+    background-color: #fafafa;
+    h5 {
+        color: $brand-color;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    ul {
+        padding-left: 0;
+    }
+}

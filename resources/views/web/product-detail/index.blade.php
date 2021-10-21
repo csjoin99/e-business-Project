@@ -1,20 +1,13 @@
 @extends('web.layout.layout')
 @section('css')
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/product-detail/index.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
     @include('web.partials.nav')
     <!--Carrito -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cesta" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Mi cesta</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            No hay articulos
-        </div>
-    </div>
+    @include('web.partials.cart')
     <br>
     <div class="breadcrumb">
         <div class="container">
@@ -60,11 +53,13 @@
                         <p>Cantidad</p>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn-Cantidad" onclick="update_qty(-1)">-</button>
-                            <input id="btn-qty-item" type="number" class="input-Cantidad" value="1" min="1">
+                            <input id="add_item_qty" type="number" class="input-Cantidad" value="1" min="1">
                             <button type="button" class="btn-Cantidad" onclick="update_qty(1)">+</button>
                         </div>
                         <br>
-                        <button type="button" class="btn-Agregar">Agregar al Carrito</button>
+                        <button type="button" class="btn-Agregar" data-id="{{ $product->id }}"
+                            v-on:click="cart_add_item($event)">Agregar al
+                            Carrito</button>
                         <div class="info">
                             <p>
                                 {{ $product->description }}
@@ -95,9 +90,9 @@
                 pageDots: false
             });
         });
+        const input = document.querySelector('input[id="add_item_qty"]');
 
         function update_qty(qty) {
-            const input = document.querySelector('input[id="btn-qty-item"]');
             let new_value = parseInt(input.value) + parseInt(qty);
             if (new_value <= 1) {
                 input.value = 1;
@@ -105,5 +100,10 @@
                 input.value = new_value;
             }
         }
+        input.addEventListener('change', ()=>{
+            if (input.value <= 1) {
+                input.value = 1;
+            }
+        });
     </script>
 @endsection

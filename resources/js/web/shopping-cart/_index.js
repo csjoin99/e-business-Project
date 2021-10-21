@@ -2,7 +2,7 @@ window.Vue = require("vue/dist/vue.js");
 import toastr from "toastr";
 
 const vm = new Vue({
-    el: "#body",
+    el: "#shopping-cart-section",
     data: {
         loading: true,
         cart: [],
@@ -17,33 +17,6 @@ const vm = new Vue({
     },
     computed: {},
     methods: {
-        async cart_add_item(event) {
-            const product_id = event.target.dataset.id;
-            const qty = document.querySelector('input[id="add_item_qty"]').value;
-            const url = `${window.location.origin}/api/cart-add-item`;
-            const response = await fetch(url, {
-                method: "POST",
-                cache: "no-cache",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: product_id,
-                    qty: qty,
-                }),
-            });
-            if (response.status === 400) {
-                const { error } = await response.json();
-            } else {
-                let {cart, total_items} = await response.json();
-                document.querySelector('#cart-count').textContent = total_items;
-                cart = Object.entries(cart).map((item, index) => {
-                    return item[1];
-                });
-                this.cart = cart;
-            }
-            return;
-        },
         update_cart_qty(total_items) {
             document.querySelector("#cart-count").textContent = total_items;
         },
@@ -77,14 +50,14 @@ const vm = new Vue({
             });
             if (response.status !== 200) {
                 let { message } = await response.json();
-                input.classList.add("border-danger");
-                toastr.error(message, "Error");
+                input.classList.add('border-danger');
+                toastr.error(message,'Error')
             } else {
                 let { data, total_items, order } = await response.json();
                 Object.assign(item, data);
                 this.update_cart_qty(total_items);
                 this.order = order;
-                input.classList.remove("border-danger");
+                input.classList.remove('border-danger');
             }
         },
         async cart_delete_item(item) {
@@ -101,7 +74,7 @@ const vm = new Vue({
             });
             if (response.status !== 200) {
                 let { message } = await response.json();
-                toastr.error(message, "Error");
+                toastr.error(message,'Error')
             } else {
                 let { message, total_items, cart_content, order } =
                     await response.json();
@@ -128,10 +101,10 @@ const vm = new Vue({
             });
             if (response.status !== 200) {
                 let resp = await response.json();
-                if (resp.order) {
+                if(resp.order){
                     this.order = resp.order;
                 }
-                toastr.error(resp.message, "Error");
+                toastr.error(resp.message,'Error')
             } else {
                 let { coupon, order } = await response.json();
                 this.coupon = coupon;
@@ -139,17 +112,14 @@ const vm = new Vue({
             }
             button.disabled = false;
         },
-        async submit_order(event) {
+        async submit_order(event){
             const order_has_items = this.cart.length;
             if (order_has_items) {
                 location.href = `${window.location.origin}/datos-envio`;
             } else {
-                toastr.error(
-                    "Su carrito de compras debe tener productos",
-                    "Error"
-                );
+                toastr.error('Su carrito de compras debe tener productos','Error')
             }
-        },
+        }
     },
     async created() {
         const { cart, coupon, order } = await this.get_cart_content();
@@ -157,13 +127,13 @@ const vm = new Vue({
         Object.assign(this.coupon, coupon);
         Object.assign(this.order, order);
         toastr.options = {
-            debug: false,
-            positionClass: "toast-top-right",
-            onclick: null,
-            fadeIn: 300,
-            fadeOut: 1000,
-            timeOut: 5000,
-            extendedTimeOut: 1000,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
         };
     },
 });

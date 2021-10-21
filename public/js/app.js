@@ -19087,6 +19087,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/sass/checkout/index.scss":
+/*!********************************************!*\
+  !*** ./resources/sass/checkout/index.scss ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -19139,10 +19152,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/checkout/index.scss":
-/*!********************************************!*\
-  !*** ./resources/sass/checkout/index.scss ***!
-  \********************************************/
+/***/ "./resources/sass/store/index.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/store/index.scss ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19457,8 +19470,9 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/checkout/index": 0,
 /******/ 			"css/shopping-cart/index": 0,
+/******/ 			"css/checkout/index": 0,
+/******/ 			"css/store/index": 0,
 /******/ 			"css/home/index": 0,
 /******/ 			"css/product-detail/index": 0,
 /******/ 			"css/app": 0
@@ -19511,12 +19525,13 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/product-detail/index.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/shopping-cart/index.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/home/index.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/checkout/index","css/shopping-cart/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/checkout/index.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/product-detail/index.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/shopping-cart/index.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/home/index.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/store/index.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/shopping-cart/index","css/checkout/index","css/store/index","css/home/index","css/product-detail/index","css/app"], () => (__webpack_require__("./resources/sass/checkout/index.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -24280,7 +24280,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 window.Vue = __webpack_require__(/*! vue/dist/vue.js */ "./node_modules/vue/dist/vue.js");
 
 var vm = new Vue({
-  el: "#shopping-cart-section",
+  el: "#body",
   data: {
     loading: true,
     cart: [],
@@ -24295,52 +24295,67 @@ var vm = new Vue({
   },
   computed: {},
   methods: {
-    update_cart_qty: function update_cart_qty(total_items) {
-      document.querySelector("#cart-count").textContent = total_items;
-    },
-    get_cart_content: function get_cart_content() {
+    cart_add_item: function cart_add_item(event) {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url, response, _yield$response$json, cart, coupon, order;
+        var product_id, qty, url, response, _yield$response$json, error, _yield$response$json2, cart, total_items;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                url = "".concat(window.location.origin, "/api/get-cart-content");
-                _context.next = 3;
+                product_id = event.target.dataset.id;
+                qty = document.querySelector('input[id="add_item_qty"]').value;
+                url = "".concat(window.location.origin, "/api/cart-add-item");
+                _context.next = 5;
                 return fetch(url, {
-                  method: "POST"
+                  method: "POST",
+                  cache: "no-cache",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    id: product_id,
+                    qty: qty
+                  })
                 });
 
-              case 3:
+              case 5:
                 response = _context.sent;
 
-                if (!(response.status !== 200)) {
-                  _context.next = 8;
+                if (!(response.status === 400)) {
+                  _context.next = 13;
                   break;
                 }
 
-                return _context.abrupt("return", []);
-
-              case 8:
-                _context.next = 10;
+                _context.next = 9;
                 return response.json();
 
-              case 10:
+              case 9:
                 _yield$response$json = _context.sent;
-                cart = _yield$response$json.cart;
-                coupon = _yield$response$json.coupon;
-                order = _yield$response$json.order;
+                error = _yield$response$json.error;
+                _context.next = 21;
+                break;
+
+              case 13:
+                _context.next = 15;
+                return response.json();
+
+              case 15:
+                _yield$response$json2 = _context.sent;
+                cart = _yield$response$json2.cart;
+                total_items = _yield$response$json2.total_items;
+                document.querySelector('#cart-count').textContent = total_items;
                 cart = Object.entries(cart).map(function (item, index) {
                   return item[1];
                 });
-                return _context.abrupt("return", {
-                  cart: cart,
-                  coupon: coupon,
-                  order: order
-                });
+                _this.cart = cart;
 
-              case 16:
+              case 21:
+                return _context.abrupt("return");
+
+              case 22:
               case "end":
                 return _context.stop();
             }
@@ -24348,15 +24363,68 @@ var vm = new Vue({
         }, _callee);
       }))();
     },
-    cart_update_qty: function cart_update_qty(event, item) {
-      var _this = this;
-
+    update_cart_qty: function update_cart_qty(total_items) {
+      document.querySelector("#cart-count").textContent = total_items;
+    },
+    get_cart_content: function get_cart_content() {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var input, url, data, response, _yield$response$json2, message, _yield$response$json3, _data, total_items, order;
+        var url, response, _yield$response$json3, cart, coupon, order;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
+              case 0:
+                url = "".concat(window.location.origin, "/api/get-cart-content");
+                _context2.next = 3;
+                return fetch(url, {
+                  method: "POST"
+                });
+
+              case 3:
+                response = _context2.sent;
+
+                if (!(response.status !== 200)) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                return _context2.abrupt("return", []);
+
+              case 8:
+                _context2.next = 10;
+                return response.json();
+
+              case 10:
+                _yield$response$json3 = _context2.sent;
+                cart = _yield$response$json3.cart;
+                coupon = _yield$response$json3.coupon;
+                order = _yield$response$json3.order;
+                cart = Object.entries(cart).map(function (item, index) {
+                  return item[1];
+                });
+                return _context2.abrupt("return", {
+                  cart: cart,
+                  coupon: coupon,
+                  order: order
+                });
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    cart_update_qty: function cart_update_qty(event, item) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var input, url, data, response, _yield$response$json4, message, _yield$response$json5, _data, total_items, order;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 input = event.target;
                 url = "".concat(window.location.origin, "/api/cart-update-item");
@@ -24365,7 +24433,7 @@ var vm = new Vue({
                   rowId: item.rowId,
                   qty: item.qty
                 };
-                _context2.next = 5;
+                _context3.next = 5;
                 return fetch(url, {
                   method: "POST",
                   headers: {
@@ -24375,63 +24443,63 @@ var vm = new Vue({
                 });
 
               case 5:
-                response = _context2.sent;
+                response = _context3.sent;
 
                 if (!(response.status !== 200)) {
-                  _context2.next = 15;
+                  _context3.next = 15;
                   break;
                 }
 
-                _context2.next = 9;
+                _context3.next = 9;
                 return response.json();
 
               case 9:
-                _yield$response$json2 = _context2.sent;
-                message = _yield$response$json2.message;
-                input.classList.add('border-danger');
-                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(message, 'Error');
-                _context2.next = 25;
+                _yield$response$json4 = _context3.sent;
+                message = _yield$response$json4.message;
+                input.classList.add("border-danger");
+                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(message, "Error");
+                _context3.next = 25;
                 break;
 
               case 15:
-                _context2.next = 17;
+                _context3.next = 17;
                 return response.json();
 
               case 17:
-                _yield$response$json3 = _context2.sent;
-                _data = _yield$response$json3.data;
-                total_items = _yield$response$json3.total_items;
-                order = _yield$response$json3.order;
+                _yield$response$json5 = _context3.sent;
+                _data = _yield$response$json5.data;
+                total_items = _yield$response$json5.total_items;
+                order = _yield$response$json5.order;
                 Object.assign(item, _data);
 
-                _this.update_cart_qty(total_items);
+                _this2.update_cart_qty(total_items);
 
-                _this.order = order;
-                input.classList.remove('border-danger');
+                _this2.order = order;
+                input.classList.remove("border-danger");
 
               case 25:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     cart_delete_item: function cart_delete_item(item) {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var url, data, response, _yield$response$json4, message, _yield$response$json5, _message, total_items, cart_content, order;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var url, data, response, _yield$response$json6, message, _yield$response$json7, _message, total_items, cart_content, order;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 url = "".concat(window.location.origin, "/api/cart-delete-item");
                 data = {
                   rowId: item.rowId
                 };
-                _context3.next = 4;
+                _context4.next = 4;
                 return fetch(url, {
                   method: "POST",
                   headers: {
@@ -24441,109 +24509,40 @@ var vm = new Vue({
                 });
 
               case 4:
-                response = _context3.sent;
-
-                if (!(response.status !== 200)) {
-                  _context3.next = 13;
-                  break;
-                }
-
-                _context3.next = 8;
-                return response.json();
-
-              case 8:
-                _yield$response$json4 = _context3.sent;
-                message = _yield$response$json4.message;
-                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(message, 'Error');
-                _context3.next = 23;
-                break;
-
-              case 13:
-                _context3.next = 15;
-                return response.json();
-
-              case 15:
-                _yield$response$json5 = _context3.sent;
-                _message = _yield$response$json5.message;
-                total_items = _yield$response$json5.total_items;
-                cart_content = _yield$response$json5.cart_content;
-                order = _yield$response$json5.order;
-
-                _this2.update_cart_qty(total_items);
-
-                _this2.cart = Object.entries(cart_content).map(function (item, index) {
-                  return item[1];
-                });
-                _this2.order = order;
-
-              case 23:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    get_coupon: function get_coupon(event) {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var button, url, data, response, resp, _yield$response$json6, coupon, order;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                button = event.target.querySelector('button[type="submit"]');
-                button.disabled = true;
-                url = "".concat(window.location.origin, "/api/cart-get-coupon");
-                data = {
-                  code: _this3.coupon.code
-                };
-                _context4.next = 6;
-                return fetch(url, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(data)
-                });
-
-              case 6:
                 response = _context4.sent;
 
                 if (!(response.status !== 200)) {
-                  _context4.next = 15;
+                  _context4.next = 13;
                   break;
                 }
 
-                _context4.next = 10;
+                _context4.next = 8;
                 return response.json();
 
-              case 10:
-                resp = _context4.sent;
-
-                if (resp.order) {
-                  _this3.order = resp.order;
-                }
-
-                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(resp.message, 'Error');
-                _context4.next = 22;
+              case 8:
+                _yield$response$json6 = _context4.sent;
+                message = _yield$response$json6.message;
+                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(message, "Error");
+                _context4.next = 23;
                 break;
 
-              case 15:
-                _context4.next = 17;
+              case 13:
+                _context4.next = 15;
                 return response.json();
 
-              case 17:
-                _yield$response$json6 = _context4.sent;
-                coupon = _yield$response$json6.coupon;
-                order = _yield$response$json6.order;
-                _this3.coupon = coupon;
-                _this3.order = order;
+              case 15:
+                _yield$response$json7 = _context4.sent;
+                _message = _yield$response$json7.message;
+                total_items = _yield$response$json7.total_items;
+                cart_content = _yield$response$json7.cart_content;
+                order = _yield$response$json7.order;
 
-              case 22:
-                button.disabled = false;
+                _this3.update_cart_qty(total_items);
+
+                _this3.cart = Object.entries(cart_content).map(function (item, index) {
+                  return item[1];
+                });
+                _this3.order = order;
 
               case 23:
               case "end":
@@ -24553,69 +24552,138 @@ var vm = new Vue({
         }, _callee4);
       }))();
     },
-    submit_order: function submit_order(event) {
+    get_coupon: function get_coupon(event) {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var order_has_items;
+        var button, url, data, response, resp, _yield$response$json8, coupon, order;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                order_has_items = _this4.cart.length;
+                button = event.target.querySelector('button[type="submit"]');
+                button.disabled = true;
+                url = "".concat(window.location.origin, "/api/cart-get-coupon");
+                data = {
+                  code: _this4.coupon.code
+                };
+                _context5.next = 6;
+                return fetch(url, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(data)
+                });
 
-                if (order_has_items) {
-                  location.href = "".concat(window.location.origin, "/datos-envio");
-                } else {
-                  toastr__WEBPACK_IMPORTED_MODULE_1___default().error('Su carrito de compras debe tener productos', 'Error');
+              case 6:
+                response = _context5.sent;
+
+                if (!(response.status !== 200)) {
+                  _context5.next = 15;
+                  break;
                 }
 
-              case 2:
+                _context5.next = 10;
+                return response.json();
+
+              case 10:
+                resp = _context5.sent;
+
+                if (resp.order) {
+                  _this4.order = resp.order;
+                }
+
+                toastr__WEBPACK_IMPORTED_MODULE_1___default().error(resp.message, "Error");
+                _context5.next = 22;
+                break;
+
+              case 15:
+                _context5.next = 17;
+                return response.json();
+
+              case 17:
+                _yield$response$json8 = _context5.sent;
+                coupon = _yield$response$json8.coupon;
+                order = _yield$response$json8.order;
+                _this4.coupon = coupon;
+                _this4.order = order;
+
+              case 22:
+                button.disabled = false;
+
+              case 23:
               case "end":
                 return _context5.stop();
             }
           }
         }, _callee5);
       }))();
+    },
+    submit_order: function submit_order(event) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var order_has_items;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                order_has_items = _this5.cart.length;
+
+                if (order_has_items) {
+                  location.href = "".concat(window.location.origin, "/datos-envio");
+                } else {
+                  toastr__WEBPACK_IMPORTED_MODULE_1___default().error("Su carrito de compras debe tener productos", "Error");
+                }
+
+              case 2:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-      var _yield$_this5$get_car, cart, coupon, order;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      var _yield$_this6$get_car, cart, coupon, order;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
-              _context6.next = 2;
-              return _this5.get_cart_content();
+              _context7.next = 2;
+              return _this6.get_cart_content();
 
             case 2:
-              _yield$_this5$get_car = _context6.sent;
-              cart = _yield$_this5$get_car.cart;
-              coupon = _yield$_this5$get_car.coupon;
-              order = _yield$_this5$get_car.order;
-              _this5.cart = cart;
-              Object.assign(_this5.coupon, coupon);
-              Object.assign(_this5.order, order);
+              _yield$_this6$get_car = _context7.sent;
+              cart = _yield$_this6$get_car.cart;
+              coupon = _yield$_this6$get_car.coupon;
+              order = _yield$_this6$get_car.order;
+              _this6.cart = cart;
+              Object.assign(_this6.coupon, coupon);
+              Object.assign(_this6.order, order);
               (toastr__WEBPACK_IMPORTED_MODULE_1___default().options) = {
-                "debug": false,
-                "positionClass": "toast-top-right",
-                "onclick": null,
-                "fadeIn": 300,
-                "fadeOut": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000
+                debug: false,
+                positionClass: "toast-top-right",
+                onclick: null,
+                fadeIn: 300,
+                fadeOut: 1000,
+                timeOut: 5000,
+                extendedTimeOut: 1000
               };
 
             case 10:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }))();
   }
 });

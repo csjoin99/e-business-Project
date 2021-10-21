@@ -30,6 +30,10 @@ mix.sass(
     "public/css/home"
 );
 
+mix.sass(
+    "resources/sass/store/index.scss",
+    "public/css/store"
+);
 
 mix.sass(
     "resources/sass/checkout/index.scss",

@@ -8,8 +8,9 @@
     "/js/web/shopping-cart/index.js": "/js/web/shopping-cart/index.js",
     "/js/web/shipment-data/index.js": "/js/web/shipment-data/index.js",
     "/js/web/checkout/index.js": "/js/web/checkout/index.js",
-    "/css/checkout/index.css": "/css/checkout/index.css",
     "/css/shopping-cart/index.css": "/css/shopping-cart/index.css",
+    "/css/checkout/index.css": "/css/checkout/index.css",
+    "/css/store/index.css": "/css/store/index.css",
     "/css/home/index.css": "/css/home/index.css",
     "/css/product-detail/index.css": "/css/product-detail/index.css",
     "/css/app.css": "/css/app.css"

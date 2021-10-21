@@ -17,14 +17,15 @@ class CartController extends Controller
     {
         try {
             $this->check_sessions();
+            $item_qty = isset($request->qty) ? $request->qty : 1;
             $product = Product::find($request->id);
             $cart = Cart::search(function ($cartItem, $rowId) use ($product) {
                 return $cartItem->id === $product->id;
             })->first();
             if ($cart) {
-                $qty = $cart->qty + 1;
+                $qty = $cart->qty + $item_qty;
             } else {
-                $qty = 1;
+                $qty = $item_qty;
             }
             if ((int)$product->stock < (int)$qty)
                 return response()->json([
@@ -33,7 +34,7 @@ class CartController extends Controller
             if ($cart) {
                 Cart::update($cart->rowId, $qty);
             } else {
-                Cart::add($product->id, $product->name, 1, $product->real_price, [
+                Cart::add($product->id, $product->name, $item_qty, $product->real_price, [
                     'category' => $product->category->name,
                     'stock' => $product->stock,
                     'image' => $product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png'
@@ -41,7 +42,7 @@ class CartController extends Controller
             }
             $this->calculate_order();
             return response()->json([
-                'data' => Cart::content(),
+                'cart' => Cart::content(),
                 'total_items' => Cart::count(),
             ], 200);
         } catch (\Throwable $th) {

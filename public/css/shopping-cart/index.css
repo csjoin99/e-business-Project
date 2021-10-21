@@ -250,6 +250,52 @@ button.toast-close-button {
     padding: 15px 50px 15px 15px;
   }
 }
+.dropdown-menu {
+  width: 100%;
+  list-style-type: none;
+  text-align: center;
+  background-color: #282c34;
+}
+.dropdown-menu a {
+  display: inline-block;
+  margin: auto;
+  width: auto;
+  padding: 5px;
+  background-color: #282c34;
+}
+.dropdown-menu a:hover {
+  background-color: #282c34;
+}
+
+.nav-item {
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
+  margin-right: 1rem;
+}
+
+.dropdown {
+  display: inline-block;
+  position: absolute;
+}
+
+.dropdown-item p {
+  color: #ffffff;
+}
+
+.ex4 {
+  background-color: #fafafa;
+}
+.ex4 h5 {
+  color: orange;
+}
+.ex4 a:hover {
+  text-decoration: underline;
+}
+.ex4 ul {
+  padding-left: 0;
+}
+
 .container-fluid {
   margin-top: 70px;
 }

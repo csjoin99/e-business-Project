@@ -8,19 +8,11 @@
     <link href="{{ asset('css/shopping-cart/index.css') }}" rel="stylesheet" />
 @endsection
 
-@section('header')
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Carrito de compra</h1>
-                <p class="lead fw-normal text-white-50 mb-0"></p>
-            </div>
-        </div>
-    </header>
-@endsection
-
 @section('content')
-    <section id="shopping-cart-section" class="py-5">
+    @include('web.partials.nav')
+    <!--Carrito -->
+    @include('web.partials.cart')
+    <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="container-fluid">
                 <div class="row">
@@ -85,7 +77,8 @@
                                             <input type="text" class="form-control coupon" name="coupon"
                                                 placeholder="Código de cupón" v-model="coupon.code">
                                             <span class="input-group-append">
-                                                <button type="submit" class="btn btn-primary btn-apply coupon h-100">Buscar</button>
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-apply coupon h-100">Buscar</button>
                                             </span>
                                         </div>
                                     </div>
@@ -100,7 +93,8 @@
                                 </dl>
                                 <dl class="dlist-align">
                                     <dt>Descuento:</dt>
-                                    <dd class="text-right text-danger ml-3 order-price" v-text="`- S/. ${this.order.discount}`"></dd>
+                                    <dd class="text-right text-danger ml-3 order-price"
+                                        v-text="`- S/. ${this.order.discount}`"></dd>
                                 </dl>
                                 <dl class="dlist-align">
                                     <dt>Delivery:</dt>
@@ -108,7 +102,9 @@
                                 </dl>
                                 <dl class="dlist-align">
                                     <dt>Total:</dt>
-                                    <dd class="text-right text-dark b ml-3 order-price" v-text="`S/. ${this.order.total}`"><strong></strong></dd>
+                                    <dd class="text-right text-dark b ml-3 order-price" v-text="`S/. ${this.order.total}`">
+                                        <strong></strong>
+                                    </dd>
                                 </dl>
                                 <hr>
                                 <form @submit.prevent="submit_order($event)">
@@ -116,7 +112,8 @@
                                         Realizar compra
                                     </button>
                                 </form>
-                                <a href="{{route('store')}}" class="btn btn-success btn-square btn-main mt-2" data-abc="true">
+                                <a href="{{ route('store') }}" class="btn btn-success btn-square btn-main mt-2"
+                                    data-abc="true">
                                     Seguir comprando
                                 </a>
                             </div>
@@ -126,15 +123,23 @@
             </div>
         </div>
     </section>
+    @include('web.partials.footer')
 @endsection
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
     <script>
-        const error_msg = "{{session('error')}}";
-        if(error_msg){
-            toastr.error(error_msg,'Error')
+        const error_msg = "{{ session('error') }}";
+        if (error_msg) {
+            toastr.error(error_msg, 'Error')
         }
     </script>
 @endsection
+
+

@@ -1,17 +1,12 @@
 @extends('web.layout.layout')
+@section('css')
+    <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
     <!--NAvBar -->
     @include('web.partials.nav')
     <!--Carrito -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cesta" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Mi cesta</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            No hay articulos
-        </div>
-    </div>
+    @include('web.partials.cart')
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active "
