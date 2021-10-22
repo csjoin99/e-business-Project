@@ -20,32 +20,32 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html">PORTAL COMMERCE</a>
+            <a href="../../index2.html">{{ $settings ? $settings->name : 'Portal Commerce' }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Login</p>
 
-                <form action="{{route('login.post')}}" id="form" method="post">
+                <form action="{{ route('login.post') }}" id="form" method="post">
                     @csrf
                     <div class="form-group mb-3">
                         <input name="email" type="email" class="form-control" placeholder="Email" required>
                         @error('email')
-                        <span class="error text-red" style="font-size: 80%">
-                            {{ $message }}
-                        </span>
+                            <span class="error text-red" style="font-size: 80%">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
                     <div class="form-group mb-3">
                         <input name="password" type="password" class="form-control" placeholder="Password" required>
                         @error('password')
-                        <span class="error text-red" style="font-size: 80%">
-                            {{ $message }}
-                        </span>
+                            <span class="error text-red" style="font-size: 80%">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember">
@@ -54,7 +54,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row d-flex justify-content-center">
                         <!-- /.col -->
                         <div class="col-4">

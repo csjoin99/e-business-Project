@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="nav-item navbar-icon-link" data-bs-toggle="user">
-                    <a role="button">
+                    <a href="{{ route('login') }}">
                         <img src="{{ asset('assets/icons/person.svg') }}">
                     </a>
                 </div>
@@ -54,7 +54,7 @@
                     <a role="button" data-bs-toggle="offcanvas" data-bs-target="#cesta" aria-controls="offcanvasRight">
                         <img src="{{ asset('assets/icons/cart.svg') }}">
                         <span id="cart-count" class="position-absolute translate-middle badge rounded-pill bg-success">
-                            {{Cart::count()}}
+                            {{ Cart::count() }}
                             <span class="visually-hidden">productos</span>
                         </span>
                     </a>

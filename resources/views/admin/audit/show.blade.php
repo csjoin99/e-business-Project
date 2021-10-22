@@ -29,7 +29,7 @@
                             <form id="form">
                                 <div class="card-body">
                                     @if (count($audit->old_values))
-                                        <h4>Viejos valores</h4>
+                                        <h4>Valores previos</h4>
                                         @foreach ($audit->old_values as $key => $item)
                                             @if (isset($audit->auditable_type::FIELDS[$key]))
                                                 @switch($audit->auditable_type::FIELDS[$key]['field'])
@@ -62,7 +62,7 @@
                                     @endif
                                     @if (count($audit->new_values))
                                         <hr>
-                                        <h4>Nuevos valores</h4>
+                                        <h4>Valores nuevos</h4>
                                         @foreach ($audit->new_values as $key => $item)
                                             @if (isset($audit->auditable_type::FIELDS[$key]))
                                                 @switch($audit->auditable_type::FIELDS[$key]['field'])

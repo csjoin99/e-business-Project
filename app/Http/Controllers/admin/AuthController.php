@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +12,8 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('admin.auth.login');
+        $settings = Settings::first();
+        return view('admin.auth.login', compact('settings'));
     }
 
     public function login_post(Request $request)

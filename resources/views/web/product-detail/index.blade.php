@@ -48,7 +48,9 @@
                     <div class="col-sm-4">
                         <div class="informacion">
                             <h4>{{ $product->name }}</h4>
-                            <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
+                            @if ($product->discount)
+                                <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
+                            @endif
                             <h5>S/. {{ $product->real_price }}</h5>
                             <p>Cantidad</p>
                             <div class="btn-group" role="group" aria-label="Basic example">

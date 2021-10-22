@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,6 +30,10 @@ class Order extends Model
         'subtotal',
         'discount',
         'status',
+    ];
+
+    protected $appends = [
+        'color'
     ];
 
     /* shipment_type */
@@ -94,6 +99,25 @@ class Order extends Model
             default:
                 return 'Anulado';
                 break;
+        }
+    }
+
+    public function getColorAttribute()
+    {
+        $current_date = Carbon::now();
+        if ($this->status === 1 && $this->shipment_status === 1) {
+            return "#28a745";
+        } else {
+            if ($current_date->gt($this->shipment_date)) {
+                return "#dc3545";
+            }
+            if ($this->status !== 1) {
+                return "#6c757d";
+            }
+            if ($this->shipment_status !== 1) {
+                return "#ffc107";
+            }
+            return "#dc3545";
         }
     }
 }
