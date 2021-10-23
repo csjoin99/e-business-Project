@@ -283,9 +283,8 @@ button.toast-close-button {
 
 .ex1 {
   margin-top: 1vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  justify-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -332,6 +331,7 @@ button.toast-close-button {
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
+  max-width: 20rem;
 }
 .ex3 button:hover {
   border-radius: 21px;

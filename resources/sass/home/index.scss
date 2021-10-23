@@ -35,9 +35,8 @@
 
 .ex1 {
     margin-top: 1vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    justify-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .card {
@@ -83,6 +82,7 @@
         flex-direction: column;
         align-items: center;
         padding: 1rem 0;
+        max-width: 20rem;
         &:hover {
             border-radius: 21px;
             background: #ffffff;
