@@ -100,7 +100,7 @@ class OrderController extends Controller
                 $order->coupon->stock += 1;
                 $order->coupon->save();
             }
-            $order->status = 3;
+            $order->status = 2;
             $order->save();
             $order->delete();
             return redirect()->route('order.index')->with('success', 'Orden anulada exitosamente');

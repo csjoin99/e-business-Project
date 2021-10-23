@@ -38,7 +38,6 @@ class Order extends Model
 
     /* shipment_type */
     /* 
-    Contraentrega
     Presencial
     Delivery
     */
@@ -46,15 +45,14 @@ class Order extends Model
     /* shipment_status */
     /* 
     1: Entregado
-    2: Enviado
-    3: En espera
+    0: En espera
     */
 
     /* status */
     /* 
+    0: Por pagar
     1: Pagado
-    2: Por pagar
-    3: Anulado
+    2: Anulado
     */
 
     public function coupon()
@@ -78,9 +76,6 @@ class Order extends Model
             case 1:
                 return 'Entregado';
                 break;
-            case 2:
-                return 'Enviado';
-                break;
             default:
                 return 'En espera';
                 break;
@@ -93,7 +88,7 @@ class Order extends Model
             case 1:
                 return 'Pagado';
                 break;
-            case 2:
+            case 0:
                 return 'Por pagar';
                 break;
             default:
@@ -111,11 +106,14 @@ class Order extends Model
             if ($current_date->gt($this->shipment_date)) {
                 return "#dc3545";
             }
+            if ($this->status !== 1 && $this->shipment_status !== 1) {
+                return "#ffc107";
+            }
             if ($this->status !== 1) {
-                return "#6c757d";
+                return "#17a2b8";
             }
             if ($this->shipment_status !== 1) {
-                return "#ffc107";
+                return "#007bff";
             }
             return "#dc3545";
         }

@@ -86,7 +86,7 @@ class CheckoutController extends Controller
         }
         $data['shipment_type'] = "Delivery";
         $data['shipment_price'] = 10;
-        $data['shipment_status'] = 3;
+        $data['shipment_status'] = 0;
         $data['status'] = 1;
         $data['total'] = $data['total'];
         $this->save_order($data);
@@ -106,8 +106,8 @@ class CheckoutController extends Controller
         }
         $data['shipment_type'] = "Delivery";
         $data['shipment_price'] = 10;
-        $data['shipment_status'] = 3;
-        $data['status'] = 2;
+        $data['shipment_status'] = 0;
+        $data['status'] = 0;
         $subtotal = Cart::subtotal();
         if (isset($coupon)) {
             if ($coupon->type === 'Fijo') {

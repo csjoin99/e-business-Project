@@ -68,8 +68,8 @@
                                             @case(1)
                                             <span class="badge badge-success">{{ $order->shipment_status_text }}</span>
                                             @break
-                                            @case(2)
-                                            <span class="badge badge-warning">{{ $order->shipment_status_text }}</span>
+                                            @case(0)
+                                            <span class="badge badge-danger">{{ $order->shipment_status_text }}</span>
                                             @break
                                             @default
                                             <span class="badge badge-danger">{{ $order->shipment_status_text }}</span>
@@ -84,11 +84,11 @@
                                             @case(1)
                                             <span class="badge badge-success">{{ $order->status_text }}</span>
                                             @break
-                                            @case(2)
-                                            <span class="badge badge-warning">{{ $order->status_text }}</span>
+                                            @case(0)
+                                            <span class="badge badge-danger">{{ $order->status_text }}</span>
                                             @break
                                             @default
-                                            <span class="badge badge-danger">{{ $order->status_text }}</span>
+                                            <span class="badge badge-warning">{{ $order->status_text }}</span>
                                             @endswitch
                                         </td>
                                         <td>

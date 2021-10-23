@@ -8,7 +8,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
+            <a role="button" class="nav-link" data-toggle="dropdown" aria-expanded="false">
                 {{ auth()->user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-right">
