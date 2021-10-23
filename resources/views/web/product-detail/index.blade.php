@@ -1,6 +1,6 @@
 @extends('web.layout.layout')
 @section('title')
-    Detalle de {{$product->name}}
+    Detalle de {{ $product->name }}
 @endsection
 @section('css')
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -80,41 +80,22 @@
                 <h2>Productos relacionados</h2>
                 <div class="carousel"
                     data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false,"autoPlay": true  }'>
-                    <div class="carousel-cell">
-                        <a class="Producto-Recomendados" href="#">
-                            <img src="imagenes/Iphone.png" alt="">
-                            <h6>iPhone 11 - 64 GB - Negro</h6>
-                            <p>S/4,499.00</p>
-                        </a>
-                    </div>
-                    <div class="carousel-cell">
-                        <a class="Producto-Recomendados" href="#">
-                            <img src="imagenes/Iphone.png" alt="">
-                            <h6>iPhone 11 - 64 GB - Negro</h6>
-                            <p>S/4,499.00</p>
-                        </a>
-                    </div>
-                    <div class="carousel-cell">
-                        <a class="Producto-Recomendados" href="#">
-                            <img src="imagenes/Iphone.png" alt="">
-                            <h6>iPhone 11 - 64 GB - Negro</h6>
-                            <p>S/4,499.00</p>
-                        </a>
-                    </div>
-                    <div class="carousel-cell">
-                        <a class="Producto-Recomendados" href="#">
-                            <img src="imagenes/Imac.png" alt="">
-                            <h6>iPhone 11 - 64 GB - Negro</h6>
-                            <p>S/4,499.00</p>
-                        </a>
-                    </div>
-                    <div class="carousel-cell">
-                        <a class="Producto-Recomendados" href="#">
-                            <img src="imagenes/Iphone.png" alt="">
-                            <h6>iPhone 11 - 64 GB - Negro</h6>
-                            <p>S/4,499.00</p>
-                        </a>
-                    </div>
+                    @foreach ($recommended_products as $recommended_product)
+                        <div class="carousel-cell">
+                            <a class="Producto-Recomendados"
+                                href="{{ route('product.detail', ['slug' => $recommended_product->slug]) }}">
+                                <div class="w-100 d-flex justify-content-center">
+                                    <img src="{{ $recommended_product->product_photo->count() ? $recommended_product->product_photo->first()->image : asset('img/web/no-img.png') }}"
+                                        alt="">
+                                </div>
+                                <h6 class="text-center">{{ $recommended_product->name }}</h6>
+                                @if ($recommended_product->discount)
+                                    <p class="text-center text-muted text-decoration-line-through">S/{{ $recommended_product->price }}</p>
+                                @endif
+                                <p class="text-center">S/{{ $recommended_product->real_price }}</p>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

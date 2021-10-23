@@ -25,7 +25,12 @@ class StoreController extends Controller
     public function product_detail($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        return view('web.product-detail.index', compact('product'));
+        $recommended_products = Product::where('category_id', $product->category_id);
+        if (!$recommended_products->count()) {
+            $recommended_products = Product::select('*');
+        }
+        $recommended_products = $recommended_products->where('id', '!=', $product->id)->get()->take(9);
+        return view('web.product-detail.index', compact('product', 'recommended_products'));
     }
 
     public function shopping_cart()
