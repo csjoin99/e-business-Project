@@ -1,5 +1,9 @@
 @extends('web.layout.layout')
 
+@section('title')
+    Tienda
+@endsection
+
 @section('css')
     <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/store/index.css') }}" rel="stylesheet" type="text/css" />

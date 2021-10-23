@@ -1,7 +1,7 @@
 @extends('web.layout.layout')
 
 @section('title')
-    Checkout
+    Datos de entrega
 @endsection
 
 @section('css')

@@ -336,3 +336,32 @@ p {
   border-color: black;
   opacity: 0.1;
 }
+
+.ex3 {
+  width: 80%;
+  margin: auto;
+}
+.ex3 .carousel-cell {
+  background-image: none;
+  background-color: white;
+  width: 253px;
+  height: 50vh;
+}
+.ex3 .carousel-cell .Producto-Recomendados {
+  text-decoration: none;
+  color: gray;
+}
+.ex3 .carousel-cell .Producto-Recomendados img {
+  width: 70%;
+}
+.ex3 .carousel-cell .Producto-Recomendados:hover {
+  text-decoration: none;
+  color: gray;
+}
+.ex3 .carousel-cell .Producto-Recomendados h6:hover {
+  text-decoration: underline;
+  color: gray;
+}
+.ex3 .carousel-cell .Producto-Recomendados p {
+  color: orange;
+}

@@ -1,4 +1,7 @@
 @extends('web.layout.layout')
+@section('title')
+    Detalle de {{$product->name}}
+@endsection
 @section('css')
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
@@ -68,6 +71,49 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ex3">
+            <div class="container">
+                <h2>Productos relacionados</h2>
+                <div class="carousel"
+                    data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false,"autoPlay": true  }'>
+                    <div class="carousel-cell">
+                        <a class="Producto-Recomendados" href="#">
+                            <img src="imagenes/Iphone.png" alt="">
+                            <h6>iPhone 11 - 64 GB - Negro</h6>
+                            <p>S/4,499.00</p>
+                        </a>
+                    </div>
+                    <div class="carousel-cell">
+                        <a class="Producto-Recomendados" href="#">
+                            <img src="imagenes/Iphone.png" alt="">
+                            <h6>iPhone 11 - 64 GB - Negro</h6>
+                            <p>S/4,499.00</p>
+                        </a>
+                    </div>
+                    <div class="carousel-cell">
+                        <a class="Producto-Recomendados" href="#">
+                            <img src="imagenes/Iphone.png" alt="">
+                            <h6>iPhone 11 - 64 GB - Negro</h6>
+                            <p>S/4,499.00</p>
+                        </a>
+                    </div>
+                    <div class="carousel-cell">
+                        <a class="Producto-Recomendados" href="#">
+                            <img src="imagenes/Imac.png" alt="">
+                            <h6>iPhone 11 - 64 GB - Negro</h6>
+                            <p>S/4,499.00</p>
+                        </a>
+                    </div>
+                    <div class="carousel-cell">
+                        <a class="Producto-Recomendados" href="#">
+                            <img src="imagenes/Iphone.png" alt="">
+                            <h6>iPhone 11 - 64 GB - Negro</h6>
+                            <p>S/4,499.00</p>
+                        </a>
                     </div>
                 </div>
             </div>
