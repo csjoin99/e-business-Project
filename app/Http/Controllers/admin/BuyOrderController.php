@@ -118,9 +118,11 @@ class BuyOrderController extends Controller
                     'quantity' => $item->qty,
                     'total' => $item->real_price,
                 ]);
+                Product::disableAuditing();
                 $product->stock = $product->stock + $item->qty;
                 $product->temp_stock = $product->temp_stock + $item->qty;
                 $product->save();
+                Product::enableAuditing();
             }
             return response()->json([
                 'status' => 200,

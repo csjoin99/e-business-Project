@@ -16,7 +16,7 @@ trait CheckoutTraits
         $cart_content = [];
         foreach (Cart::content() as $item) {
             $product = Product::find($item->id);
-            if($product->temp_stock < $item->qty){
+            if ($product->temp_stock < $item->qty) {
                 return false;
             }
             array_push($cart_content, ['product' => $product, 'item' => $item]);
@@ -34,6 +34,7 @@ trait CheckoutTraits
             ];
             $session = Purchase_session::create($session_data);
         }
+        Product::disableAuditing();
         foreach ($cart_content as $cart_item) {
             $item = $cart_item['item'];
             $product = $cart_item['product'];
@@ -59,6 +60,7 @@ trait CheckoutTraits
                 'temp_stock' => $temp_stock
             ]);
         }
+        Product::enableAuditing();
         return true;
     }
 
@@ -71,12 +73,14 @@ trait CheckoutTraits
         }
         $purchase_session_list = $purchase_session_list->get();
         foreach ($purchase_session_list as $purchase_session) {
+            Product::disableAuditing();
             foreach ($purchase_session->product as $product_session) {
                 $product = Product::find($product_session->product_id);
                 $product->temp_stock = $product->temp_stock + $product_session->quantity;
                 $product->save();
                 $product_session->delete();
             }
+            Product::enableAuditing();
             $purchase_session->delete();
         }
     }

@@ -41,6 +41,11 @@ class Category extends Model implements Auditable
             ->saveSlugsTo('slug');
     }
 
+    public function getFieldAttribute()
+    {
+        return $this->name;
+    }
+
     protected function getUpdatedEventAttributes(): array
     {
         $old = [];

@@ -91,11 +91,13 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         try {
+            Product::disableAuditing();
             foreach ($order->product as $product) {
                 $product->stock += $product->pivot->quantity;
                 $product->temp_stock += $product->pivot->quantity;
                 $product->save();
             }
+            Product::enableAuditing();
             if ($order->coupon) {
                 $order->coupon->stock += 1;
                 $order->coupon->save();
@@ -149,9 +151,11 @@ class OrderController extends Controller
                     'price' => $item->price,
                     'price_discount' => $item->price,
                 ]);
+                Product::disableAuditing();
                 $product->stock = $product->stock - $item->qty;
                 $product->temp_stock = $product->temp_stock - $item->qty;
                 $product->save();
+                Product::enableAuditing();
             }
             if ($coupon) {
                 $coupon->stock = $coupon->stock - 1;

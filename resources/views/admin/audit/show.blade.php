@@ -42,7 +42,12 @@
                                                         </div>
                                                     @break
                                                     @case('textarea')
-
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="name">{{ $audit->auditable_type::FIELDS[$key]['name'] }}:</label>
+                                                            <textarea class="form-control" rows="5"
+                                                                readonly>{{ $item }}</textarea>
+                                                        </div>
                                                     @break
                                                     @case('image')
                                                         <div class="form-group">
@@ -53,15 +58,25 @@
                                                                 alt="" style="max-width: 10rem; max-height: 10rem">
                                                         </div>
                                                     @break
+                                                    @case('model')
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="name">{{ $audit->auditable_type::FIELDS[$key]['name'] }}:</label>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $audit->auditable_type::FIELDS[$key]['model']::find($item)->field }}"
+                                                                readonly>
+                                                        </div>
+                                                    @break
                                                     @default
-
                                                 @endswitch
 
                                             @endif
                                         @endforeach
                                     @endif
-                                    @if (count($audit->new_values))
+                                    @if (count($audit->new_values) && count($audit->old_values))
                                         <hr>
+                                    @endif
+                                    @if (count($audit->new_values))
                                         <h4>Valores nuevos</h4>
                                         @foreach ($audit->new_values as $key => $item)
                                             @if (isset($audit->auditable_type::FIELDS[$key]))
@@ -75,7 +90,12 @@
                                                         </div>
                                                     @break
                                                     @case('textarea')
-
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="name">{{ $audit->auditable_type::FIELDS[$key]['name'] }}:</label>
+                                                            <textarea class="form-control" rows="5"
+                                                                readonly>{{ $item }}</textarea>
+                                                        </div>
                                                     @break
                                                     @case('image')
                                                         <div class="form-group">
@@ -84,6 +104,15 @@
                                                             <br>
                                                             <img src="{{ $item ? $item : asset('img/web/no-img.png') }}"
                                                                 alt="" style="max-width: 10rem; max-height: 10rem">
+                                                        </div>
+                                                    @break
+                                                    @case('model')
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="name">{{ $audit->auditable_type::FIELDS[$key]['name'] }}:</label>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $audit->auditable_type::FIELDS[$key]['model']::find($item)->field }}"
+                                                                readonly>
                                                         </div>
                                                     @break
                                                     @default

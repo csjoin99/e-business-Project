@@ -131,6 +131,7 @@ class CheckoutController extends Controller
         $order = Order::create($data);
         $order->code = str_pad($order->id, 5, "0", STR_PAD_LEFT);
         $order->save();
+        Product::disableAuditing();
         foreach (Cart::content() as $item) {
             $product = Product::find($item->id);
             $order->product()->attach($item->id, [
@@ -141,6 +142,7 @@ class CheckoutController extends Controller
             $product->stock = $product->stock - $item->qty;
             $product->save();
         }
+        Product::enableAuditing();
         if ($order->coupon) {
             $order->coupon->stock = $order->coupon->stock - 1;
             $order->coupon->save();
