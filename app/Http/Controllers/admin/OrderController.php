@@ -99,8 +99,10 @@ class OrderController extends Controller
             }
             Product::enableAuditing();
             if ($order->coupon) {
+                Coupon::disableAuditing();
                 $order->coupon->stock += 1;
                 $order->coupon->save();
+                Coupon::enableAuditing();
             }
             $order->status = 2;
             $order->save();
@@ -158,8 +160,10 @@ class OrderController extends Controller
                 Product::enableAuditing();
             }
             if ($coupon) {
+                Coupon::disableAuditing();
                 $coupon->stock = $coupon->stock - 1;
                 $coupon->save();
+                Coupon::enableAuditing();
             }
             return response()->json([
                 'status' => 200,

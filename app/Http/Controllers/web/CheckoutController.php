@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase_session;
@@ -144,8 +145,10 @@ class CheckoutController extends Controller
         }
         Product::enableAuditing();
         if ($order->coupon) {
+            Coupon::disableAuditing();
             $order->coupon->stock = $order->coupon->stock - 1;
             $order->coupon->save();
+            Coupon::enableAuditing();
         }
         Cart::destroy();
         if (auth()->check()) {
