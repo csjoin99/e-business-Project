@@ -111,7 +111,7 @@
                                                             <label
                                                                 for="name">{{ $audit->auditable_type::FIELDS[$key]['name'] }}:</label>
                                                             <input type="text" class="form-control"
-                                                                value="{{ $audit->auditable_type::FIELDS[$key]['model']::find($item)->field }}"
+                                                                value="{{ $audit->auditable_type::FIELDS[$key]['model']::find($item) ? $audit->auditable_type::FIELDS[$key]['model']::find($item)->field : '' }}"
                                                                 readonly>
                                                         </div>
                                                     @break

@@ -19,4 +19,9 @@ class Provider extends Model
         'phone',
         'email',
     ];
+
+    public function getFieldAttribute()
+    {
+        return $this->name;
+    }
 }

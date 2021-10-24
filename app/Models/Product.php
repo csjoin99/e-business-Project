@@ -22,7 +22,7 @@ class Product extends Model implements Auditable
         'category_id' => [
             'name' => 'Categoría',
             'field' => 'model',
-            'model' => 'App\Models\Category',
+            'model' => 'App\Models\Provider',
         ],
         'name' => [
             'name' => 'Nombre',
