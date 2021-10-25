@@ -52,3 +52,4 @@ mix.js("resources/js/web/product-detail/index.js", "public/js/web/product-detail
 mix.js("resources/js/web/shopping-cart/index.js", "public/js/web/shopping-cart");
 mix.js("resources/js/web/shipment-data/index.js", "public/js/web/shipment-data");
 mix.js("resources/js/web/checkout/index.js", "public/js/web/checkout");
+mix.js("resources/js/web/store/index.js", "public/js/web/store");

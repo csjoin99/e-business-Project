@@ -58,6 +58,8 @@ class Product extends Model implements Auditable
 
     protected $appends = [
         'real_price',
+        'image',
+        'route',
     ];
 
     protected $auditInclude = [
@@ -88,6 +90,16 @@ class Product extends Model implements Auditable
         if (!$this->discount)
             return $this->price;
         return number_format($this->price * (100 - $this->discount) / 100, 2);
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->product_photo->count() ? $this->product_photo->first()->image : asset('img/web/no-img.png');
+    }
+
+    public function getRouteAttribute()
+    {
+        return route('product.detail',['slug' => $this->slug]);
     }
 
     public function getSlugOptions(): SlugOptions

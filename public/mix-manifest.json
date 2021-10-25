@@ -8,6 +8,7 @@
     "/js/web/shopping-cart/index.js": "/js/web/shopping-cart/index.js",
     "/js/web/shipment-data/index.js": "/js/web/shipment-data/index.js",
     "/js/web/checkout/index.js": "/js/web/checkout/index.js",
+    "/js/web/store/index.js": "/js/web/store/index.js",
     "/css/shopping-cart/index.css": "/css/shopping-cart/index.css",
     "/css/checkout/index.css": "/css/checkout/index.css",
     "/css/store/index.css": "/css/store/index.css",

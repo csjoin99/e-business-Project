@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProviderController;
 use App\Http\Controllers\web\CartController;
+use App\Http\Controllers\web\StoreController;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,3 +54,6 @@ Route::post('cart-get-coupon',[CartController::class, 'get_coupon']);
 
 /* Delivery */
 Route::post('delivery-update',[DeliveryController::class, 'update']);
+
+/* Store */
+Route::post('get-products',[StoreController::class, 'api_get_products']);

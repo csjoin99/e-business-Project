@@ -4,69 +4,104 @@
     Tienda
 @endsection
 
-@section('header')
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Tienda</h1>
-                <p class="lead fw-normal text-white-50 mb-0"></p>
-            </div>
-        </div>
-    </header>
+@section('css')
+    <link href="{{ asset('css/home/index.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/store/index.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach ($products as $product)
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
-                            </div>
-                            <!-- Product image-->
-                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">
-                                <img class="card-img-top" style="object-fit: cover; max-height: 150px"
-                                    src="{{ $product->product_photo->count() ? $product->product_photo->first()->image : 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png' }}"
-                                    alt="{{ $product->name }}" />
-                            </a>
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ $product->name }}</h5>
-                                    <!-- Product reviews-->
-                                    {{-- <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div> --}}
-                                    <!-- Product price-->
-                                    @if ($product->discount)
-                                        <span class="text-muted text-decoration-line-through">S/.
-                                            {{ number_format($product->price, 2) }}</span>
-                                    @endif
-                                    S/. {{ number_format($product->real_price, 2) }}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><button class="btn btn-outline-dark mt-auto"
-                                        v-on:click="add_cart" data-id="{{ $product->id }}">Añadir a
-                                        carrito</button>
-                                </div>
+    <!--NAvBar -->
+    @include('web.partials.nav')
+    <!--Carrito -->
+    @include('web.partials.cart')
+    <br>
+    <div class="ex1">
+        <div class="container">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="ex3">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="Filtros">
+                        <p>Filtros</p>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="mayor-precio">Mayor Precio</option>
+                            <option value="menor-precio">Menor Precio</option>
+                        </select>
+                        <br>
+                        <div class="Tipo">
+                            <h5>Tipo de Producto</h5>
+                            <hr>
+                            @foreach ($categories as $category)
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="{{ $category->slug }}">
+                                    {{ $category->name }}
+                                </label>
+                            @endforeach
+                            <h5>Precio</h5>
+                            <hr>
+                            <div class="d-flex align-items-center">
+                                <input type="number" class="form-control form-control-xs" placeholder="Mínimo" min="1">
+                                <div class="text-gray-350 mx-2">‒</div>
+                                <input type="number" class="form-control form-control-xs" placeholder="Máximo" max="10000">
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
+                <div class="col-sm-9">
+                    <div class="col-sm-12">
+                        <div class="ListProductos">
+                            <p>{{ $total }}</p>
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                                @forelse ($products as $product)
+                                    <div class="col">
+                                        <a class="Producto-items"
+                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}"
+                                            type="button">
+                                            <img src="{{ $product->product_photo->count() ? $product->product_photo->first()->image : asset('img/web/no-img.png') }}"
+                                                alt="">
+                                            <p class="name">{{ $product->name }}</p>
+                                            @if ($product->discount)
+                                                <p class="text-muted text-decoration-line-through">S/{{ $product->price }}
+                                                </p>
+                                            @endif
+                                            <p style="color:orange">S/{{ $product->real_price }}</p>
+                                        </a>
+                                    </div>
+                                @empty
+                                    <h1>No hay productos</h1>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-@endsection
-@section('js')
-    <script src="{{ asset('js/web/product-detail/index.js') }}"></script>
-@endsection
+        <br>
+        @include('web.partials.footer')
+    @endsection
+    @section('js')
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
+        <script>
+            const purchase_message = "{{ session('purchase_message') }}";
+            if (purchase_message) {
+                toastr.success(purchase_message, 'Compra realizada')
+            }
+        </script>
+        <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
+    @endsection
