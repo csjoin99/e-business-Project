@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\BuyOrderController;
 use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\DeliveryController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProviderController;
@@ -49,3 +50,6 @@ Route::post('cart-update-item',[CartController::class, 'update_item']);
 Route::post('cart-delete-item',[CartController::class, 'delete_item']);
 
 Route::post('cart-get-coupon',[CartController::class, 'get_coupon']);
+
+/* Delivery */
+Route::post('delivery-update',[DeliveryController::class, 'update']);

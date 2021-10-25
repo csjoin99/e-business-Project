@@ -133,6 +133,16 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('admin.cash.register')
+                                <li class="nav-item">
+                                    <a href="{{ route('delivery.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Pedidos
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan

@@ -100,20 +100,20 @@ class Order extends Model
     public function getColorAttribute()
     {
         $current_date = Carbon::now();
-        if ($this->status === 1 && $this->shipment_status === 1) {
+        if ($this->status == 1 && $this->shipment_status == 1) {
             return "#28a745";
         } else {
             if ($current_date->gt($this->shipment_date)) {
                 return "#dc3545";
             }
-            if ($this->status !== 1 && $this->shipment_status !== 1) {
-                return "#ffc107";
+            if ($this->status != 1 && $this->shipment_status != 1) {
+                return "#FFB302";
             }
-            if ($this->status !== 1) {
-                return "#17a2b8";
+            if ($this->status != 1) {
+                return "#2DCCFF";
             }
-            if ($this->shipment_status !== 1) {
-                return "#007bff";
+            if ($this->shipment_status != 1) {
+                return "#2DCCFF";
             }
             return "#dc3545";
         }
