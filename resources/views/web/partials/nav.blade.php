@@ -16,7 +16,7 @@
                 <li class="nav-item active">
                     <a class="nav-link active" href="{{ route('store') }}">Tienda</a>
                 </li>
-                <li class="nav-item active">
+                {{-- <li class="nav-item active">
                     <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
@@ -28,7 +28,7 @@
                             </a>
                         @endforeach
                     </div>
-                </li>
+                </li> --}}
             </ul>
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <div class="nav-item navbar-icon-link" data-bs-toggle="search">

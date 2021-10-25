@@ -12,14 +12,14 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $categories = Category::all();
-        if (isset($request->categoria)) {
+        /* if (isset($request->categoria)) {
             $category = Category::where('slug', $request->categoria)->first();
             $products = Product::where('category_id', $category->id)->get();
         } else {
             $products = Product::all();
         }
-        $total = $products->count() === 1 ? "{$products->count()} Artículo" : "{$products->count()} Artículos";
-        return view('web.store.index', compact('products', 'categories', 'total'));
+        $total = $products->count() === 1 ? "{$products->count()} Artículo" : "{$products->count()} Artículos"; */
+        return view('web.store.index', compact('categories'));
     }
 
     public function product_detail($slug)
