@@ -32,6 +32,7 @@ class SettingsUpdateRequest extends FormRequest
             'instagram' => 'nullable|max:255',
             'twitter' => 'nullable|max:255',
             'logo' => 'nullable|image|mimes:jpg,png,jpeg,gif',
+            'color' => 'nullable',
         ];
     }
 
@@ -46,6 +47,7 @@ class SettingsUpdateRequest extends FormRequest
             'instagram' => 'instagram',
             'twitter' => 'twitter',
             'logo' => 'logo',
+            'color' => 'color',
         ];
     }
 }

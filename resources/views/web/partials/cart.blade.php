@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-8">
                     <a role="button" v-text="item.name"></a>
-                    <p style="color:orange" v-text="`S/. ${parseFloat(item.subtotal).toFixed(2)}`"></p>
+                    <p class="text-color-brand" style="color:orange" v-text="`S/. ${parseFloat(item.subtotal).toFixed(2)}`"></p>
                     <input type="number" v-model="item.qty" v-on:change="cart_update_qty($event, item)" style="max-width: 100px">
                     <button v-on:click="cart_delete_item(item)" type="button" class="btn-close position-relative"
                         aria-label="Close"></button>

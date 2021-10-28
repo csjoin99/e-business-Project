@@ -54,7 +54,7 @@
                             @if ($product->discount)
                                 <h5 class="text-muted text-decoration-line-through">S/. {{ $product->price }}</h5>
                             @endif
-                            <h5>S/. {{ $product->real_price }}</h5>
+                            <h5 class="text-color-brand">S/. {{ $product->real_price }}</h5>
                             <p>Cantidad</p>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn-Cantidad" onclick="update_qty(-1)">-</button>
@@ -65,7 +65,7 @@
                             <button type="button" class="btn-Agregar" data-id="{{ $product->id }}"
                                 v-on:click="cart_add_item($event)">Agregar al
                                 Carrito</button>
-                            <div class="info">
+                            <div class="info border-color-brand">
                                 <p>
                                     {{ $product->description }}
                                 </p>

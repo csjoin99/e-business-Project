@@ -115,6 +115,16 @@
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="color">Color</label>
+                                    <input type="color"
+                                        class="form-control {{ $errors->has('color') ? 'is-invalid' : '' }}"
+                                        id="color" name="color" value="{{$settings->color}}"
+                                        placeholder="Ingresar color" maxlength="255">
+                                    @error('color')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

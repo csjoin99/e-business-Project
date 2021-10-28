@@ -20,15 +20,15 @@
             </button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active background-color-brand">
                 <h5 class="text-carousel">First slide label</h5>
                 <p class="text-carousel">Some representative placeholder content for the first slide.</p>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item background-color-brand">
                 <h5 class="text-carousel">Second slide label</h5>
                 <p class="text-carousel">Some representative placeholder content for the second slide.</p>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item background-color-brand">
                 <h5 class="text-carousel">Third slide label</h5>
                 <p class="text-carousel">Some representative placeholder content for the third slide.</p>
             </div>
@@ -68,7 +68,7 @@
         </div>
         <br>
         <div class="ex2">
-            <h6>Productos mas vendidos:</h6>
+            <h6 class="text-color-brand">Productos mas vendidos:</h6>
         </div>
         <br>
         <div class="ex3">
@@ -87,7 +87,7 @@
                         @if ($product->discount)
                             <p class="text-muted text-decoration-line-through">S/{{ $product->price }}</p>
                         @endif
-                        <p>S/{{ $product->real_price }}</p>
+                        <p class="text-color-brand">S/{{ $product->real_price }}</p>
                     </div>
                 </button>
             @endforeach

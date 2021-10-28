@@ -20,5 +20,6 @@ class Settings extends Model
         'instagram',
         'twitter',
         'whatsapp',
+        'color',
     ];
 }

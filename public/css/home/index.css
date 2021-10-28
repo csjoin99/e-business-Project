@@ -276,7 +276,7 @@ button.toast-close-button {
 }
 
 .carousel-item {
-  background-image: linear-gradient(#fb8f22, #f45f22);
+  background-image: linear-gradient(#FFA500, #FFA500);
   height: 50vh;
   color: white;
 }
@@ -311,7 +311,7 @@ button.toast-close-button {
 
 .ex2 {
   text-align: center;
-  color: orange;
+  color: #FFA500;
 }
 
 .ex3 {
@@ -358,7 +358,7 @@ button.toast-close-button {
 }
 .ex3 button .card-body p {
   margin-bottom: 0px;
-  color: orange;
+  color: #FFA500;
 }
 .ex3 button .card-body .descripcion {
   display: block;
@@ -374,7 +374,7 @@ button.toast-close-button {
   background-color: #fafafa;
 }
 .ex4 h5 {
-  color: orange;
+  color: #FFA500;
 }
 .ex4 a:hover {
   text-decoration: underline;

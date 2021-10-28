@@ -25,7 +25,7 @@ class ProviderEditRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'ruc' => 'required|unique:provider,ruc,NULL,id,deleted_at,NULL|max:11|min:11',
+            'ruc' => "required|unique:provider,ruc,{$this->provider->id},id,deleted_at,NULL|max:11|min:11",
             'phone' => 'required|numeric',
             'address' => 'required|max:150',
         ];

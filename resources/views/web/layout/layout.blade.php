@@ -14,6 +14,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>@yield('title')</title>
     @yield('css')
+    @if ($settings->color)
+        <style>
+            .text-color-brand {
+                color: {{ $settings->color }} !important;
+            }
+
+            .background-color-brand {
+                background-image: linear-gradient({{ $settings->color }}, {{ $settings->color }}) !important;
+            }
+
+            .border-color-brand {
+                border-color: {{ $settings->color }} !important;
+            }
+
+        </style>
+    @endif
 </head>
 
 <body>

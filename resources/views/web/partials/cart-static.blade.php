@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-8">
                         <a role="button">{{ $item->name }}</a>
-                        <p style="color:orange">S/. {{ number_format($item->price, 2) }}</p>
+                        <p class="text-color-brand" style="color:orange">S/. {{ number_format($item->price, 2) }}</p>
                         <input type="number" value="{{ $item->qty }}" style="max-width: 100px" readonly>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
         <footer class="py-5">
             <div class="row">
                 <div class="col-sm-4">
-                    <h5>Sobre Nosotros</h5>
+                    <h5 class="text-color-brand">Sobre Nosotros</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a role="button" class="nav-link p-0 text-muted">Home</a>
                         </li>
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <h5>Medios de pago</h5>
+                    <h5 class="text-color-brand">Medios de pago</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item ">
                             <a href="#" class="nav-link p-0 text-muted">
@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-4">
-                    <h5>Síguenos</h5>
+                    <h5 class="text-color-brand">Síguenos</h5>
                     <ul class="nav">
                         @if ($settings->facebook)
                             <li class="nav-item ">

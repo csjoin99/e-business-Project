@@ -305,6 +305,9 @@ button.toast-close-button {
   max-width: 100%;
   max-height: 10rem;
 }
+.Producto-items p:last-child {
+  color: #FFA500;
+}
 
 .name:hover {
   text-decoration: underline;

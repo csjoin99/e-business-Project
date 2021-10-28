@@ -73,7 +73,7 @@
                                         <p class="text-muted text-decoration-line-through" v-if="item.discount"
                                             v-text="`S/. ${item.price}`">S/. 0.00
                                         </p>
-                                        <p style="color:orange" v-text="`S/. ${item.real_price}`">S/.
+                                        <p class="text-color-brand" v-text="`S/. ${item.real_price}`">S/.
                                             0.00</p>
                                     </a>
                                 </div>
@@ -81,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- class="text-color-brand" --}}
                 </div>
             </div>
         </div>
