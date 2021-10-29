@@ -5,11 +5,11 @@
                 <div class="col-sm-4">
                     <h5 class="text-color-brand">Sobre Nosotros</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a role="button" class="nav-link p-0 text-muted">Home</a>
+                        <li class="nav-item mb-2"><a href="{{route('home')}}" class="nav-link p-0 text-muted">Home</a>
                         </li>
-                        <li class="nav-item mb-2"><a role="button" class="nav-link p-0 text-muted">Productos</a></li>
-                        <li class="nav-item mb-2"><a role="button" class="nav-link p-0 text-muted">Preguntas
-                                Frecuentes</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('store')}}" class="nav-link p-0 text-muted">Productos</a></li>
+                        {{-- <li class="nav-item mb-2"><a role="button" class="nav-link p-0 text-muted">Preguntas
+                                Frecuentes</a></li> --}}
                     </ul>
                 </div>
 
@@ -28,21 +28,21 @@
                     <ul class="nav">
                         @if ($settings->facebook)
                             <li class="nav-item ">
-                                <a href="#">
+                                <a href="{{$settings->facebook}}" target="_blank">
                                     <img class="credit" src="{{ asset('assets/icons/facebook.svg') }}">
                                 </a>
                             </li>
                         @endif
                         @if ($settings->whatsapp)
                             <li class="nav-item ">
-                                <a href="#">
+                                <a href="https://api.whatsapp.com/send?phone={{$settings->whatsapp}}" target="_blank">
                                     <img class="credit" src="{{ asset('assets/icons/whatsapp.svg') }}">
                                 </a>
                             </li>
                         @endif
                         @if ($settings->instagram)
                             <li class="nav-item ">
-                                <a href="#">
+                                <a href="{{$settings->instagram}}" target="_blank">
                                     <img class="credit" src="{{ asset('assets/icons/instagram.svg') }}">
                                 </a>
                             </li>

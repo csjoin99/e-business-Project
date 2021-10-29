@@ -22,7 +22,6 @@ class Order extends Model
         'shipment_type',
         'shipment_price',
         'shipment_status',
-        'shipment_hour',
         'address',
         'district',
         'reference',

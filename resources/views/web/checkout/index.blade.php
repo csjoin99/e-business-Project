@@ -63,7 +63,8 @@
                                                                         data-amount="{{ number_format(session()->get('order.total'), 2, '', '') }}"
                                                                         data-name="Portal Commerce" data-description="Compra"
                                                                         data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                                                        data-locale="auto">
+                                                                        data-locale="auto"
+                                                                        data-currency="PEN">
                                     </script>
                                 </form>
                             </div>

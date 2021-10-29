@@ -137,8 +137,7 @@ class CheckoutController extends Controller
             $product = Product::find($item->id);
             $order->product()->attach($item->id, [
                 'quantity' => $item->qty,
-                'price' => $product->real_price,
-                'price_discount' => $item->price,
+                'price' => $item->price,
             ]);
             $product->stock = $product->stock - $item->qty;
             $product->save();

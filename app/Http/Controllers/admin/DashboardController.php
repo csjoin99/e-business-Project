@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Buy_order;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -16,27 +17,39 @@ class DashboardController extends Controller
     {
         $current_month = date('m');
         $income = $this->get_income();
+        $expenses = $this->get_expenses();
         $total_products = $this->get_total_products();
         $users = User::whereMonth('created_at', $current_month)->get();
         $orders = Order::whereMonth('created_at', $current_month)->get();
         $order_bar_chart = $this->order_bar_chart();
         $product_pie_chart = $this->product_pie_chart();
-        return view('admin.dashboard.index', compact('orders', 'income', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart'));
+        return view('admin.dashboard.index', compact('orders', 'income', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart', 'expenses'));
     }
 
     private function get_income()
     {
         $current_month = date('m');
-        $sum_income = Order::whereMonth('created_at', $current_month)->sum('total');
+        $current_year = date('Y');
+        $sum_income = Order::whereMonth('created_at', $current_month)->whereYear('created_at', $current_year)->sum('total');
         return number_format($sum_income, 2);
+    }
+
+    private function get_expenses()
+    {
+        $current_month = date('m');
+        $current_year = date('Y');
+        $sum_expenses = Buy_order::whereMonth('created_at', $current_month)->whereYear('created_at', $current_year)->sum('total');
+        return number_format($sum_expenses, 2);
     }
 
     private function get_total_products()
     {
         $current_month = date('m');
+        $current_year = date('Y');
         $total_products = Order::leftJoin('order_detail', 'order_detail.order_id', '=', 'order.id')
             ->select(DB::raw('COALESCE(sum([order_detail].[quantity]),0) total'))
             ->whereMonth('order.created_at', $current_month)
+            ->whereYear('created_at', $current_year)
             ->groupBy(DB::raw('MONTH([order].[created_at])'))
             ->get();
         return $total_products->count() ?  $total_products->first()->total : 0;

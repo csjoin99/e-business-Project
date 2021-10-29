@@ -151,7 +151,6 @@ class OrderController extends Controller
                 $order->product()->attach($product->id, [
                     'quantity' => $item->qty,
                     'price' => $item->price,
-                    'price_discount' => $item->price,
                 ]);
                 Product::disableAuditing();
                 $product->stock = $product->stock - $item->qty;

@@ -87,6 +87,37 @@
                 </div>
                 <!-- ./col -->
             </div>
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>S/. {{$expenses}}</h3>
+
+                            <p>Egresos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{route('order.index')}}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{$expenses}}</h3>
+
+                            <p>Productos ingresados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{route('order.index')}}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
             <!-- /.row -->
             <!-- Main row -->
             <div class="row">

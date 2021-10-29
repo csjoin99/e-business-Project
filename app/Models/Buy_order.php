@@ -19,7 +19,6 @@ class Buy_order extends Model implements Auditable
         'provider_id',
         'total',
         'subtotal',
-        'discount',
         'num_doc',
     ];
 
@@ -27,7 +26,6 @@ class Buy_order extends Model implements Auditable
         'provider_id',
         'total',
         'subtotal',
-        'discount',
         'num_doc',
     ];
 
