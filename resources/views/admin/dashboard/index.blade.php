@@ -107,7 +107,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{$expenses}}</h3>
+                            <h3>{{$total_products_bought}}</h3>
 
                             <p>Productos ingresados</p>
                         </div>

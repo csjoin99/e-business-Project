@@ -19,11 +19,12 @@ class DashboardController extends Controller
         $income = $this->get_income();
         $expenses = $this->get_expenses();
         $total_products = $this->get_total_products();
+        $total_products_bought = $this->get_total_products_bought();
         $users = User::whereMonth('created_at', $current_month)->get();
         $orders = Order::whereMonth('created_at', $current_month)->get();
         $order_bar_chart = $this->order_bar_chart();
         $product_pie_chart = $this->product_pie_chart();
-        return view('admin.dashboard.index', compact('orders', 'income', 'users', 'total_products', 'order_bar_chart', 'product_pie_chart', 'expenses'));
+        return view('admin.dashboard.index', compact('orders', 'income', 'users', 'total_products', 'total_products_bought', 'order_bar_chart', 'product_pie_chart', 'expenses'));
     }
 
     private function get_income()
@@ -51,6 +52,19 @@ class DashboardController extends Controller
             ->whereMonth('order.created_at', $current_month)
             ->whereYear('created_at', $current_year)
             ->groupBy(DB::raw('MONTH([order].[created_at])'))
+            ->get();
+        return $total_products->count() ?  $total_products->first()->total : 0;
+    }
+
+    private function get_total_products_bought()
+    {
+        $current_month = date('m');
+        $current_year = date('Y');
+        $total_products = Buy_order::leftJoin('buy_order_detail', 'buy_order_detail.buy_order_id', '=', 'buy_order.id')
+            ->select(DB::raw('COALESCE(sum([buy_order_detail].[quantity]),0) total'))
+            ->whereMonth('buy_order.created_at', $current_month)
+            ->whereYear('buy_order.created_at', $current_year)
+            ->groupBy(DB::raw('MONTH([buy_order].[created_at])'))
             ->get();
         return $total_products->count() ?  $total_products->first()->total : 0;
     }
