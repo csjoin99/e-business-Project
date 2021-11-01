@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Models\Kardex;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase_session;
@@ -135,6 +136,15 @@ class CheckoutController extends Controller
         Product::disableAuditing();
         foreach (Cart::content() as $item) {
             $product = Product::find($item->id);
+            Kardex::create([
+                'product_id' =>  $product->id,
+                'order_id' =>  $order->id,
+                'total' =>  $item->real_price * $item->qty,
+                'unit_price' =>  $item->real_price,
+                'init_stock' =>  $product->stock,
+                'end_stock' =>  $product->stock - $item->qty,
+                'quantity' =>  $item->qty
+            ]);
             $order->product()->attach($item->id, [
                 'quantity' => $item->qty,
                 'price' => $item->price,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Models\Kardex;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Settings;
@@ -93,6 +94,15 @@ class OrderController extends Controller
         try {
             Product::disableAuditing();
             foreach ($order->product as $product) {
+                Kardex::create([
+                    'product_id' =>  $product->id,
+                    'order_id' =>  $order->id,
+                    'total' =>  $product->pivot['price'] * $product->pivot['quantity'],
+                    'unit_price' =>  $product->pivot['price'],
+                    'init_stock' =>  $product->stock,
+                    'end_stock' =>  $product->stock + $product->pivot['quantity'],
+                    'quantity' =>  $product->pivot['quantity']
+                ]);
                 $product->stock += $product->pivot->quantity;
                 $product->temp_stock += $product->pivot->quantity;
                 $product->save();
@@ -109,7 +119,7 @@ class OrderController extends Controller
             $order->delete();
             return redirect()->route('order.index')->with('success', 'Orden anulada exitosamente');
         } catch (\Throwable $th) {
-            return redirect()->route('order.index')->with('failure', 'Ocurrio un error, no se pudo anular la orden');
+            return redirect()->route('order.index')->with('failure', 'Ocurrio un error, no se pudo anular la orden'.$th->getMessage());
         }
     }
 
@@ -151,6 +161,15 @@ class OrderController extends Controller
                 $order->product()->attach($product->id, [
                     'quantity' => $item->qty,
                     'price' => $item->price,
+                ]);
+                Kardex::create([
+                    'product_id' =>  $product->id,
+                    'order_id' =>  $order->id,
+                    'total' =>  $item->real_price * $item->qty,
+                    'unit_price' =>  $item->real_price,
+                    'init_stock' =>  $product->stock,
+                    'end_stock' =>  $product->stock - $item->qty,
+                    'quantity' =>  $item->qty
                 ]);
                 Product::disableAuditing();
                 $product->stock = $product->stock - $item->qty;

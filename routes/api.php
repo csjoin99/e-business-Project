@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\BuyOrderController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DeliveryController;
+use App\Http\Controllers\admin\KardexController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProviderController;
@@ -57,3 +58,6 @@ Route::post('delivery-update',[DeliveryController::class, 'update']);
 
 /* Store */
 Route::post('get-products',[StoreController::class, 'api_get_products']);
+
+/* Kardex */
+Route::post('check-kardex',[KardexController::class, 'check_kardex']);

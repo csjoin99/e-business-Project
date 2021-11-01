@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DeliveryController;
+use App\Http\Controllers\admin\KardexController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
@@ -88,5 +89,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('audit/{audit}', [AuditController::class, 'show'])->name('audit.show')->middleware('permission:admin.cash.register');
 
     Route::get('delivery', [DeliveryController::class, 'index'])->name('delivery.index')->middleware('permission:admin.cash.register');
+
+    Route::get('delivery', [DeliveryController::class, 'index'])->name('delivery.index')->middleware('permission:admin.cash.register');
+
+    /* Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register'); */
 });
 

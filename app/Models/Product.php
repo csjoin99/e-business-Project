@@ -82,7 +82,7 @@ class Product extends Model implements Auditable
 
     public function order()
     {
-        return $this->belongsToMany(Order::class, 'order_detail')->withPivot(['quantity', 'price', 'price_discount']);
+        return $this->belongsToMany(Order::class, 'order_detail')->withPivot(['quantity', 'price']);
     }
 
     public function getRealPriceAttribute()

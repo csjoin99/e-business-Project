@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Lista de ordenes de compra')
+@section('title', 'Lista de ordenes')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lista de ordenes de compra</h1>
+                    <h1>Lista de ordenes</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -24,8 +24,8 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-6 d-flex flex-column justify-content-center">
-                                    <a href="{{ route('buy-order.create') }}" class="btn btn-outline-success"
-                                        style="width: fit-content">Registrar</a>
+                                    {{-- <a href="{{ route('coupon.create') }}" class="btn btn-outline-success"
+                                    style="width: fit-content">Registrar</a> --}}
                                 </div>
                                 <div class="col-6 d-flex justify-content-end">
                                     <form method="GET" class="row px-2 w-100 d-flex flex-column"
@@ -36,46 +36,85 @@
                                     </form>
                                 </div>
                             </div>
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped nowrap w-100 responsive" data-responsive="true">
                                 <thead>
                                     <tr>
-                                        <th>N°</th>
-                                        <th>Proveedor</th>
+                                        <th>Código</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha de compra</th>
+                                        <th>Distrito</th>
+                                        <th>Fecha de envío</th>
+                                        <th>Estado de envío</th>
+                                        <th>Precio de envío</th>
+                                        <th>Descuento</th>
+                                        <th>Subtotal</th>
                                         <th>Total</th>
-                                        <th>Fecha de registro</th>
+                                        <th>Status</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($buy_order_list as $buy_order)
+                                    @forelse ($orders as $order)
                                     <tr>
-                                        <td>{{ $buy_order->num_doc }}</td>
-                                        <td>{{ $buy_order->provider->name }}</td>
-                                        <td>{{ $buy_order->total }}</td>
-                                        <td>{{ Carbon::createFromFormat('Y-m-d H:i:s', $buy_order->created_at)->format('d-m-Y') }}</td>
+                                        <td>{{ $order->code }}</td>
+                                        <td>{{ $order->user ? "{$order->user->name} {$order->user->lastname}" : $order->client }}
+                                        </td>
+                                        <td>{{ Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('d-m-Y') }}
+                                        </td>
+                                        <td>{{ $order->district ? $order->district : '-' }}</td>
+                                        <td>{{ Carbon::createFromFormat('Y-m-d', $order->shipment_date)->format('d-m-Y') }}</td>
+                                        <td>
+                                            @switch($order->shipment_status)
+                                            @case(1)
+                                            <span class="badge badge-success">{{ $order->shipment_status_text }}</span>
+                                            @break
+                                            @case(0)
+                                            <span class="badge badge-danger">{{ $order->shipment_status_text }}</span>
+                                            @break
+                                            @default
+                                            <span class="badge badge-danger">{{ $order->shipment_status_text }}</span>
+                                            @endswitch
+                                        </td>
+                                        <td>S/. {{ number_format($order->shipment_price,2) }}</td>
+                                        <td>{{ $order->coupon ? "S/. {$order->discount}" : '-' }}</td>
+                                        <td>S/. {{ number_format($order->subtotal,2) }}</td>
+                                        <td>S/. {{ number_format($order->total,2) }}</td>
+                                        <td>
+                                            @switch($order->status)
+                                            @case(1)
+                                            <span class="badge badge-success">{{ $order->status_text }}</span>
+                                            @break
+                                            @case(0)
+                                            <span class="badge badge-danger">{{ $order->status_text }}</span>
+                                            @break
+                                            @default
+                                            <span class="badge badge-warning">{{ $order->status_text }}</span>
+                                            @endswitch
+                                        </td>
                                         <td>
                                             <div class="d-flex flex-nowrap">
-                                                <a href="{{route('buy-order.show',$buy_order)}}"
-                                                    class="btn btn-primary mr-1"><i class="fas fa-eye"></i></a>
-                                                {{-- <form action="{{route('buy-order.destroy',$buy_order)}}" method="POST">
+                                                <a target="_blank" href="{{route('generate.order.pdf',$order)}}"
+                                                    class="btn btn-primary mr-1"><i class="fas fa-file-pdf"></i></a>
+                                                <form action="{{route('order.destroy',$order)}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <a role="button" class="btn btn-danger" name="delete-button"><i
-                                                            class="fas fa-trash"></i></a>
-                                                </form> --}}
+                                                    <a role="button" class="btn btn-danger" name="cancel-button"><i
+                                                            class="fas fa-times"></i></a>
+                                                </form>
+                                                {{-- <a href="{{route('order.show',$order)}}">Detail</a> --}}
                                             </div>
                                         </td>
                                     </tr>
                                     @empty
                                     <tr class="odd">
-                                        <td valign="top" colspan="8" class="dataTables_empty text-center">No hay
+                                        <td valign="top" colspan="12" class="dataTables_empty text-center">No hay
                                             registros
                                         </td>
                                     </tr>
                                     @endforelse
                                 </tbody>
                             </table>
-                            {{ $buy_order_list->onEachSide(1)->appends(request()->except(['page']))->links('admin.partials.pagination') }}
+                            {{ $orders->onEachSide(1)->appends(request()->except(['page']))->links('admin.partials.pagination') }}
                         </div>
                         <!-- /.card-body -->
                     </div>

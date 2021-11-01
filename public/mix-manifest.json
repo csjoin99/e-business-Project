@@ -4,6 +4,7 @@
     "/js/confirm-deletion.js": "/js/confirm-deletion.js",
     "/js/admin/cash-register/index.js": "/js/admin/cash-register/index.js",
     "/js/admin/buy-order/index.js": "/js/admin/buy-order/index.js",
+    "/js/admin/kardex/index.js": "/js/admin/kardex/index.js",
     "/js/web/product-detail/index.js": "/js/web/product-detail/index.js",
     "/js/web/shopping-cart/index.js": "/js/web/shopping-cart/index.js",
     "/js/web/shipment-data/index.js": "/js/web/shipment-data/index.js",

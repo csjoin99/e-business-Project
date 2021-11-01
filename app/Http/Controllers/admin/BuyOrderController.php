@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buy_order;
+use App\Models\Kardex;
 use App\Models\Product;
 use App\Models\Provider;
 use Illuminate\Http\Request;
@@ -117,6 +118,15 @@ class BuyOrderController extends Controller
                 $buy_order->product()->attach($product->id, [
                     'quantity' => $item->qty,
                     'total' => $item->real_price,
+                ]);
+                Kardex::create([
+                    'product_id' =>  $product->id,
+                    'buy_order_id' =>  $buy_order->id,
+                    'total' =>  $item->real_price * $item->qty,
+                    'unit_price' =>  $item->real_price,
+                    'init_stock' =>  $product->stock,
+                    'end_stock' =>  $product->stock + $item->qty,
+                    'quantity' =>  $item->qty
                 ]);
                 Product::disableAuditing();
                 $product->stock = $product->stock + $item->qty;
