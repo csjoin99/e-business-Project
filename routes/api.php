@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\KardexController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProviderController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\web\CartController;
 use App\Http\Controllers\web\StoreController;
 use App\Models\Coupon;
@@ -61,3 +62,6 @@ Route::post('get-products',[StoreController::class, 'api_get_products']);
 
 /* Kardex */
 Route::post('check-kardex',[KardexController::class, 'check_kardex']);
+
+/* Report */
+Route::post('report-product',[ReportController::class, 'api_report_product']);

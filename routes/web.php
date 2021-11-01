@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductPhotoController;
 use App\Http\Controllers\admin\ProviderController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\web\AuthController as WebAuthController;
@@ -99,6 +100,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('delivery', [DeliveryController::class, 'index'])->name('delivery.index')->middleware('permission:admin.cash.register');
 
     Route::get('delivery', [DeliveryController::class, 'index'])->name('delivery.index')->middleware('permission:admin.cash.register');
+
+    Route::get('report-product', [ReportController::class, 'report_product'])->name('report-product')->middleware('permission:admin.cash.register');
 
     /* Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register'); */
 });
