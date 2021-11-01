@@ -146,6 +146,29 @@
                         </ul>
                     </li>
                 @endcan
+                @can(['admin.order', 'admin.buy_order', 'admin.cash.register'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-signature"></i>
+                            <p>
+                                Reportes
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('admin.buy_order')
+                                <li class="nav-item">
+                                    <a href="{{ route('report.product') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Productos
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('admin.settings')
                     <li class="nav-item">
                         <a href="{{ route('settings') }}" class="nav-link">

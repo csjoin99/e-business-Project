@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('delivery', [DeliveryController::class, 'index'])->name('delivery.index')->middleware('permission:admin.cash.register');
 
-    Route::get('report-product', [ReportController::class, 'report_product'])->name('report-product')->middleware('permission:admin.cash.register');
+    Route::get('report-product', [ReportController::class, 'report_product'])->name('report.product')->middleware('permission:admin.cash.register');
 
     /* Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register'); */
 });
