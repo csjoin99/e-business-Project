@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\ProductPhotoController;
 use App\Http\Controllers\admin\ProviderController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\web\AuthController as WebAuthController;
 use App\Http\Controllers\web\CheckoutController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\StoreController;
@@ -45,9 +46,16 @@ Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout'
 Route::post('upon-delivery-payment', [CheckoutController::class, 'upon_delivery'])->name('upon.delivery');
 Route::post('stripe-payment', [CheckoutController::class, 'stripe'])->name('stripe');
 
-Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
-Route::post('login', [AuthController::class, 'login_post'])->name('login.post');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('admin/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('admin/login', [AuthController::class, 'login_post'])->name('login.post');
+Route::post('admin/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('login', [WebAuthController::class, 'login'])->name('web.login')->middleware('guest');
+Route::post('login', [WebAuthController::class, 'login_post'])->name('web.login.post');
+Route::post('logout', [WebAuthController::class, 'logout'])->name('web.logout');
+
+Route::get('register', [WebAuthController::class, 'register'])->name('web.register')->middleware('guest');
+Route::post('register', [WebAuthController::class, 'register_post'])->name('web.register.post');
 
 /* Generate order pdf */
 Route::get('order/pdf/{order}', [OrderController::class, 'generate_order_pdf'])->name('generate.order.pdf');

@@ -57,7 +57,7 @@
                                                 alt="">
                                         </td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->roles->first()->name }}</td>
+                                        <td>{{ $user->roles->count() ? $user->roles->first()->name : '' }}</td>
                                         <td>
                                             @if ($user->deleted_at)
                                             <span class="badge badge-danger">Inactivo</span>

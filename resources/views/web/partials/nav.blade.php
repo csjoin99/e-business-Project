@@ -45,10 +45,34 @@
                     </div>
                 </div>
 
-                <div class="nav-item navbar-icon-link" data-bs-toggle="user">
+                {{-- <div class="nav-item navbar-icon-link" data-bs-toggle="user">
                     <a href="{{ route('login') }}">
                         <img src="{{ asset('assets/icons/person.svg') }}">
                     </a>
+                </div> --}}
+                <div class="nav-item navbar-icon-link" data-bs-toggle="user">
+                    <button class="nav-link btn" role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="{{ asset('assets/icons/person.svg') }}">
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @if (auth()->check())
+                            <li>
+                                <form action="{{ route('web.logout') }}" method="POST">
+                                    @csrf
+                                    <a class="dropdown-item" role="button" id="web-logout">
+                                        <p>Logout</p>
+                                    </a>
+                                </form>
+                            </li>
+                        @else
+                            <li>
+                                <a class="dropdown-item" href="{{ route('web.login') }}">
+                                    <p>Login</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
                 <div class="nav-item navbar-icon-link" data-bs-toggle="cart">
                     <a role="button" data-bs-toggle="offcanvas" data-bs-target="#cesta" aria-controls="offcanvasRight">

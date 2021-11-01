@@ -38,5 +38,14 @@
     </div>
 </body>
 @yield('js')
+<script>
+    let web_logout = document.querySelector('a[id="web-logout"]');
+    if (web_logout) {
+        web_logout.addEventListener('click', () => {
+            let form = web_logout.closest('form');
+            form.submit();
+        });
+    }
+</script>
 
 </html>
