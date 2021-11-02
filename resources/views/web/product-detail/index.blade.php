@@ -90,7 +90,8 @@
                                 </div>
                                 <h6 class="text-center">{{ $recommended_product->name }}</h6>
                                 @if ($recommended_product->discount)
-                                    <p class="text-center text-muted text-decoration-line-through">S/{{ $recommended_product->price }}</p>
+                                    <p class="text-center text-muted text-decoration-line-through">
+                                        S/{{ $recommended_product->price }}</p>
                                 @endif
                                 <p class="text-center">S/{{ $recommended_product->real_price }}</p>
                             </a>
@@ -112,13 +113,16 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.carousel-main').flickity();
-            // 2nd carousel, navigation
-            $('.carousel-nav').flickity({
-                asNavFor: '.carousel-main',
-                contain: true,
-                pageDots: false
-            });
+            setTimeout(
+                function() {
+                    $('.carousel-main').flickity();
+                    // 2nd carousel, navigation
+                    $('.carousel-nav').flickity({
+                        asNavFor: '.carousel-main',
+                        contain: true,
+                        pageDots: false
+                    });
+                }, 500);
         });
     </script>
     <script src="{{ asset('js/web/shopping-cart/index.js') }}"></script>
