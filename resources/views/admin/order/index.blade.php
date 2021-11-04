@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Lista de ordenes')
+@section('title', 'Lista de ventas')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lista de ordenes</h1>
+                    <h1>Lista de ventas</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
