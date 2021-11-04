@@ -1,3 +1,6 @@
+import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 const product = document.querySelector('select[id="product"]');
 const date = document.querySelector('input[id="date"]');
 const button = document.querySelector('button[id="get-report"]');
@@ -36,22 +39,37 @@ button.addEventListener("click", async () => {
                         {
                             label: "Ventas",
                             data: chart_order_data,
-                            backgroundColor: "rgba(255, 99, 132, 0.8)",
-                            borderColor: "rgba(255, 99, 132, 0.8)",
+                            backgroundColor: "rgb(54, 162, 235)",
+                            borderColor: "rgb(54, 162, 235)",
                             borderWidth: 1,
                             fill: false,
                         },
                         {
                             label: "Compras",
                             data: chart_buy_order_data,
-                            backgroundColor: "rgba(54, 162, 235, 0.8)",
-                            borderColor: "rgba(54, 162, 235, 0.8)",
+                            backgroundColor: "rgb(255, 99, 132)",
+                            borderColor: "rgb(255, 99, 132)",
                             borderWidth: 1,
                             fill: false,
                         },
                     ],
                 },
                 options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        datalabels: {
+                            anchor: 'center',
+                            align: 'end',
+                            padding: 6,   
+                            backgroundColor: function(context) {
+                                return context.dataset.backgroundColor;
+                            },     
+                            borderRadius: 4,
+                            color: 'white',
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -64,7 +82,16 @@ button.addEventListener("click", async () => {
                         display: true,
                         text: "Reporte de producto",
                     },
+                    layout: {
+                        padding: {
+                        top: 32,
+                        right: 16,
+                        bottom: 16,
+                        left: 8
+                        }
+                    },
                 },
+                plugins: [ChartDataLabels],
             });
         } else {
             const { message } = await response.json();
@@ -90,6 +117,11 @@ let myChart = new Chart(ctx, {
         ],
     },
     options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
         scales: {
             y: {
                 beginAtZero: true,
@@ -101,6 +133,14 @@ let myChart = new Chart(ctx, {
         title: {
             display: true,
             text: "Reporte de producto",
+        },
+        layout: {
+            padding: {
+            top: 32,
+            right: 16,
+            bottom: 16,
+            left: 8
+            }
         },
     },
 });

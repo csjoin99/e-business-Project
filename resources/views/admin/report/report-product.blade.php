@@ -96,7 +96,7 @@
     <script src="{{ asset('admin/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/plugins/chart.js/Chart.min.js') }}"></script> --}}
     <script src="{{ asset('js/admin/report-product/index.js') }}"></script>
     <script src="{{ asset('js/form-validation.js') }}"></script>
     <script>

@@ -61,7 +61,9 @@ class AuthController extends Controller
             $role = Role::where('name', 'Cliente')->first();
             $data = $request->all();
             $data['password'] = bcrypt($data['password']);
+            User::disableAuditing();
             $user = User::create($data);
+            User::enableAuditing();
             $user->assignRole($role->id);
             if (Auth::attempt($auth_data)) {
                 return redirect()->route('home');

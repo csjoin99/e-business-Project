@@ -12986,7 +12986,7 @@ var vm = new Vue({
                 input = e.target;
                 qty = parseFloat(input.value);
 
-                if (!(qty <= 0 || qty % 1 != 0)) {
+                if (!(input.name === 'item_qty' && (qty <= 0 || qty % 1 != 0))) {
                   _context2.next = 7;
                   break;
                 }
@@ -12995,6 +12995,15 @@ var vm = new Vue({
                 return _context2.abrupt("return");
 
               case 7:
+                if (!(input.name === 'item_price' && qty <= 0)) {
+                  _context2.next = 12;
+                  break;
+                }
+
+                input.classList.add("border-danger");
+                return _context2.abrupt("return");
+
+              case 12:
                 input.classList.remove("border-danger");
                 _this2.product_list = _this2.product_list.map(function (item) {
                   item.total = (item.real_price * item.qty).toFixed(2);
@@ -13003,7 +13012,7 @@ var vm = new Vue({
 
                 _this2.calculate_price();
 
-              case 10:
+              case 15:
               case "end":
                 return _context2.stop();
             }

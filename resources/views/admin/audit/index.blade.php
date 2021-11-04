@@ -37,9 +37,9 @@
                                     <tbody>
                                         @forelse ($audit_list as $audit)
                                             <tr>
-                                                <td>{{ $audit->user_with_trashed->name }}</td>
-                                                <td>{{ $audit->user_with_trashed->email }}</td>
-                                                <td>{{ $audit->user_with_trashed->roles->first()->name }}</td>
+                                                <td>{{ $audit->user_with_trashed ? $audit->user_with_trashed->name : '' }}</td>
+                                                <td>{{ $audit->user_with_trashed ? $audit->user_with_trashed->email : '' }}</td>
+                                                <td>{{ $audit->user_with_trashed ? $audit->user_with_trashed->roles->first()->name : '' }}</td>
                                                 <td>
                                                     @switch($audit->event)
                                                         @case('created')

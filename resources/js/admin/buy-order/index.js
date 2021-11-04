@@ -60,9 +60,12 @@ const vm = new Vue({
         async update_product(e) {
             const input = e.target;
             const qty = parseFloat(input.value);
-            if (
-                qty <= 0 ||
-                qty % 1 != 0
+            if(input.name === 'item_qty' && (qty <= 0 || qty % 1 != 0)){
+                input.classList.add("border-danger");
+                return;
+            }
+            else if (
+                input.name === 'item_price' && (qty <= 0)
             ) {
                 input.classList.add("border-danger");
                 return;

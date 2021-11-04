@@ -78,11 +78,11 @@
                                                             v-on:click.prevent="delete_product(product_item)"><i
                                                                 class="fas fa-times"></i></button></td>
                                                     <td v-text="product_item.name"></td>
-                                                    <td><input type="number" class="form-control "
+                                                    <td><input type="number" name="item_qty" class="form-control "
                                                             v-model="product_item.qty" v-on:keyup.prevent="update_product">
                                                     </td>
                                                     <td>
-                                                        <input type="number" class="form-control "
+                                                        <input type="number" name="item_price" class="form-control "
                                                             v-model="product_item.real_price" v-on:keyup.prevent="update_product">
                                                     </td>
                                                     <td v-text="`S/. ${product_item.total}`"></td>
