@@ -15654,9 +15654,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!****************************************************!*\
-  !*** ./resources/js/admin/report-product/index.js ***!
-  \****************************************************/
+/*!******************************************************!*\
+  !*** ./resources/js/admin/report-most-sold/index.js ***!
+  \******************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -15670,27 +15670,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var product = document.querySelector('select[id="product"]');
 var date = document.querySelector('input[id="date"]');
 var button = document.querySelector('button[id="get-report"]');
 button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-  var url, response, _yield$response$json, data_order_sum, data_buy_order_sum, data_label, data_title, chart_order_data, chart_buy_order_data, chart_label, _yield$response$json2, message;
+  var url, response, _yield$response$json, data, label, title, _yield$response$json2, message;
 
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           button.disabled = true;
-          url = "".concat(window.location.origin, "/api/report-product");
+          url = "".concat(window.location.origin, "/api/report-most-sold");
 
-          if (!(product.value.length <= 0 || date.value.length <= 0)) {
+          if (!(date.value.length <= 0)) {
             _context.next = 7;
             break;
           }
 
-          toastr.error("Debe seleccionar un producto y un rango de fecha");
+          toastr.error("Debe seleccionar un rango de fecha");
           button.disabled = false;
-          _context.next = 32;
+          _context.next = 28;
           break;
 
         case 7:
@@ -15702,7 +15701,6 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              product: product.value,
               date: date.value
             })
           });
@@ -15711,7 +15709,7 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
           response = _context.sent;
 
           if (!(response.status !== 400)) {
-            _context.next = 26;
+            _context.next = 22;
             break;
           }
 
@@ -15720,31 +15718,20 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
 
         case 13:
           _yield$response$json = _context.sent;
-          data_order_sum = _yield$response$json.data_order_sum;
-          data_buy_order_sum = _yield$response$json.data_buy_order_sum;
-          data_label = _yield$response$json.data_label;
-          data_title = _yield$response$json.data_title;
-          chart_order_data = data_order_sum;
-          chart_buy_order_data = data_buy_order_sum;
-          chart_label = data_label;
+          data = _yield$response$json.data;
+          label = _yield$response$json.label;
+          title = _yield$response$json.title;
           button.disabled = false;
           myChart.destroy();
           myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_1__.default(ctx, {
-            type: "line",
+            type: "bar",
             data: {
-              labels: chart_label,
+              labels: label,
               datasets: [{
-                label: "Ventas",
-                data: chart_order_data,
+                label: "Cantidad de productos vendidos",
+                data: data,
                 backgroundColor: "rgb(54, 162, 235)",
                 borderColor: "rgb(54, 162, 235)",
-                borderWidth: 1,
-                fill: false
-              }, {
-                label: "Compras",
-                data: chart_buy_order_data,
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(255, 99, 132)",
                 borderWidth: 1,
                 fill: false
               }]
@@ -15756,17 +15743,11 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
                 },
                 datalabels: {
                   anchor: 'center',
-                  align: 'end',
-                  padding: 6,
+                  align: 'center',
                   backgroundColor: function backgroundColor(context) {
                     return context.dataset.backgroundColor;
                   },
-                  borderRadius: 4,
                   color: 'white'
-                },
-                title: {
-                  display: true,
-                  text: data_title
                 }
               },
               scales: {
@@ -15779,7 +15760,7 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
               },
               title: {
                 display: true,
-                text: "Reporte de producto"
+                text: title
               },
               layout: {
                 padding: {
@@ -15792,20 +15773,20 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
             },
             plugins: [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__.default]
           });
-          _context.next = 32;
+          _context.next = 28;
           break;
 
-        case 26:
-          _context.next = 28;
+        case 22:
+          _context.next = 24;
           return response.json();
 
-        case 28:
+        case 24:
           _yield$response$json2 = _context.sent;
           message = _yield$response$json2.message;
           toastr.error(message);
           button.disabled = false;
 
-        case 32:
+        case 28:
         case "end":
           return _context.stop();
       }
@@ -15814,7 +15795,7 @@ button.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_b
 })));
 var ctx = document.getElementById("myChart").getContext("2d");
 var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_1__.default(ctx, {
-  type: "line",
+  type: "bar",
   data: {
     labels: [],
     datasets: [{

@@ -21,6 +21,11 @@ class ReportController extends Controller
         return view('admin.report.report-product', compact('products'));
     }
 
+    public function report_most_sold()
+    {
+        return view('admin.report.report-most-sold');
+    }
+
     public function api_report_product(Request $request)
     {
         try {
@@ -83,13 +88,49 @@ class ReportController extends Controller
                 'data_order_sum' => $order_sum_list,
                 'data_buy_order_sum' => $buy_order_sum_list,
                 'data_label' => $month_list,
+                'data_title' => 'Reporte de compra/venta de ' . $product->name
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Ocurrio un error' . $th->getMessage(),
                 'data_sum' => [],
                 'data_label' => [],
-                'test' => '',
+            ], 400);
+        }
+    }
+
+    public function api_report_most_sold(Request $request)
+    {
+        try {
+            $get_date = function ($value) {
+                $date = trim($value);
+                return Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+            };
+            $range_date = array_map($get_date, explode('-', $request->date));
+            $date_start = $range_date[0];
+            $date_end = $range_date[1];
+            $product_list = Product::select([
+                DB::raw("sum([order_detail].[quantity]) as sum_qty"),
+                'product.id',
+                'product.name',
+            ])->leftJoin('order_detail', 'product.id', '=', 'order_detail.product_id')
+                ->leftJoin('order', 'order.id', '=', 'order_detail.order_id')
+                ->where('order.created_at', '>=', $date_start)
+                ->where('order.created_at', '<=', $date_end)
+                ->groupBy('product.id')
+                ->groupBy('product.name')
+                ->orderBy(DB::raw("sum([order_detail].[quantity])"))->get();
+            return response()->json([
+                'message' => 'Reporte generado',
+                'data' => $product_list->pluck('sum_qty'),
+                'label' => $product_list->pluck('name'),
+                'title' => 'Reporte de productos mas vendidos',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Ocurrio un error' . $th->getMessage(),
+                'data_sum' => [],
+                'data_label' => [],
             ], 400);
         }
     }

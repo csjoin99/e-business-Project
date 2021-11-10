@@ -1,15 +1,14 @@
-import Chart from 'chart.js/auto';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-const product = document.querySelector('select[id="product"]');
 const date = document.querySelector('input[id="date"]');
 const button = document.querySelector('button[id="get-report"]');
 
 button.addEventListener("click", async () => {
     button.disabled = true;
-    const url = `${window.location.origin}/api/report-product`;
-    if (product.value.length <= 0 || date.value.length <= 0) {
-        toastr.error("Debe seleccionar un producto y un rango de fecha");
+    const url = `${window.location.origin}/api/report-most-sold`;
+    if (date.value.length <= 0) {
+        toastr.error("Debe seleccionar un rango de fecha");
         button.disabled = false;
     } else {
         const response = await fetch(url, {
@@ -19,39 +18,26 @@ button.addEventListener("click", async () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                product: product.value,
                 date: date.value,
             }),
         });
         if (response.status !== 400) {
-            const { data_order_sum, data_buy_order_sum, data_label, data_title } =
-                await response.json();
-            let chart_order_data = data_order_sum;
-            let chart_buy_order_data = data_buy_order_sum;
-            let chart_label = data_label;
+            const { data, label, title } = await response.json();
             button.disabled = false;
             myChart.destroy();
             myChart = new Chart(ctx, {
-                type: "line",
+                type: "bar",
                 data: {
-                    labels: chart_label,
+                    labels: label,
                     datasets: [
                         {
-                            label: "Ventas",
-                            data: chart_order_data,
+                            label: "Cantidad de productos vendidos",
+                            data: data,
                             backgroundColor: "rgb(54, 162, 235)",
                             borderColor: "rgb(54, 162, 235)",
                             borderWidth: 1,
                             fill: false,
-                        },
-                        {
-                            label: "Compras",
-                            data: chart_buy_order_data,
-                            backgroundColor: "rgb(255, 99, 132)",
-                            borderColor: "rgb(255, 99, 132)",
-                            borderWidth: 1,
-                            fill: false,
-                        },
+                        }
                     ],
                 },
                 options: {
@@ -61,18 +47,12 @@ button.addEventListener("click", async () => {
                         },
                         datalabels: {
                             anchor: 'center',
-                            align: 'end',
-                            padding: 6,   
+                            align: 'center',
                             backgroundColor: function(context) {
                                 return context.dataset.backgroundColor;
                             },     
-                            borderRadius: 4,
                             color: 'white',
-                        },
-                        title: {
-                            display: true,
-                            text: data_title
-                        }            
+                        }
                     },
                     scales: {
                         y: {
@@ -84,7 +64,7 @@ button.addEventListener("click", async () => {
                     },
                     title: {
                         display: true,
-                        text: "Reporte de producto",
+                        text: title,
                     },
                     layout: {
                         padding: {
@@ -107,7 +87,7 @@ button.addEventListener("click", async () => {
 
 const ctx = document.getElementById("myChart").getContext("2d");
 let myChart = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
         labels: [],
         datasets: [
@@ -123,7 +103,7 @@ let myChart = new Chart(ctx, {
     options: {
         plugins: {
             legend: {
-                display: false
+                display: false,
             },
         },
         scales: {
@@ -140,11 +120,11 @@ let myChart = new Chart(ctx, {
         },
         layout: {
             padding: {
-            top: 32,
-            right: 16,
-            bottom: 16,
-            left: 8
-            }
+                top: 32,
+                right: 16,
+                bottom: 16,
+                left: 8,
+            },
         },
     },
 });

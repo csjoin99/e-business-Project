@@ -65,3 +65,4 @@ Route::post('check-kardex',[KardexController::class, 'check_kardex']);
 
 /* Report */
 Route::post('report-product',[ReportController::class, 'api_report_product']);
+Route::post('report-most-sold',[ReportController::class, 'api_report_most_sold']);

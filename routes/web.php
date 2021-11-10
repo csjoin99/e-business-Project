@@ -103,6 +103,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('report-product', [ReportController::class, 'report_product'])->name('report.product')->middleware('permission:admin.cash.register');
 
+    Route::get('report-most-sold', [ReportController::class, 'report_most_sold'])->name('report.most.sold')->middleware('permission:admin.cash.register');
+
     /* Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register'); */
 });
 
