@@ -50,6 +50,7 @@ mix.js("resources/js/admin/buy-order/index.js", "public/js/admin/buy-order");
 mix.js("resources/js/admin/kardex/index.js", "public/js/admin/kardex");
 mix.js("resources/js/admin/report-product/index.js", "public/js/admin/report-product");
 mix.js("resources/js/admin/report-most-sold/index.js", "public/js/admin/report-most-sold");
+mix.js("resources/js/admin/report-order/index.js", "public/js/admin/report-order");
 
 mix.js("resources/js/web/product-detail/index.js", "public/js/web/product-detail");
 mix.js("resources/js/web/shopping-cart/index.js", "public/js/web/shopping-cart");

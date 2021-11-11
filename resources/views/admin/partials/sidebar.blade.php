@@ -171,7 +171,17 @@
                                     <a href="{{ route('report.most.sold') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>
-                                            Cantidad de productos
+                                            Productos más vendidos
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('admin.buy_order')
+                                <li class="nav-item">
+                                    <a href="{{ route('report.order') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Reporte de ventas
                                         </p>
                                     </a>
                                 </li>

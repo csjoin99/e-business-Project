@@ -7,6 +7,7 @@
     "/js/admin/kardex/index.js": "/js/admin/kardex/index.js",
     "/js/admin/report-product/index.js": "/js/admin/report-product/index.js",
     "/js/admin/report-most-sold/index.js": "/js/admin/report-most-sold/index.js",
+    "/js/admin/report-order/index.js": "/js/admin/report-order/index.js",
     "/js/web/product-detail/index.js": "/js/web/product-detail/index.js",
     "/js/web/shopping-cart/index.js": "/js/web/shopping-cart/index.js",
     "/js/web/shipment-data/index.js": "/js/web/shipment-data/index.js",
