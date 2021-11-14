@@ -107,6 +107,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     
     Route::get('report-order', [ReportController::class, 'report_order'])->name('report.order')->middleware('permission:admin.cash.register');
 
-    /* Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register'); */
+    Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register');
 });
 

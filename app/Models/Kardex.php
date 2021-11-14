@@ -29,7 +29,9 @@ class Kardex extends Model
         'type',
         'date',
         'new_total',
-        'old_total'
+        'old_total',
+        'unit_price_format',
+        'total_format',
     ];
 
     public function product()
@@ -68,6 +70,16 @@ class Kardex extends Model
 
     public function getOldTotalAttribute()
     {
-        return number_format($this->init_stock * $this->current_unit_price, 2, '.', '');
+        return number_format($this->init_stock * $this->unit_price, 2, '.', '');
+    }
+
+    public function getUnitPriceFormatAttribute()
+    {
+        return number_format($this->unit_price, 2, '.', '');
+    }
+
+    public function getTotalFormatAttribute()
+    {
+        return number_format($this->total, 2, '.', '');
     }
 }

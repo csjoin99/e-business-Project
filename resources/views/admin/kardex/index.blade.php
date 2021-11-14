@@ -79,70 +79,70 @@
                                                     <th>Valor unitario</th>
                                                     <th>Valor total</th>
                                                     <th>Cantidad</th>
-                                                    {{-- <th>Valor unitario</th>
-                                                    <th>Valor total</th> --}}
+                                                    <th>Valor unitario</th>
+                                                    <th>Valor total</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-if="kardex_list.length">
                                                     <td v-text="kardex_list[0].date"></td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="'-'"></span>
+                                                        <span v-text="''"></span>
                                                     </td>
                                                     <td>
                                                         <span v-text="kardex_list[0].init_stock"></span>
                                                     </td>
-                                                    {{-- <td>
+                                                    <td>
                                                         <span v-text="`S/. ${kardex_list[0].unit_price}`"></span>
                                                     </td>
                                                     <td>
                                                         <span v-text="`S/. ${kardex_list[0].old_total}`"></span>
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                                 <tr v-if="kardex_list.length" v-for="item in kardex_list">
                                                     <td v-text="item.date"></td>
                                                     <td>
-                                                        <span v-text="item.type=='compra' ? item.quantity : '-'"></span>
+                                                        <span v-text="item.type=='compra' ? item.quantity : ''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="item.type=='compra' ? `S/. ${item.unit_price}` : '-'"></span>
+                                                        <span v-text="item.type=='compra' ? `S/. ${item.unit_price}` : ''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="item.type=='compra' ? `S/. ${item.total}` : '-'"></span>
+                                                        <span v-text="item.type=='compra' ? `S/. ${item.total}` : ''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="item.type=='orden' ? item.quantity : '-'"></span>
+                                                        <span v-text="item.type=='orden' ? item.quantity : ''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="item.type=='orden' ? `S/. ${item.unit_price}` : '-'"></span>
+                                                        <span v-text="item.type=='orden' ? (item.unit_price ? `S/. ${item.unit_price_format}` : `S/. 0.00`) : ''"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="item.type=='orden' ? `S/. ${item.total}` : '-'"></span>
+                                                        <span v-text="item.type=='orden' ? (item.total ? `S/. ${item.total_format}` : `S/. 0.00`) : ''"></span>
                                                     </td>
                                                     <td>
                                                         <span v-text="item.end_stock"></span>
                                                     </td>
-                                                    {{-- <td>
-                                                        <span v-text="`S/. ${item.unit_price}`"></span>
+                                                    <td>
+                                                        <span v-text="`S/. ${item.unit_price_format}`"></span>
                                                     </td>
                                                     <td>
                                                         <span v-text="`S/. ${item.new_total}`"></span>
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
