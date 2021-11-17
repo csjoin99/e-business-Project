@@ -186,6 +186,16 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('admin.buy_order')
+                                <li class="nav-item">
+                                    <a href="{{ route('kardex.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Kardex
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan
