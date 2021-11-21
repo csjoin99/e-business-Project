@@ -103,6 +103,7 @@ class OrderController extends Controller
                     'order_id' =>  $order->id,
                     'total' =>  $product->pivot['price'] * $product->pivot['quantity'],
                     'unit_price' =>  $product->pivot['price'],
+                    'current_price' =>  $product->real_price,
                     'init_stock' =>  $product->stock,
                     'end_stock' =>  $product->stock + $product->pivot['quantity'],
                     'quantity' =>  $product->pivot['quantity']
@@ -171,6 +172,7 @@ class OrderController extends Controller
                     'order_id' =>  $order->id,
                     'total' =>  $item->real_price * $item->qty,
                     'unit_price' =>  $item->real_price,
+                    'current_price' =>  $product->real_price,
                     'init_stock' =>  $product->stock,
                     'end_stock' =>  $product->stock - $item->qty,
                     'quantity' =>  $item->qty

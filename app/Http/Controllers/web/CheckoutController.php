@@ -67,7 +67,7 @@ class CheckoutController extends Controller
 
     public function stripe(Request $request)
     {
-        Stripe::setApiKey(config('services.stripe.secret'));
+        /* Stripe::setApiKey(config('services.stripe.secret'));
         $customer = Customer::create(array(
             'email' => $request->stripeEmail,
             'source'  => $request->stripeToken
@@ -76,7 +76,7 @@ class CheckoutController extends Controller
             'customer' => $customer->id,
             'amount'   => (int)number_format(session('order.total'), 2, '', ''),
             'currency' => 'usd'
-        ));
+        )); */
         $shipment_data = session('shipment_data');
         $order = session('order');
         $data = array_merge($shipment_data, $order);
@@ -139,8 +139,9 @@ class CheckoutController extends Controller
             Kardex::create([
                 'product_id' =>  $product->id,
                 'order_id' =>  $order->id,
-                'total' =>  $item->real_price * $item->qty,
-                'unit_price' =>  $item->real_price,
+                'total' =>  $item->price * $item->qty,
+                'unit_price' =>  $item->price,
+                'current_price' =>  $product->real_price,
                 'init_stock' =>  $product->stock,
                 'end_stock' =>  $product->stock - $item->qty,
                 'quantity' =>  $item->qty

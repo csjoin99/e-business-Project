@@ -84,36 +84,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-if="kardex_list.length">
-                                                    <td v-text="kardex_list[0].date"></td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="''"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="kardex_list[0].init_stock"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="`S/. ${kardex_list[0].unit_price}`"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span v-text="`S/. ${kardex_list[0].old_total}`"></span>
-                                                    </td>
-                                                </tr>
                                                 <tr v-if="kardex_list.length" v-for="item in kardex_list">
                                                     <td v-text="item.date"></td>
                                                     <td>
@@ -138,7 +108,7 @@
                                                         <span v-text="item.end_stock"></span>
                                                     </td>
                                                     <td>
-                                                        <span v-text="`S/. ${item.unit_price_format}`"></span>
+                                                        <span v-text="`S/. ${item.current_price_format}`"></span>
                                                     </td>
                                                     <td>
                                                         <span v-text="`S/. ${item.new_total}`"></span>

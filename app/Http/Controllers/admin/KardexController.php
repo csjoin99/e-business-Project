@@ -42,6 +42,7 @@ class KardexController extends Controller
             $kardex = Kardex::where('product_id', $product->id)
                 ->where('created_at', '>=', $date_start)
                 ->where('created_at', '<=', $date_end)
+                ->orderBy('created_at','desc')
                 ->get();
             return response()->json([
                 'message' => 'Data de kardex',

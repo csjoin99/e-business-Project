@@ -124,6 +124,7 @@ class BuyOrderController extends Controller
                     'buy_order_id' =>  $buy_order->id,
                     'total' =>  $item->real_price * $item->qty,
                     'unit_price' =>  $item->real_price,
+                    'current_price' =>  $product->real_price,
                     'init_stock' =>  $product->stock,
                     'end_stock' =>  $product->stock + $item->qty,
                     'quantity' =>  $item->qty

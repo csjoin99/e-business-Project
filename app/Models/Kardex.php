@@ -19,7 +19,7 @@ class Kardex extends Model
         'buy_order_id',
         'total',
         'unit_price',
-        'current_unit_price',
+        'current_price',
         'init_stock',
         'end_stock',
         'quantity'
@@ -31,6 +31,7 @@ class Kardex extends Model
         'new_total',
         'old_total',
         'unit_price_format',
+        'current_price_format',
         'total_format',
     ];
 
@@ -65,17 +66,22 @@ class Kardex extends Model
 
     public function getNewTotalAttribute()
     {
-        return number_format($this->end_stock * $this->unit_price, 2, '.', '');
+        return number_format($this->end_stock * $this->current_price, 2, '.', '');
     }
 
     public function getOldTotalAttribute()
     {
-        return number_format($this->init_stock * $this->unit_price, 2, '.', '');
+        return number_format($this->init_stock * $this->current_price, 2, '.', '');
     }
 
     public function getUnitPriceFormatAttribute()
     {
         return number_format($this->unit_price, 2, '.', '');
+    }
+
+    public function getCurrentPriceFormatAttribute()
+    {
+        return number_format($this->current_price, 2, '.', '');
     }
 
     public function getTotalFormatAttribute()
