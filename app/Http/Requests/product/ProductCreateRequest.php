@@ -26,6 +26,7 @@ class ProductCreateRequest extends FormRequest
     {
         $categories = Category::all();
         return [
+            'code' => 'required|unique:product,code,NULL,id,deleted_at,NULL|max:100',
             'name' => 'required|unique:product,name,NULL,id,deleted_at,NULL|max:100',
             'category_id' => 'required|in:' . implode(', ', $categories->pluck('id')->toarray()),
             'price' => 'required|numeric|min:1',
@@ -37,6 +38,7 @@ class ProductCreateRequest extends FormRequest
     public function attributes()
     {
         return [
+            'code' => 'código',
             'name' => 'nombre',
             'category_id' => 'categoría',
             'price' => 'precio',

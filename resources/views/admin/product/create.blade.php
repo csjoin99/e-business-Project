@@ -24,6 +24,15 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label for="name">Código</label>
+                                    <input type="text"
+                                        class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" id="code"
+                                        name="code" placeholder="Ingresar código" maxlength="100" required>
+                                    @error('code')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="name">Nombre</label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"

@@ -134,6 +134,7 @@
                                 <thead style="position: sticky; top: -1px; background: white;">
                                     <tr>
                                         <th></th>
+                                        <th>Código</th>
                                         <th>Producto</th>
                                         <th>Categoría</th>
                                         <th>Stock</th>
@@ -149,6 +150,7 @@
                                         <td><button type="button" class="btn btn-success"
                                                 v-on:click.prevent="add_product(item)"><i
                                                     class="fas fa-plus"></i></button></td>
+                                        <td v-text="item.code"></td>
                                         <td v-text="item.name"></td>
                                         <td v-text="item.category.name"></td>
                                         <td v-text="item.stock"></td>

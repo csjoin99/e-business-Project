@@ -39,7 +39,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        {{-- <th>Código</th> --}}
+                                        <th>Código</th>
                                         <th>Nombre</th>
                                         <th>Categoría</th>
                                         <th>Precio</th>
@@ -51,7 +51,7 @@
                                 <tbody>
                                     @forelse ($products as $product)
                                     <tr>
-                                        {{-- <td>{{ $product->code }}</td> --}}
+                                        <td>{{ $product->code }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->category->name }}</td>
                                         <td>

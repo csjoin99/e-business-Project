@@ -54,10 +54,10 @@ class ProductController extends Controller
         try {
             $data = $request->all();
             $new_product = Product::create($data);
-            Product::disableAuditing();
+            /* Product::disableAuditing();
             $new_product->code = str_pad($new_product->id, 5, "0", STR_PAD_LEFT);
             $new_product->save();
-            Product::enableAuditing();
+            Product::enableAuditing(); */
             return redirect()->route('product.index')->with('success', 'Producto registrado exitosamente');
         } catch (\Throwable $th) {
             return redirect()->route('product.index')->with('failure', 'Ocurrio un error, no se pudo registrar el producto');
