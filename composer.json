@@ -17,7 +17,6 @@
         "spatie/laravel-permission": "^4.3",
         "spatie/laravel-sluggable": "^2.6",
         "stripe/stripe-php": "^7.97",
-        "ext-pdo": "^7.4",
         "ext-sqlsrv": "^5.9",
         "ext-pdo_sqlsrv": "^5.9"
     },
