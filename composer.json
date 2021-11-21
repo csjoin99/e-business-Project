@@ -5,9 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "heroku-sys/php": "^8.0",
-        "ext-sqlsrv": "^5.9",
-        "ext-pdo_sqlsrv": "^5.9",
+        "php": "^7.4",
         "barryvdh/laravel-dompdf": "^0.9.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
