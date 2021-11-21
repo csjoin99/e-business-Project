@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Registrar cupón')
+@section('title', 'Caja registradora')
 @section('css')
 <link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
 @endsection

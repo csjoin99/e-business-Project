@@ -23,9 +23,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::orderBy('created_at', 'desc')->paginate(10);
+        if (isset($request->search)) {
+            $orders = Order::where('code', 'LIKE', "%{$request->search}%")->orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            $orders = Order::orderBy('created_at', 'desc')->paginate(10);
+        }
         return view('admin.order.index', compact('orders'));
     }
 
@@ -119,7 +123,7 @@ class OrderController extends Controller
             $order->delete();
             return redirect()->route('order.index')->with('success', 'Orden anulada exitosamente');
         } catch (\Throwable $th) {
-            return redirect()->route('order.index')->with('failure', 'Ocurrio un error, no se pudo anular la orden'.$th->getMessage());
+            return redirect()->route('order.index')->with('failure', 'Ocurrio un error, no se pudo anular la orden' . $th->getMessage());
         }
     }
 
