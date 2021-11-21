@@ -18,8 +18,8 @@
         "spatie/laravel-sluggable": "^2.6",
         "stripe/stripe-php": "^7.97",
         "ext-pdo": "^7.4",
-        "ext-sqlsrv": "*",
-        "ext-pdo_sqlsrv": "^5.8"
+        "ext-sqlsrv": "^5.9",
+        "ext-pdo_sqlsrv": "^5.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
