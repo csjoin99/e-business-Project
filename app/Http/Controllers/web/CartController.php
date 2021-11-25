@@ -155,7 +155,7 @@ class CartController extends Controller
         } else {
             $discount = 0;
         }
-        $total = number_format($subtotal - $discount + 10, 2, '.', '');
+        $total = ($subtotal - $discount + 10 >= 0) ? number_format($subtotal - $discount + 10, 2, '.', '') : "0.00";
         session()->put('order',[
             'subtotal' => $subtotal,
             'discount' => $discount,

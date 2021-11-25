@@ -110,6 +110,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('kardex', [KardexController::class, 'index'])->name('kardex.index')->middleware('permission:admin.cash.register');
 });
 /*  */
-Route::get('test', function () {
+/* Route::get('test', function () {
     dd(env("DB_CONNECTION"), env("DB_HOST"), env("DB_DATABASE"));
-});
+}); */
