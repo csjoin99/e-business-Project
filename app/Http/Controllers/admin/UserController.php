@@ -7,6 +7,7 @@ use App\Http\Requests\user\ProfileRequest;
 use App\Http\Requests\user\UserCreateRequest;
 use App\Http\Requests\user\UserEditRequest;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -58,11 +59,12 @@ class UserController extends Controller
     {
         try {
             $data = $request->all();
-            if ($request->hasFile('avatar')) {
+            $url = Cloudinary::upload($request->file('avatar')->getRealPath())->getSecurePath();
+            /* if ($request->hasFile('avatar')) {
                 $image_name = time() . '-' . $request->avatar->getClientOriginalName();
                 $request->avatar->move(public_path('img/user/'), $image_name);
                 $url = url('') . '/img/user/' . $image_name;
-            }
+            } */
             $data['avatar'] = isset($url) ? $url : null;
             $data['password'] = bcrypt($data['password']);
             $user = User::create($data);
@@ -107,11 +109,12 @@ class UserController extends Controller
     {
         try {
             $data = $request->except('email');
-            if ($request->hasFile('avatar')) {
+            $url = Cloudinary::upload($request->file('avatar')->getRealPath())->getSecurePath();
+            /* if ($request->hasFile('avatar')) {
                 $image_name = time() . '-' . $request->avatar->getClientOriginalName();
                 $request->avatar->move(public_path('img/user/'), $image_name);
                 $url = url('') . '/img/user/' . $image_name;
-            }
+            } */
             $data['avatar'] = isset($url) ? $url : $user->avatar;
             $user->update($data);
             $user->removeRole($user->roles->first());
@@ -160,11 +163,12 @@ class UserController extends Controller
         try {
             $user = auth()->user();
             $data = $request->only(['name', 'lastname']);
-            if ($request->hasFile('avatar')) {
+            $url = Cloudinary::upload($request->file('avatar')->getRealPath())->getSecurePath();
+            /* if ($request->hasFile('avatar')) {
                 $image_name = time() . '-' . $request->avatar->getClientOriginalName();
                 $request->avatar->move(public_path('img/user/'), $image_name);
                 $url = url('') . '/img/user/' . $image_name;
-            }
+            } */
             $data['avatar'] = isset($url) ? $url : $user->avatar;
             if (isset($request->password)) {
                 $data['password'] = bcrypt($request->password);

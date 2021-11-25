@@ -7,6 +7,7 @@ use App\Http\Requests\product_photo\ProductPhotoCreateRequest;
 use App\Http\Requests\product_photo\ProductPhotoEditRequest;
 use App\Models\Product;
 use App\Models\Product_photo;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class ProductPhotoController extends Controller
@@ -46,11 +47,13 @@ class ProductPhotoController extends Controller
         ]);
         try {
             $data = $request->all();
+            $url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            /* dd($url);
             if ($request->hasFile('image')) {
                 $image_name = time() . '-' . $request->image->getClientOriginalName();
                 $request->image->move(public_path('img/product/'), $image_name);
                 $url = url('') . '/img/product/' . $image_name;
-            }
+            } */
             $data['image'] = isset($url) ? $url : null;
             $data['product_id'] = $product->id;
             Product_photo::create($data);
@@ -93,11 +96,12 @@ class ProductPhotoController extends Controller
     {
         try {
             $data = $request->all();
-            if ($request->hasFile('image')) {
+            $url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            /* if ($request->hasFile('image')) {
                 $image_name = time() . '-' . $request->image->getClientOriginalName();
                 $request->image->move(public_path('img/product/'), $image_name);
                 $url = url('') . '/img/product/' . $image_name;
-            }
+            } */
             $data['image'] = isset($url) ? $url : $product_photo->image;
             $product_photo->update($data);
             return redirect()->route('product.photo.index', $product_photo->product)->with('success', 'Foto actualizada exitosamente');
