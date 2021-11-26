@@ -100,7 +100,7 @@
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="logo">Logo</label>
                                     <input id="logo" name="logo" type="file" class="file"
                                         data-browse-on-zone-click="true" accept="image/png, image/gif, image/jpeg"
@@ -114,7 +114,7 @@
                                     @error('logo')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="color">Color</label>
                                     <input type="color"

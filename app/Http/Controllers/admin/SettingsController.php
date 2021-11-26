@@ -19,13 +19,13 @@ class SettingsController extends Controller
     {
         try {
             $data = $request->except('_token');
-            $url = Cloudinary::upload($request->file('logo')->getRealPath())->getSecurePath();
+            /* $url = Cloudinary::upload($request->file('logo')->getRealPath())->getSecurePath(); */
             /* if ($request->hasFile('logo')) {
                 $image_name = time() . '-' . $request->logo->getClientOriginalName();
                 $request->logo->move(public_path('img/settings/'), $image_name);
                 $url = url('') . '/img/settings/' . $image_name;
             } */
-            $data['logo'] = isset($url) ? $url : $settings->logo;
+            /* $data['logo'] = isset($url) ? $url : $settings->logo; */
             $settings->update($data);
             return redirect()->route('settings')->with('success', 'Configuración actualizada exitosamente');
         } catch (\Throwable $th) {
